@@ -1,0 +1,48 @@
+:root {
+  --bg: #0b0b0d;
+  --card: #141418;
+  --text: #f5f5f5;
+  --muted: #a1a1aa;
+  --border: #26262b;
+  --accentA: #d4af37;
+  --accentB: #9c7a2b;
+  --accentSoft: #1a1710;
+  --radius: 16px;
+  --btnRadius: 12px;
+  --shadowY: 18px;
+  --shadowBlur: 44px;
+  --shadowOpacity: 0.24;
+  --fontDisplay: "Playfair Display", serif;
+  --fontBody: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--fontBody);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
