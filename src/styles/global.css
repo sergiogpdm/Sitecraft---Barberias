@@ -46,3 +46,33 @@ img {
   max-width: 100%;
   display: block;
 }
+
+input,
+textarea,
+select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px 14px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 900px) {
+  section div[style*="grid-template-columns: 1.1fr 0.9fr"],
+  section div[style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  main div[style*="grid-template-columns: 420px 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
