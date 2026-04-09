@@ -1,16 +1,80 @@
-# React + Vite
+🚀 GUÍA RÁPIDA: crear una web en 5–10 minutos
+🧠 IDEA CLAVE
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+No estás “programando”.
 
-Currently, two official plugins are available:
+👉 Estás rellenando una config → render → listo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+⚡ MÉTODO 1 (EL QUE DEBES USAR)
+🔥 Paso 1: abre el proyecto
+npm run dev
 
-## React Compiler
+🧩 Paso 2: carga una base
+Opción A (rápida)
+Copia client-template.js
+Opción B (mejor)
+Copia un cliente ya hecho
+👉 ejemplo: mvp-barber-studio.js
+📥 Paso 3: importar config
+Copia TODO el objeto:
+export const xxx = { ... }
+Ve a /customize
+Pégalo en el cuadro de abajo
+Click en:
+👉 Importar config
+✏️ Paso 4: edita lo mínimo necesario
+🔥 OBLIGATORIO:
+Nombre negocio
+WhatsApp
+Google Maps
+Dirección
+Imagen hero
+Fotos
+⚡ OPCIONAL (pero suma mucho):
+Cambiar textos del hero
+Ajustar servicios
+Ajustar precios
+Cambiar preset visual
+🎯 Paso 5: revisa preview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👉 A la derecha ves la web en tiempo real
 
-## Expanding the ESLint configuration
+Comprueba:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+nombre correcto
+fotos bien
+CTA funciona
+📤 Paso 6: exportar
+
+Click:
+👉 Exportar config
+
+🧠 Paso 7: pegar en producción
+Abre:
+src/config/site.config.js
+Sustituye TODO por lo exportado
+🌐 Paso 8: deploy
+
+Tu flujo:
+
+git add .
+git commit -m "nuevo cliente"
+git push
+
+👉 Render / hosting se actualiza
+
+💰 Paso 9: enviar al cliente
+
+Le mandas:
+
+👉 link de la web
+
+⚡ RESUMEN ULTRA RÁPIDO
+Importar config
+Cambiar datos
+Revisar
+Exportar
+Deploy
+Enviar
+
+⏱️ 5–10 minutos por web
