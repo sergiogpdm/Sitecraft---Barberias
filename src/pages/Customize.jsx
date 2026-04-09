@@ -10,7 +10,7 @@ import BookingSection from "../components/sections/BookingSection.jsx";
 import Footer from "../components/Footer.jsx";
 
 function toConfigFileString(config) {
-  return `export const siteConfig = ${JSON.stringify(config, null, 2)};`;
+  return `export const siteConfig = ${JSON.stringify(config, null, 2)};\n`;
 }
 
 function parseConfigText(text) {
