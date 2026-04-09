@@ -1,16 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { siteConfig as initialConfig } from "../config/site.config.js";
+import { applyThemeVars } from "../utils/applyTheme.js";
 
 const SiteConfigContext = createContext(null);
-
-function applyThemeVars(config) {
-  const root = document.documentElement;
-  const overrides = config?.theme?.overrides || {};
-
-  Object.entries(overrides).forEach(([key, value]) => {
-    root.style.setProperty(key, value);
-  });
-}
 
 export function SiteConfigProvider({ children }) {
   const [config, setConfig] = useState(initialConfig);

@@ -28,27 +28,27 @@ export const siteConfig = {
   },
 
   theme: {
-    preset: "goldNight",
-    mode: "flat",
-    scheme: "dark",
-    overrides: {
-      "--bg": "#0B0B0D",
-      "--card": "#141418",
-      "--text": "#F5F5F5",
-      "--muted": "#A1A1AA",
-      "--border": "#26262B",
-      "--accentA": "#D4AF37",
-      "--accentB": "#9C7A2B",
-      "--accentSoft": "#1A1710",
-      "--radius": "16px",
-      "--btnRadius": "12px",
-      "--shadowY": "18px",
-      "--shadowBlur": "44px",
-      "--shadowOpacity": "0.24",
-      "--fontDisplay": "Playfair Display, serif",
-      "--fontBody": "Inter, sans-serif"
-    }
-  },
+  preset: "goldNight",
+  mode: "flat",
+  scheme: "dark",
+  overrides: {
+    "--bg": "#0B0B0D",
+    "--card": "#141418",
+    "--text": "#F5F5F5",
+    "--muted": "#A1A1AA",
+    "--border": "#26262B",
+    "--accentA": "#D4AF37",
+    "--accentB": "#9C7A2B",
+    "--accentSoft": "#1A1710",
+    "--radius": "16px",
+    "--btnRadius": "12px",
+    "--shadowY": "18px",
+    "--shadowBlur": "44px",
+    "--shadowOpacity": "0.24",
+    "--fontDisplay": "Playfair Display, serif",
+    "--fontBody": "Inter, sans-serif"
+  }
+},
 
   pages: {
     home: {

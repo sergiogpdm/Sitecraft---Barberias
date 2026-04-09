@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useSiteConfig } from "../context/SiteConfigContext.jsx";
+import { presets } from "../config/presets.js";
 
 import HeroSection from "../components/sections/HeroSection.jsx";
 import ServicesSection from "../components/sections/ServicesSection.jsx";
@@ -46,6 +47,22 @@ export default function Customize() {
   const setMessage = (value) => {
     setMsg(value);
     setTimeout(() => setMsg(""), 2500);
+  };
+
+  const applyPreset = (presetId) => {
+    const found = presets.find((p) => p.id === presetId);
+    if (!found) return;
+
+    setConfig((prev) => ({
+      ...prev,
+      theme: {
+        ...prev.theme,
+        preset: found.id,
+        overrides: { ...found.overrides },
+      },
+    }));
+
+    setMessage(`✅ Preset aplicado: ${found.label}`);
   };
 
   const updateRoot = (section, key, value) => {
@@ -281,6 +298,30 @@ export default function Customize() {
             <>
               <SectionTitle>General</SectionTitle>
 
+              <div style={{ marginBottom: 18 }}>
+                <div style={{ fontWeight: 700, marginBottom: 10 }}>Presets</div>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  {presets.map((preset) => (
+                    <button
+                      key={preset.id}
+                      onClick={() => applyPreset(preset.id)}
+                      style={{
+                        padding: "10px 14px",
+                        borderRadius: "var(--btnRadius)",
+                        border: "1px solid var(--border)",
+                        background:
+                          config.theme.preset === preset.id ? "var(--accentA)" : "var(--bg)",
+                        color: config.theme.preset === preset.id ? "#111" : "var(--text)",
+                        fontWeight: 700,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <Input
                 label="Nombre negocio"
                 value={config.brand.name}
@@ -412,73 +453,26 @@ export default function Customize() {
           {active === "hero" && (
             <>
               <SectionTitle>Hero</SectionTitle>
-
-              <Input
-                label="Badge"
-                value={config.copy.hero.badge}
-                onChange={(v) => updateCopy("hero", "badge", v)}
-              />
-              <Input
-                label="Título A"
-                value={config.copy.hero.titleA}
-                onChange={(v) => updateCopy("hero", "titleA", v)}
-              />
-              <Input
-                label="Título Highlight"
-                value={config.copy.hero.titleHighlight}
-                onChange={(v) => updateCopy("hero", "titleHighlight", v)}
-              />
-              <Input
-                label="Título B"
-                value={config.copy.hero.titleB}
-                onChange={(v) => updateCopy("hero", "titleB", v)}
-              />
-              <Textarea
-                label="Subtitle"
-                value={config.copy.hero.subtitle}
-                onChange={(v) => updateCopy("hero", "subtitle", v)}
-              />
-              <Input
-                label="CTA texto"
-                value={config.copy.hero.ctaText}
-                onChange={(v) => updateCopy("hero", "ctaText", v)}
-              />
-              <Input
-                label="CTA href"
-                value={config.copy.hero.ctaHref}
-                onChange={(v) => updateCopy("hero", "ctaHref", v)}
-              />
-              <Input
-                label="Imagen hero"
-                value={config.copy.hero.imageSrc}
-                onChange={(v) => updateCopy("hero", "imageSrc", v)}
-              />
+              <Input label="Badge" value={config.copy.hero.badge} onChange={(v) => updateCopy("hero", "badge", v)} />
+              <Input label="Título A" value={config.copy.hero.titleA} onChange={(v) => updateCopy("hero", "titleA", v)} />
+              <Input label="Título Highlight" value={config.copy.hero.titleHighlight} onChange={(v) => updateCopy("hero", "titleHighlight", v)} />
+              <Input label="Título B" value={config.copy.hero.titleB} onChange={(v) => updateCopy("hero", "titleB", v)} />
+              <Textarea label="Subtitle" value={config.copy.hero.subtitle} onChange={(v) => updateCopy("hero", "subtitle", v)} />
+              <Input label="CTA texto" value={config.copy.hero.ctaText} onChange={(v) => updateCopy("hero", "ctaText", v)} />
+              <Input label="CTA href" value={config.copy.hero.ctaHref} onChange={(v) => updateCopy("hero", "ctaHref", v)} />
+              <Input label="Imagen hero" value={config.copy.hero.imageSrc} onChange={(v) => updateCopy("hero", "imageSrc", v)} />
             </>
           )}
 
           {active === "services" && (
             <>
               <SectionTitle>Services</SectionTitle>
-
-              <Input
-                label="Kicker"
-                value={config.copy.services.kicker}
-                onChange={(v) => updateCopy("services", "kicker", v)}
-              />
-              <Input
-                label="Título"
-                value={config.copy.services.title}
-                onChange={(v) => updateCopy("services", "title", v)}
-              />
-              <Textarea
-                label="Descripción"
-                value={config.copy.services.desc}
-                onChange={(v) => updateCopy("services", "desc", v)}
-              />
+              <Input label="Kicker" value={config.copy.services.kicker} onChange={(v) => updateCopy("services", "kicker", v)} />
+              <Input label="Título" value={config.copy.services.title} onChange={(v) => updateCopy("services", "title", v)} />
+              <Textarea label="Descripción" value={config.copy.services.desc} onChange={(v) => updateCopy("services", "desc", v)} />
 
               <div style={{ marginTop: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Items</div>
-
                 {config.copy.services.items.map((item, index) => (
                   <ArrayCard
                     key={`${item.title}-${index}`}
@@ -487,16 +481,8 @@ export default function Customize() {
                     onMoveDown={() => moveArrayItem("services", index, 1)}
                     onRemove={() => removeArrayItem("services", index)}
                   >
-                    <Input
-                      label="Título"
-                      value={item.title}
-                      onChange={(v) => updateArrayItem("services", index, "title", v)}
-                    />
-                    <Textarea
-                      label="Descripción"
-                      value={item.desc}
-                      onChange={(v) => updateArrayItem("services", index, "desc", v)}
-                    />
+                    <Input label="Título" value={item.title} onChange={(v) => updateArrayItem("services", index, "title", v)} />
+                    <Textarea label="Descripción" value={item.desc} onChange={(v) => updateArrayItem("services", index, "desc", v)} />
                   </ArrayCard>
                 ))}
 
@@ -518,22 +504,9 @@ export default function Customize() {
           {active === "prices" && (
             <>
               <SectionTitle>Prices</SectionTitle>
-
-              <Input
-                label="Kicker"
-                value={config.copy.prices.kicker}
-                onChange={(v) => updateCopy("prices", "kicker", v)}
-              />
-              <Input
-                label="Título"
-                value={config.copy.prices.title}
-                onChange={(v) => updateCopy("prices", "title", v)}
-              />
-              <Textarea
-                label="Descripción"
-                value={config.copy.prices.desc}
-                onChange={(v) => updateCopy("prices", "desc", v)}
-              />
+              <Input label="Kicker" value={config.copy.prices.kicker} onChange={(v) => updateCopy("prices", "kicker", v)} />
+              <Input label="Título" value={config.copy.prices.title} onChange={(v) => updateCopy("prices", "title", v)} />
+              <Textarea label="Descripción" value={config.copy.prices.desc} onChange={(v) => updateCopy("prices", "desc", v)} />
 
               <div style={{ marginTop: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Items</div>
@@ -546,21 +519,9 @@ export default function Customize() {
                     onMoveDown={() => moveArrayItem("prices", index, 1)}
                     onRemove={() => removeArrayItem("prices", index)}
                   >
-                    <Input
-                      label="Precio"
-                      value={item.price}
-                      onChange={(v) => updateArrayItem("prices", index, "price", v)}
-                    />
-                    <Input
-                      label="Título"
-                      value={item.title}
-                      onChange={(v) => updateArrayItem("prices", index, "title", v)}
-                    />
-                    <Textarea
-                      label="Descripción"
-                      value={item.desc}
-                      onChange={(v) => updateArrayItem("prices", index, "desc", v)}
-                    />
+                    <Input label="Precio" value={item.price} onChange={(v) => updateArrayItem("prices", index, "price", v)} />
+                    <Input label="Título" value={item.title} onChange={(v) => updateArrayItem("prices", index, "title", v)} />
+                    <Textarea label="Descripción" value={item.desc} onChange={(v) => updateArrayItem("prices", index, "desc", v)} />
                   </ArrayCard>
                 ))}
 
@@ -583,22 +544,9 @@ export default function Customize() {
           {active === "photoStrip" && (
             <>
               <SectionTitle>PhotoStrip</SectionTitle>
-
-              <Input
-                label="Kicker"
-                value={config.copy.photoStrip.kicker}
-                onChange={(v) => updateCopy("photoStrip", "kicker", v)}
-              />
-              <Input
-                label="Título"
-                value={config.copy.photoStrip.title}
-                onChange={(v) => updateCopy("photoStrip", "title", v)}
-              />
-              <Textarea
-                label="Nota"
-                value={config.copy.photoStrip.note}
-                onChange={(v) => updateCopy("photoStrip", "note", v)}
-              />
+              <Input label="Kicker" value={config.copy.photoStrip.kicker} onChange={(v) => updateCopy("photoStrip", "kicker", v)} />
+              <Input label="Título" value={config.copy.photoStrip.title} onChange={(v) => updateCopy("photoStrip", "title", v)} />
+              <Textarea label="Nota" value={config.copy.photoStrip.note} onChange={(v) => updateCopy("photoStrip", "note", v)} />
 
               <div style={{ marginTop: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Fotos</div>
@@ -609,11 +557,7 @@ export default function Customize() {
                     title={`Foto ${index + 1}`}
                     onRemove={() => removePhoto(index)}
                   >
-                    <Input
-                      label="URL foto"
-                      value={photo}
-                      onChange={(v) => updatePhoto(index, v)}
-                    />
+                    <Input label="URL foto" value={photo} onChange={(v) => updatePhoto(index, v)} />
                   </ArrayCard>
                 ))}
 
@@ -627,54 +571,20 @@ export default function Customize() {
           {active === "booking" && (
             <>
               <SectionTitle>Booking</SectionTitle>
-
-              <Input
-                label="Kicker"
-                value={config.copy.booking.kicker}
-                onChange={(v) => updateCopy("booking", "kicker", v)}
-              />
-              <Input
-                label="Título"
-                value={config.copy.booking.title}
-                onChange={(v) => updateCopy("booking", "title", v)}
-              />
-              <Textarea
-                label="Descripción"
-                value={config.copy.booking.desc}
-                onChange={(v) => updateCopy("booking", "desc", v)}
-              />
-              <Input
-                label="CTA texto"
-                value={config.copy.booking.ctaText}
-                onChange={(v) => updateCopy("booking", "ctaText", v)}
-              />
-              <Input
-                label="CTA href"
-                value={config.copy.booking.ctaHref}
-                onChange={(v) => updateCopy("booking", "ctaHref", v)}
-              />
+              <Input label="Kicker" value={config.copy.booking.kicker} onChange={(v) => updateCopy("booking", "kicker", v)} />
+              <Input label="Título" value={config.copy.booking.title} onChange={(v) => updateCopy("booking", "title", v)} />
+              <Textarea label="Descripción" value={config.copy.booking.desc} onChange={(v) => updateCopy("booking", "desc", v)} />
+              <Input label="CTA texto" value={config.copy.booking.ctaText} onChange={(v) => updateCopy("booking", "ctaText", v)} />
+              <Input label="CTA href" value={config.copy.booking.ctaHref} onChange={(v) => updateCopy("booking", "ctaHref", v)} />
             </>
           )}
 
           {active === "footer" && (
             <>
               <SectionTitle>Footer</SectionTitle>
-
-              <Input
-                label="Título"
-                value={config.copy.footer.title}
-                onChange={(v) => updateCopy("footer", "title", v)}
-              />
-              <Input
-                label="Subtitle"
-                value={config.copy.footer.subtitle}
-                onChange={(v) => updateCopy("footer", "subtitle", v)}
-              />
-              <Input
-                label="Small"
-                value={config.copy.footer.small}
-                onChange={(v) => updateCopy("footer", "small", v)}
-              />
+              <Input label="Título" value={config.copy.footer.title} onChange={(v) => updateCopy("footer", "title", v)} />
+              <Input label="Subtitle" value={config.copy.footer.subtitle} onChange={(v) => updateCopy("footer", "subtitle", v)} />
+              <Input label="Small" value={config.copy.footer.small} onChange={(v) => updateCopy("footer", "small", v)} />
             </>
           )}
         </div>
@@ -705,9 +615,7 @@ export default function Customize() {
               {active === "prices" && <PricesSection data={config.copy.prices} />}
               {active === "photoStrip" && <PhotoStripSection data={config.copy.photoStrip} />}
               {active === "booking" && <BookingSection data={config.copy.booking} />}
-              {active === "footer" && (
-                <Footer data={config.copy.footer} contact={config.contact} />
-              )}
+              {active === "footer" && <Footer data={config.copy.footer} contact={config.contact} />}
               {active === "general" && (
                 <>
                   <HeroSection brand={config.brand} data={config.copy.hero} />
@@ -783,22 +691,12 @@ function Textarea({ label, value, onChange }) {
   return (
     <label style={{ display: "block", marginBottom: 12 }}>
       <div>{label}</div>
-      <textarea
-        value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-        style={{ minHeight: 100 }}
-      />
+      <textarea value={value ?? ""} onChange={(e) => onChange(e.target.value)} style={{ minHeight: 100 }} />
     </label>
   );
 }
 
-function ArrayCard({
-  title,
-  children,
-  onMoveUp,
-  onMoveDown,
-  onRemove,
-}) {
+function ArrayCard({ title, children, onMoveUp, onMoveDown, onRemove }) {
   return (
     <div
       style={{
@@ -822,21 +720,9 @@ function ArrayCard({
         <strong>{title}</strong>
 
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          {onMoveUp && (
-            <button onClick={onMoveUp} style={tinyButtonStyle}>
-              ↑
-            </button>
-          )}
-          {onMoveDown && (
-            <button onClick={onMoveDown} style={tinyButtonStyle}>
-              ↓
-            </button>
-          )}
-          {onRemove && (
-            <button onClick={onRemove} style={tinyButtonStyle}>
-              Borrar
-            </button>
-          )}
+          {onMoveUp && <button onClick={onMoveUp} style={tinyButtonStyle}>↑</button>}
+          {onMoveDown && <button onClick={onMoveDown} style={tinyButtonStyle}>↓</button>}
+          {onRemove && <button onClick={onRemove} style={tinyButtonStyle}>Borrar</button>}
         </div>
       </div>
 
