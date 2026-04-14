@@ -151,3 +151,18 @@ section {
     border-bottom: none;
   }
 }
+
+@media (max-width: 760px) {
+  .price-row-editorial {
+    grid-template-columns: 1fr !important;
+  }
+
+  .price-row-editorial > div:last-child {
+    text-align: left !important;
+    min-width: 0 !important;
+  }
+
+  .price-row-editorial > div:last-child div:last-child {
+    margin-left: 0 !important;
+  }
+}
