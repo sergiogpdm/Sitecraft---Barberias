@@ -58,6 +58,11 @@ export const siteConfig = {
           "label": "Servicios"
         },
         {
+          "id": "testimonials",
+          "enabled": true,
+          "label": "Opiniones"
+        },
+        {
           "id": "photoStrip",
           "enabled": true,
           "label": "Galería"

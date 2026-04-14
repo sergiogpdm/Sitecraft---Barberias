@@ -140,15 +140,15 @@ export default function Home() {
         )}
       </div>
 
-      <div id="testimonials">
-        {enabledSections.some((s) => s.id === "testimonials") && (
-          <TestimonialsSection data={copy.testimonials} />
-        )}
-      </div>
-
       <div id="services">
         {enabledSections.some((s) => s.id === "services") && (
           <ServicesSection data={copy.services} />
+        )}
+      </div>
+
+      <div id="testimonials">
+        {enabledSections.some((s) => s.id === "testimonials") && (
+          <TestimonialsSection data={copy.testimonials} />
         )}
       </div>
 

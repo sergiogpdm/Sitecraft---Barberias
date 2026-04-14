@@ -26,6 +26,24 @@ function parseConfigText(text) {
   return JSON.parse(objText);
 }
 
+function ensureHomeSections(existingSections = []) {
+  const defaults = [
+    { id: "hero", enabled: true, label: "Inicio" },
+    { id: "services", enabled: true, label: "Servicios" },
+    { id: "testimonials", enabled: true, label: "Opiniones" },
+    { id: "photoStrip", enabled: true, label: "Galería" },
+    { id: "prices", enabled: true, label: "Precios" },
+    { id: "booking", enabled: true, label: "Reservar" },
+  ];
+
+  const byId = new Map((existingSections || []).map((s) => [s.id, s]));
+
+  return defaults.map((base) => ({
+    ...base,
+    ...(byId.get(base.id) || {}),
+  }));
+}
+
 function ensureConfigShape(config) {
   return {
     ...config,
@@ -87,23 +105,16 @@ function ensureConfigShape(config) {
     },
 
     pages: {
-      ...(config?.pages || {}),
-      home: {
-        sections: [
-          { id: "hero", enabled: true, label: "Inicio" },
-          { id: "services", enabled: true, label: "Servicios" },
-          { id: "testimonials", enabled: true, label: "Opiniones" },
-          { id: "photoStrip", enabled: true, label: "Galería" },
-          { id: "prices", enabled: true, label: "Precios" },
-          { id: "booking", enabled: true, label: "Reservar" },
-        ],
-        ...(config?.pages?.home || {}),
-      },
-      customize: {
-        enabled: true,
-        ...(config?.pages?.customize || {}),
-      },
-    },
+  ...(config?.pages || {}),
+  home: {
+    ...(config?.pages?.home || {}),
+    sections: ensureHomeSections(config?.pages?.home?.sections || []),
+  },
+  customize: {
+    enabled: true,
+    ...(config?.pages?.customize || {}),
+  },
+},
 
     copy: {
       ...(config?.copy || {}),
@@ -1157,6 +1168,7 @@ function QuickGenerator({ setConfig }) {
     standard: [
       { id: "hero", enabled: true, label: "Inicio" },
       { id: "services", enabled: true, label: "Servicios" },
+      { id: "testimonials", enabled: true, label: "Opiniones" },
       { id: "photoStrip", enabled: true, label: "Galería" },
       { id: "prices", enabled: true, label: "Precios" },
       { id: "booking", enabled: true, label: "Reservar" },
@@ -1166,6 +1178,7 @@ function QuickGenerator({ setConfig }) {
       { id: "hero", enabled: true, label: "Inicio" },
       { id: "photoStrip", enabled: true, label: "Galería" },
       { id: "services", enabled: true, label: "Servicios" },
+      { id: "testimonials", enabled: true, label: "Opiniones" },
       { id: "prices", enabled: true, label: "Precios" },
       { id: "booking", enabled: true, label: "Reservar" },
     ],
@@ -1174,6 +1187,7 @@ function QuickGenerator({ setConfig }) {
       { id: "hero", enabled: true, label: "Inicio" },
       { id: "prices", enabled: true, label: "Precios" },
       { id: "services", enabled: true, label: "Servicios" },
+      { id: "testimonials", enabled: true, label: "Opiniones" },
       { id: "photoStrip", enabled: true, label: "Galería" },
       { id: "booking", enabled: true, label: "Reservar" },
     ],
@@ -1181,6 +1195,7 @@ function QuickGenerator({ setConfig }) {
     compact: [
       { id: "hero", enabled: true, label: "Inicio" },
       { id: "services", enabled: true, label: "Servicios" },
+      { id: "testimonials", enabled: true, label: "Opiniones" },
       { id: "prices", enabled: true, label: "Precios" },
       { id: "booking", enabled: true, label: "Reservar" },
       { id: "photoStrip", enabled: false, label: "Galería" },
@@ -1221,8 +1236,8 @@ function QuickGenerator({ setConfig }) {
     const cleanWhatsapp = String(form.whatsapp || "").replace(/\s+/g, "");
     const whatsappLink = cleanWhatsapp
       ? `https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(
-          `Hola, quiero reservar una cita en ${cleanName} 💈`
-        )}`
+        `Hola, quiero reservar una cita en ${cleanName} 💈`
+      )}`
       : "";
 
     const heroImageByStyle = {
@@ -1349,6 +1364,26 @@ function QuickGenerator({ setConfig }) {
 
           testimonials: {
             ...(prev?.copy?.testimonials || {}),
+            kicker: "Opiniones",
+            title: "Clientes que vuelven por algo.",
+            desc: "Confianza, detalle y resultados que se notan desde la primera visita.",
+            items: [
+              {
+                name: "Carlos M.",
+                service: "Corte + barba",
+                text: "Muy buen trato y un resultado impecable. Se nota el detalle y la profesionalidad.",
+              },
+              {
+                name: "Adrián R.",
+                service: "Fade",
+                text: "Reserva rápida por WhatsApp y corte muy limpio. Muy recomendable.",
+              },
+              {
+                name: "Javi P.",
+                service: "Arreglo de barba",
+                text: "La mejor barbería de la zona. Buen ambiente y servicio muy cuidado.",
+              },
+            ],
           },
 
           photoStrip: {
