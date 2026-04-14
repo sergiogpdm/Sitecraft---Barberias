@@ -62,16 +62,9 @@ export default function PricesSection({ data }) {
           ) : null}
         </div>
 
-        <div
-          style={{
-            marginTop: 62,
-            maxWidth: 980,
-            marginInline: "auto",
-            borderTop: "1px solid var(--border)",
-          }}
-        >
+        <div className="prices-band-grid">
           {items.map((item, index) => (
-            <PriceRow
+            <PriceBand
               key={`${item.title}-${index}`}
               title={item.title}
               desc={item.desc}
@@ -81,15 +74,7 @@ export default function PricesSection({ data }) {
           ))}
         </div>
 
-        <div
-          style={{
-            marginTop: 34,
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: 12,
-          }}
-        >
+        <div className="prices-band-cta">
           <Button href="#booking" variant="secondary">
             Reservar cita
           </Button>
@@ -99,20 +84,10 @@ export default function PricesSection({ data }) {
   );
 }
 
-function PriceRow({ title, desc, price, featured = false }) {
+function PriceBand({ title, desc, price, featured = false }) {
   return (
-    <div
-      className="price-row-editorial"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr auto",
-        gap: 24,
-        alignItems: "center",
-        padding: "30px 0",
-        borderBottom: "1px solid var(--border)",
-      }}
-    >
-      <div>
+    <article className={`price-band ${featured ? "is-featured" : ""}`}>
+      <div className="price-band-left">
         <div
           style={{
             display: "flex",
@@ -121,83 +96,19 @@ function PriceRow({ title, desc, price, featured = false }) {
             flexWrap: "wrap",
           }}
         >
-          <h3
-            style={{
-              margin: 0,
-              fontSize: "clamp(24px, 2vw, 34px)",
-              lineHeight: 1.04,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            {title}
-          </h3>
+          <h3 className="price-band-title">{title}</h3>
 
           {featured ? (
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                padding: "6px 10px",
-                borderRadius: 999,
-                background: "rgba(212,175,55,0.10)",
-                border: "1px solid rgba(212,175,55,0.20)",
-                color: "var(--accentA)",
-                fontSize: 12,
-                fontWeight: 800,
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-              }}
-            >
-              Más pedido
-            </span>
+            <span className="price-band-badge">Más pedido</span>
           ) : null}
         </div>
 
-        {desc ? (
-          <p
-            style={{
-              marginTop: 12,
-              marginBottom: 0,
-              maxWidth: 560,
-              color: "var(--muted)",
-              fontSize: 15.5,
-              lineHeight: 1.8,
-            }}
-          >
-            {desc}
-          </p>
-        ) : null}
+        <p className="price-band-desc">{desc}</p>
       </div>
 
-      <div
-        style={{
-          minWidth: 120,
-          textAlign: "right",
-          alignSelf: "start",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "clamp(28px, 3vw, 42px)",
-            lineHeight: 1,
-            letterSpacing: "-0.04em",
-            fontWeight: 800,
-            color: featured ? "var(--accentA)" : "var(--text)",
-          }}
-        >
-          {price}
-        </div>
-
-        <div
-          style={{
-            marginTop: 8,
-            width: 56,
-            height: 1,
-            background: featured ? "var(--accentA)" : "var(--border)",
-            marginLeft: "auto",
-          }}
-        />
+      <div className="price-band-right">
+        <div className="price-band-price">{price}</div>
       </div>
-    </div>
+    </article>
   );
 }
