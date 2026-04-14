@@ -58,6 +58,11 @@ export const siteConfig = {
           "label": "Servicios"
         },
         {
+          "id": "testimonials",
+          "enabled": true,
+          "label": "Opiniones"
+        },
+        {
           "id": "photoStrip",
           "enabled": true,
           "label": "Galería"
@@ -151,6 +156,28 @@ export const siteConfig = {
       "title": "De la Rue Studio",
       "subtitle": "Estilo · Precisión · Reserva",
       "small": "© 2026"
+    },
+    "testimonials": {
+      "kicker": "Opiniones",
+      "title": "Clientes que vuelven por algo.",
+      "desc": "Confianza, detalle y resultados que se notan desde la primera visita.",
+      "items": [
+        {
+          "name": "Carlos M.",
+          "service": "Corte + barba",
+          "text": "Muy buen trato y un resultado impecable."
+        },
+        {
+          "name": "Adrián R.",
+          "service": "Fade",
+          "text": "Reserva rápida por WhatsApp y corte muy limpio."
+        },
+        {
+          "name": "Javi P.",
+          "service": "Arreglo de barba",
+          "text": "Buen ambiente y servicio muy cuidado."
+        }
+      ]
     }
   }
 };
