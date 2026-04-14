@@ -11,6 +11,7 @@ export default function ServicesSection({ data }) {
       }}
     >
       <Container wide>
+        {/* HEADER */}
         <div
           style={{
             maxWidth: 900,
@@ -61,52 +62,37 @@ export default function ServicesSection({ data }) {
           ) : null}
         </div>
 
+        {/* GRID */}
         <div
+          className="services-solid-grid"
           style={{
             marginTop: 64,
-            borderTop: "1px solid var(--border)",
-            borderBottom: "1px solid var(--border)",
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-            }}
-          >
-            {items.map((item, index) => (
-              <MinimalServiceBlock
-                key={`${item.title}-${index}`}
-                index={index}
-                title={item.title}
-                desc={item.desc}
-                isLast={index === items.length - 1}
-              />
-            ))}
-          </div>
+          {items.map((item, index) => (
+            <ServiceCard
+              key={`${item.title}-${index}`}
+              index={index}
+              title={item.title}
+              desc={item.desc}
+            />
+          ))}
         </div>
       </Container>
     </section>
   );
 }
 
-function MinimalServiceBlock({ index, title, desc, isLast }) {
+/* CARD */
+function ServiceCard({ index, title, desc }) {
   return (
-    <div
-      style={{
-        padding: "42px 34px 38px",
-        borderRight: isLast ? "none" : "1px solid var(--border)",
-        minHeight: 260,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
+    <div className="services-solid-card">
+      {/* número */}
       <div
         style={{
-          fontSize: 14,
+          fontSize: 13,
           color: "var(--accentA)",
-          fontWeight: 700,
+          fontWeight: 800,
           letterSpacing: "0.08em",
           textTransform: "uppercase",
         }}
@@ -114,6 +100,7 @@ function MinimalServiceBlock({ index, title, desc, isLast }) {
         0{index + 1}
       </div>
 
+      {/* contenido */}
       <div style={{ marginTop: 26 }}>
         <h3
           style={{
@@ -131,7 +118,7 @@ function MinimalServiceBlock({ index, title, desc, isLast }) {
           style={{
             marginTop: 18,
             marginBottom: 0,
-            color: "var(--muted)",
+            color: "color-mix(in srgb, var(--text) 65%, transparent)",
             fontSize: 15.5,
             lineHeight: 1.8,
             maxWidth: 300,
@@ -141,13 +128,15 @@ function MinimalServiceBlock({ index, title, desc, isLast }) {
         </p>
       </div>
 
+      {/* línea inferior */}
       <div
         style={{
           marginTop: 28,
-          width: 42,
-          height: 1,
-          background: "var(--accentA)",
-          opacity: 0.8,
+          width: 54,
+          height: 2,
+          borderRadius: 999,
+          background: "linear-gradient(90deg, var(--accentA), transparent)",
+          opacity: 0.9,
         }}
       />
     </div>
