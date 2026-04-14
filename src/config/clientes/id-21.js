@@ -29,10 +29,10 @@ export const siteConfig = {
     "overrides": {
       "--bg": "#0B0B0D",
       "--card": "#fa3a34",
-      "--text": "#F5F5F5",
+      "--text": "#ffffff",
       "--muted": "#A1A1AA",
       "--border": "#26262B",
-      "--accentA": "#fa3a34",
+      "--accentA": "#ffffff",
       "--accentB": "#9C7A2B",
       "--accentSoft": "#1A1710",
       "--radius": "16px",

@@ -10,7 +10,7 @@ export default function TestimonialsSection({ data }) {
         padding: "120px 0 100px",
       }}
     >
-      <Container>
+      <Container wide>
         <div
           style={{
             maxWidth: 900,
@@ -18,7 +18,7 @@ export default function TestimonialsSection({ data }) {
             textAlign: "center",
           }}
         >
-          {data.kicker && (
+          {data.kicker ? (
             <div
               style={{
                 color: "var(--accentA)",
@@ -31,7 +31,7 @@ export default function TestimonialsSection({ data }) {
             >
               {data.kicker}
             </div>
-          )}
+          ) : null}
 
           <h2
             style={{
@@ -44,7 +44,7 @@ export default function TestimonialsSection({ data }) {
             {data.title}
           </h2>
 
-          {data.desc && (
+          {data.desc ? (
             <p
               style={{
                 margin: "22px auto 0",
@@ -56,7 +56,7 @@ export default function TestimonialsSection({ data }) {
             >
               {data.desc}
             </p>
-          )}
+          ) : null}
         </div>
 
         <div className="testimonials-grid">
