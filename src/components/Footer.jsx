@@ -1,15 +1,93 @@
 import Container from "./Container.jsx";
+import Button from "./ui/Button.jsx";
+import { useSiteConfig } from "../context/SiteConfigContext.jsx";
 
 export default function Footer({ data, contact }) {
+  const { config } = useSiteConfig();
+  const { brand, links } = config;
+
   return (
-    <footer style={{ borderTop: "1px solid var(--border)", padding: "24px 0 40px" }}>
-      <Container>
-        <div style={{ fontWeight: 700 }}>{data.title}</div>
-        <div style={{ color: "var(--muted)", marginTop: 6 }}>{data.subtitle}</div>
-        <div style={{ color: "var(--muted)", marginTop: 10 }}>
-          {contact.address} · {contact.hours}
+    <footer
+      id="footer"
+      style={{
+        padding: "70px 0 30px",
+        borderTop: "1px solid var(--border)",
+      }}
+    >
+      <Container wide>
+        <div className="footer-clean-shell">
+          <div className="footer-clean-top">
+            <div className="footer-clean-brand">
+              <div className="footer-clean-mark">
+                {brand.emojiLogo}
+              </div>
+
+              <div>
+                <div className="footer-clean-name">
+                  {data.title || brand.name}
+                </div>
+
+                <div className="footer-clean-subtitle">
+                  {data.subtitle}
+                </div>
+              </div>
+            </div>
+
+            <div className="footer-clean-cta">
+              <Button href={links.whatsapp} target="_blank" rel="noreferrer">
+                Reservar cita
+              </Button>
+            </div>
+          </div>
+
+          <div className="footer-clean-grid">
+            <div className="footer-clean-col">
+              <div className="footer-clean-label">Ubicación</div>
+              <div className="footer-clean-text">{contact.address}</div>
+              {links.maps ? (
+                <a
+                  href={links.maps}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="footer-clean-link"
+                >
+                  Ver en Maps
+                </a>
+              ) : null}
+            </div>
+
+            <div className="footer-clean-col">
+              <div className="footer-clean-label">Horario</div>
+              <div className="footer-clean-text">{contact.hours}</div>
+            </div>
+
+            <div className="footer-clean-col">
+              <div className="footer-clean-label">Contacto</div>
+              <div className="footer-clean-text">{contact.phoneDisplay}</div>
+              {links.instagram ? (
+                <a
+                  href={links.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="footer-clean-link"
+                >
+                  Instagram
+                </a>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="footer-clean-bottom">
+            <div className="footer-clean-small">{data.small}</div>
+
+            <div className="footer-clean-nav">
+              <a href="#hero">Inicio</a>
+              <a href="#services">Servicios</a>
+              <a href="#prices">Precios</a>
+              <a href="#booking">Reservar</a>
+            </div>
+          </div>
         </div>
-        <div style={{ color: "var(--muted)", marginTop: 10 }}>{data.small}</div>
       </Container>
     </footer>
   );

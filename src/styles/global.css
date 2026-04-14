@@ -451,3 +451,137 @@ section {
     border-radius: 14px;
   }
 }
+
+
+.footer-clean-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.footer-clean-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-clean-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-clean-mark {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: 24px;
+}
+
+.footer-clean-name {
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.footer-clean-subtitle {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-clean-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-clean-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-clean-label {
+  color: var(--accentA);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-clean-text {
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.footer-clean-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-clean-link:hover {
+  color: var(--accentA);
+}
+
+.footer-clean-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.footer-clean-small {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer-clean-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-clean-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-clean-nav a:hover {
+  color: var(--accentA);
+}
+
+@media (max-width: 900px) {
+  .footer-clean-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-clean-top {
+    align-items: flex-start;
+  }
+
+  .footer-clean-mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 22px;
+  }
+}
