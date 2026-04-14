@@ -1,11 +1,11 @@
-export default function Container({ children, style = {} }) {
+export default function Container({ children, style = {}, wide = false }) {
   return (
     <div
       style={{
         width: "100%",
-        maxWidth: 1200,
+        maxWidth: wide ? 1400 : 1200,
         margin: "0 auto",
-        padding: "0 20px",
+        padding: wide ? "0 32px" : "0 20px",
         ...style,
       }}
     >
