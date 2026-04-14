@@ -9,6 +9,8 @@ import PhotoStripSection from "../components/sections/PhotoStripSection.jsx";
 import BookingSection from "../components/sections/BookingSection.jsx";
 import Footer from "../components/Footer.jsx";
 
+import { clientConfigs } from "../config/clientes/index.js";
+
 function toConfigFileString(config) {
   return `export const siteConfig = ${JSON.stringify(config, null, 2)};\n`;
 }
@@ -297,6 +299,14 @@ export default function Customize() {
           {active === "general" && (
             <>
               <SectionTitle>General</SectionTitle>
+
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ fontWeight: 700, marginBottom: 10 }}>
+                  📂 Cargar cliente
+                </div>
+
+                <ClientLoader setConfig={setConfig} />
+              </div>
 
               {/* 🚀 GENERADOR RÁPIDO */}
               <div style={{ marginBottom: 24 }}>
@@ -1200,6 +1210,48 @@ function QuickGenerator({ setConfig }) {
 
       <button onClick={generate} style={smallButtonStyle}>
         Generar web automática
+      </button>
+    </div>
+  );
+}
+
+function ClientLoader({ setConfig }) {
+  const [selected, setSelected] = useState("");
+
+  const loadClient = () => {
+    if (!selected) return;
+
+    const config = clientConfigs[selected];
+    if (!config) return;
+
+    setConfig(config);
+  };
+
+  return (
+    <div
+      style={{
+        border: "1px solid var(--border)",
+        background: "var(--bg)",
+        borderRadius: 14,
+        padding: 14,
+      }}
+    >
+      <select
+        value={selected}
+        onChange={(e) => setSelected(e.target.value)}
+        style={{ marginBottom: 12 }}
+      >
+        <option value="">Selecciona un cliente</option>
+
+        {Object.keys(clientConfigs).map((name) => (
+          <option key={name} value={name}>
+            {name}
+          </option>
+        ))}
+      </select>
+
+      <button onClick={loadClient} style={smallButtonStyle}>
+        Cargar config
       </button>
     </div>
   );
