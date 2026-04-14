@@ -7,18 +7,18 @@ export default function TestimonialsSection({ data }) {
     <section
       id="testimonials"
       style={{
-        padding: "100px 0 90px",
+        padding: "120px 0 100px",
       }}
     >
-      <Container wide>
+      <Container>
         <div
           style={{
-            maxWidth: 860,
+            maxWidth: 900,
             margin: "0 auto",
             textAlign: "center",
           }}
         >
-          {data.kicker ? (
+          {data.kicker && (
             <div
               style={{
                 color: "var(--accentA)",
@@ -31,7 +31,7 @@ export default function TestimonialsSection({ data }) {
             >
               {data.kicker}
             </div>
-          ) : null}
+          )}
 
           <h2
             style={{
@@ -39,18 +39,16 @@ export default function TestimonialsSection({ data }) {
               fontSize: "clamp(38px, 5vw, 68px)",
               lineHeight: 0.96,
               letterSpacing: "-0.04em",
-              maxWidth: 760,
-              marginInline: "auto",
             }}
           >
             {data.title}
           </h2>
 
-          {data.desc ? (
+          {data.desc && (
             <p
               style={{
                 margin: "22px auto 0",
-                maxWidth: 680,
+                maxWidth: 700,
                 color: "var(--muted)",
                 fontSize: 18,
                 lineHeight: 1.8,
@@ -58,26 +56,30 @@ export default function TestimonialsSection({ data }) {
             >
               {data.desc}
             </p>
-          ) : null}
+          )}
         </div>
 
-        <div className="testimonials-pro-grid" style={{ marginTop: 54 }}>
+        <div className="testimonials-grid">
           {items.map((item, index) => (
-            <article key={`${item.name}-${index}`} className="testimonial-pro-card">
-              <div className="testimonial-pro-stars">★★★★★</div>
-
-              <p className="testimonial-pro-text">
-                “{item.text}”
-              </p>
-
-              <div className="testimonial-pro-footer">
-                <div className="testimonial-pro-name">{item.name}</div>
-                <div className="testimonial-pro-service">{item.service}</div>
-              </div>
-            </article>
+            <TestimonialCard key={index} {...item} />
           ))}
         </div>
       </Container>
     </section>
+  );
+}
+
+function TestimonialCard({ name, service, text }) {
+  return (
+    <div className="testimonial-card">
+      <div className="testimonial-stars">★★★★★</div>
+
+      <p className="testimonial-text">“{text}”</p>
+
+      <div className="testimonial-footer">
+        <strong>{name}</strong>
+        <span>{service}</span>
+      </div>
+    </div>
   );
 }
