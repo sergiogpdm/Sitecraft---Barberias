@@ -113,6 +113,7 @@ section {
 ========================= */
 
 @media (max-width: 980px) {
+
   section div[style*="grid-template-columns: 1.1fr 0.9fr"],
   section div[style*="grid-template-columns: 1.05fr 0.95fr"],
   section div[style*="grid-template-columns: 0.95fr 1.05fr"],
@@ -124,6 +125,7 @@ section {
 }
 
 @media (max-width: 760px) {
+
   div[style*="grid-template-columns: 1fr 1fr"],
   div[style*="grid-template-columns: repeat(3, minmax(0, 1fr))"] {
     grid-template-columns: 1fr !important;
@@ -171,12 +173,12 @@ section {
     grid-template-columns: 1fr !important;
   }
 
-  .price-row-editorial > div:last-child {
+  .price-row-editorial>div:last-child {
     text-align: left !important;
     min-width: 0 !important;
   }
 
-  .price-row-editorial > div:last-child div:last-child {
+  .price-row-editorial>div:last-child div:last-child {
     margin-left: 0 !important;
   }
 }
@@ -317,10 +319,10 @@ section {
   border: 1px solid rgba(212, 175, 55, 0.18);
   background:
     radial-gradient(circle at top center, rgba(212, 175, 55, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
   box-shadow:
     0 28px 70px rgba(0, 0, 0, 0.16),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
 
@@ -377,11 +379,11 @@ section {
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   font-size: 14px;
   font-weight: 700;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .booking-spotlight-steps {
@@ -399,8 +401,8 @@ section {
   padding: 20px 18px;
   border-radius: 22px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.035);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .booking-step-v2-number {
@@ -644,9 +646,9 @@ section {
   align-items: center;
   justify-content: center;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
   border: 1px solid var(--border);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -725,7 +727,7 @@ section {
   height: 46px;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -751,7 +753,7 @@ section {
   border-radius: 22px;
   border: 1px solid var(--border);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
   display: grid;
   gap: 12px;
 }
@@ -854,11 +856,9 @@ section {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(
-      to bottom,
+    linear-gradient(to bottom,
       rgba(0, 0, 0, 0.55),
-      rgba(0, 0, 0, 0.65)
-    );
+      rgba(0, 0, 0, 0.65));
   pointer-events: none;
 }
 
@@ -873,8 +873,8 @@ section {
   display: inline-flex;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   font-size: 14px;
   font-weight: 700;
   color: var(--accentA);
@@ -907,7 +907,7 @@ section {
 /* texto */
 .hero-full-subtitle {
   margin-top: 22px;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 18px;
   line-height: 1.8;
 }
@@ -931,8 +931,8 @@ section {
 .hero-full-tag {
   padding: 8px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   font-size: 13px;
   font-weight: 600;
   color: #fff;
@@ -965,10 +965,10 @@ section {
   border-radius: 24px;
   border: 1px solid var(--border);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
   box-shadow:
     0 16px 36px rgba(0, 0, 0, 0.10),
-    inset 0 1px 0 rgba(255,255,255,0.03);
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .testimonial-pro-stars {
@@ -1008,5 +1008,222 @@ section {
 @media (max-width: 980px) {
   .testimonials-pro-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   Background global barber v6
+========================= */
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -4;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0)),
+    var(--bg);
+}
+
+/* malla hexagonal completa */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -3;
+  opacity: 0.34;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='360' height='312' viewBox='0 0 360 312'>\
+  <defs>\
+    <filter id='g' x='-50%' y='-50%' width='200%' height='200%'>\
+      <feGaussianBlur stdDeviation='3' result='b'/>\
+      <feMerge>\
+        <feMergeNode in='b'/>\
+        <feMergeNode in='SourceGraphic'/>\
+      </feMerge>\
+    </filter>\
+  </defs>\
+  <g fill='none' stroke='white' stroke-opacity='0.08' stroke-width='1.8' stroke-linejoin='round'>\
+    <path d='M45 26 L90 52 L90 104 L45 130 L0 104 L0 52 Z'/>\
+    <path d='M135 26 L180 52 L180 104 L135 130 L90 104 L90 52 Z'/>\
+    <path d='M225 26 L270 52 L270 104 L225 130 L180 104 L180 52 Z'/>\
+    <path d='M315 26 L360 52 L360 104 L315 130 L270 104 L270 52 Z'/>\
+    <path d='M90 104 L135 130 L135 182 L90 208 L45 182 L45 130 Z'/>\
+    <path d='M180 104 L225 130 L225 182 L180 208 L135 182 L135 130 Z'/>\
+    <path d='M270 104 L315 130 L315 182 L270 208 L225 182 L225 130 Z'/>\
+    <path d='M45 182 L90 208 L90 260 L45 286 L0 260 L0 208 Z'/>\
+    <path d='M135 182 L180 208 L180 260 L135 286 L90 260 L90 208 Z'/>\
+    <path d='M225 182 L270 208 L270 260 L225 286 L180 260 L180 208 Z'/>\
+    <path d='M315 182 L360 208 L360 260 L315 286 L270 260 L270 208 Z'/>\
+  </g>\
+  <g fill='none' stroke='white' stroke-opacity='0.24' stroke-width='2.6' stroke-linejoin='round' filter='url(%23g)'>\
+    <path d='M135 26 L180 52 L180 104 L135 130 L90 104 L90 52 Z'/>\
+    <path d='M270 104 L315 130 L315 182 L270 208 L225 182 L225 130 Z'/>\
+    <path d='M135 182 L180 208 L180 260 L135 286 L90 260 L90 208 Z'/>\
+  </g>\
+  <g fill='none' stroke='white' stroke-opacity='0.40' stroke-width='3.4' stroke-linejoin='round' filter='url(%23g)'>\
+    <path d='M225 26 L270 52 L270 104 L225 130 L180 104 L180 52 Z'/>\
+    <path d='M45 182 L90 208 L90 260 L45 286 L0 260 L0 208 Z'/>\
+  </g>\
+</svg>");
+  background-size: 360px 312px;
+  background-repeat: repeat;
+  animation: barberHexWallMove 26s ease-in-out infinite, barberHexPulse 8s ease-in-out infinite;
+}
+
+/* glows laterales */
+.site-bg-glow-left,
+.site-bg-glow-right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 320px;
+  pointer-events: none;
+  z-index: -2;
+  filter: blur(90px);
+  opacity: 0.14;
+}
+
+.site-bg-glow-left {
+  left: -120px;
+  background: radial-gradient(circle at center, var(--accentA), transparent 68%);
+  animation: barberSideGlowLeft 18s ease-in-out infinite;
+}
+
+.site-bg-glow-right {
+  right: -120px;
+  background: radial-gradient(circle at center, var(--accentA), transparent 68%);
+  animation: barberSideGlowRight 18s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+/* viñeta suave */
+.site-bg-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at center, transparent 0%, transparent 62%, rgba(0, 0, 0, 0.22) 100%);
+}
+
+@keyframes barberHexWallMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(14px, 8px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+
+@keyframes barberSideGlowLeft {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(18px, 24px, 0) scale(1.04);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes barberSideGlowRight {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-18px, -20px, 0) scale(1.05);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  body::after {
+    background-size: 280px 243px;
+    opacity: 0.28;
+  }
+
+  .site-bg-glow-left,
+  .site-bg-glow-right {
+    width: 220px;
+    opacity: 0.10;
+  }
+}
+
+/* glows esquina superior e inferior */
+.site-bg-glow-top,
+.site-bg-glow-bottom {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  height: 320px;
+  pointer-events: none;
+  z-index: -2;
+  filter: blur(110px);
+  opacity: 0.12;
+}
+
+.site-bg-glow-top {
+  top: -120px;
+  background: radial-gradient(circle at center, var(--accentA), transparent 70%);
+  animation: barberGlowTop 20s ease-in-out infinite;
+}
+
+.site-bg-glow-bottom {
+  bottom: -140px;
+  background: radial-gradient(circle at center, var(--accentA), transparent 70%);
+  animation: barberGlowBottom 22s ease-in-out infinite;
+  animation-delay: 6s;
+}
+
+/* animaciones suaves */
+@keyframes barberGlowTop {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(20px) scale(1.05);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes barberGlowBottom {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-20px) scale(1.06);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1);
   }
 }

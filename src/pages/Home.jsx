@@ -54,6 +54,14 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: "100vh" }}>
+
+      <div className="site-bg-glow-left" />
+  <div className="site-bg-glow-right" />
+
+  <div className="site-bg-glow-top" />
+  <div className="site-bg-glow-bottom" />
+
+  <div className="site-bg-vignette" />
       <header className={`navbar-pro ${isScrolled ? "is-scrolled" : "is-top"}`} style={navbarStyle}>
         <Container wide>
           <div className="navbar-pro-inner">
