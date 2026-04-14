@@ -8,6 +8,7 @@ import BookingSection from "../components/sections/BookingSection.jsx";
 import Footer from "../components/Footer.jsx";
 import Container from "../components/Container.jsx";
 import Button from "../components/ui/Button.jsx";
+import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
 
 export default function Home() {
   const { config } = useSiteConfig();
@@ -136,6 +137,12 @@ export default function Home() {
       <div id="hero">
         {enabledSections.some((s) => s.id === "hero") && (
           <HeroSection brand={brand} data={copy.hero} />
+        )}
+      </div>
+
+      <div id="testimonials">
+        {enabledSections.some((s) => s.id === "testimonials") && (
+          <TestimonialsSection data={copy.testimonials} />
         )}
       </div>
 

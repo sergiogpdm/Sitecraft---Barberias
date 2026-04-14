@@ -4,6 +4,7 @@ import { presets } from "../config/presets.js";
 
 import HeroSection from "../components/sections/HeroSection.jsx";
 import ServicesSection from "../components/sections/ServicesSection.jsx";
+import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
 import PricesSection from "../components/sections/PricesSection.jsx";
 import PhotoStripSection from "../components/sections/PhotoStripSection.jsx";
 import BookingSection from "../components/sections/BookingSection.jsx";
@@ -25,10 +26,172 @@ function parseConfigText(text) {
   return JSON.parse(objText);
 }
 
+function ensureConfigShape(config) {
+  return {
+    ...config,
+
+    brand: {
+      name: "",
+      tagline: "",
+      emojiLogo: "💈",
+      logoImage: "",
+      ...(config?.brand || {}),
+    },
+
+    links: {
+      whatsapp: "",
+      instagram: "",
+      maps: "",
+      ...(config?.links || {}),
+    },
+
+    contact: {
+      phoneDisplay: "",
+      phoneTel: "",
+      email: "",
+      address: "",
+      hours: "",
+      phone: "",
+      ...(config?.contact || {}),
+    },
+
+    layout: {
+      showNavbarCta: true,
+      showFloatingWhatsApp: true,
+      ...(config?.layout || {}),
+    },
+
+    theme: {
+      preset: "goldNight",
+      mode: "flat",
+      scheme: "dark",
+      ...(config?.theme || {}),
+      overrides: {
+        "--bg": "#0B0B0D",
+        "--card": "#141418",
+        "--text": "#F5F5F5",
+        "--muted": "#A1A1AA",
+        "--border": "#26262B",
+        "--accentA": "#D4AF37",
+        "--accentB": "#9C7A2B",
+        "--accentSoft": "#1A1710",
+        "--radius": "16px",
+        "--btnRadius": "12px",
+        "--shadowY": "18px",
+        "--shadowBlur": "44px",
+        "--shadowOpacity": "0.24",
+        "--fontDisplay": "Playfair Display, serif",
+        "--fontBody": "Inter, sans-serif",
+        ...(config?.theme?.overrides || {}),
+      },
+    },
+
+    pages: {
+      ...(config?.pages || {}),
+      home: {
+        sections: [
+          { id: "hero", enabled: true, label: "Inicio" },
+          { id: "services", enabled: true, label: "Servicios" },
+          { id: "testimonials", enabled: true, label: "Opiniones" },
+          { id: "photoStrip", enabled: true, label: "Galería" },
+          { id: "prices", enabled: true, label: "Precios" },
+          { id: "booking", enabled: true, label: "Reservar" },
+        ],
+        ...(config?.pages?.home || {}),
+      },
+      customize: {
+        enabled: true,
+        ...(config?.pages?.customize || {}),
+      },
+    },
+
+    copy: {
+      ...(config?.copy || {}),
+
+      hero: {
+        badge: "",
+        titleA: "",
+        titleHighlight: "",
+        titleB: "",
+        subtitle: "",
+        ctaText: "",
+        ctaHref: "",
+        imageSrc: "",
+        ...(config?.copy?.hero || {}),
+      },
+
+      services: {
+        kicker: "",
+        title: "",
+        desc: "",
+        items: [],
+        ...(config?.copy?.services || {}),
+      },
+
+      testimonials: {
+        kicker: "Opiniones",
+        title: "Clientes que vuelven por algo.",
+        desc: "Confianza, detalle y resultados que se notan desde la primera visita.",
+        items: [
+          {
+            name: "Carlos M.",
+            service: "Corte + barba",
+            text: "Muy buen trato y un resultado impecable.",
+          },
+          {
+            name: "Adrián R.",
+            service: "Fade",
+            text: "Reserva rápida por WhatsApp y corte muy limpio.",
+          },
+          {
+            name: "Javi P.",
+            service: "Arreglo de barba",
+            text: "Buen ambiente y servicio muy cuidado.",
+          },
+        ],
+        ...(config?.copy?.testimonials || {}),
+      },
+
+      prices: {
+        kicker: "",
+        title: "",
+        desc: "",
+        items: [],
+        ...(config?.copy?.prices || {}),
+      },
+
+      photoStrip: {
+        kicker: "",
+        title: "",
+        note: "",
+        photos: [],
+        ...(config?.copy?.photoStrip || {}),
+      },
+
+      booking: {
+        kicker: "",
+        title: "",
+        desc: "",
+        ctaText: "",
+        ctaHref: "",
+        ...(config?.copy?.booking || {}),
+      },
+
+      footer: {
+        title: "",
+        subtitle: "",
+        small: "",
+        ...(config?.copy?.footer || {}),
+      },
+    },
+  };
+}
+
 const TABS = [
   { key: "general", label: "General" },
   { key: "hero", label: "Hero" },
   { key: "services", label: "Services" },
+  { key: "testimonials", label: "Testimonials" },
   { key: "prices", label: "Prices" },
   { key: "photoStrip", label: "PhotoStrip" },
   { key: "booking", label: "Booking" },
@@ -37,6 +200,8 @@ const TABS = [
 
 export default function Customize() {
   const { config, setConfig } = useSiteConfig();
+  const safeConfig = useMemo(() => ensureConfigShape(config || {}), [config]);
+
   const [active, setActive] = useState("general");
   const [textBox, setTextBox] = useState("");
   const [msg, setMsg] = useState("");
@@ -55,179 +220,197 @@ export default function Customize() {
     const found = presets.find((p) => p.id === presetId);
     if (!found) return;
 
-    setConfig((prev) => ({
-      ...prev,
-      theme: {
-        ...prev.theme,
-        preset: found.id,
-        overrides: { ...found.overrides },
-      },
-    }));
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        theme: {
+          ...(prev?.theme || {}),
+          preset: found.id,
+          overrides: { ...found.overrides },
+        },
+      })
+    );
 
     setMessage(`✅ Preset aplicado: ${found.label}`);
   };
 
   const updateRoot = (section, key, value) => {
-    setConfig((prev) => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [key]: value,
-      },
-    }));
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        [section]: {
+          ...(prev?.[section] || {}),
+          [key]: value,
+        },
+      })
+    );
   };
 
   const updateCopy = (section, key, value) => {
-    setConfig((prev) => ({
-      ...prev,
-      copy: {
-        ...prev.copy,
-        [section]: {
-          ...prev.copy[section],
-          [key]: value,
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        copy: {
+          ...(prev?.copy || {}),
+          [section]: {
+            ...(prev?.copy?.[section] || {}),
+            [key]: value,
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   const updateThemeOverride = (key, value) => {
-    setConfig((prev) => ({
-      ...prev,
-      theme: {
-        ...prev.theme,
-        overrides: {
-          ...prev.theme.overrides,
-          [key]: value,
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        theme: {
+          ...(prev?.theme || {}),
+          overrides: {
+            ...(prev?.theme?.overrides || {}),
+            [key]: value,
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   const toggleSection = (id) => {
-    setConfig((prev) => ({
-      ...prev,
-      pages: {
-        ...prev.pages,
-        home: {
-          ...prev.pages.home,
-          sections: prev.pages.home.sections.map((s) =>
-            s.id === id ? { ...s, enabled: !s.enabled } : s
-          ),
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        pages: {
+          ...(prev?.pages || {}),
+          home: {
+            ...(prev?.pages?.home || {}),
+            sections: (prev?.pages?.home?.sections || []).map((s) =>
+              s.id === id ? { ...s, enabled: !s.enabled } : s
+            ),
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   const updateArrayItem = (section, index, key, value) => {
     setConfig((prev) => {
-      const nextItems = [...prev.copy[section].items];
+      const nextItems = [...(prev?.copy?.[section]?.items || [])];
       nextItems[index] = { ...nextItems[index], [key]: value };
 
-      return {
+      return ensureConfigShape({
         ...prev,
         copy: {
-          ...prev.copy,
+          ...(prev?.copy || {}),
           [section]: {
-            ...prev.copy[section],
+            ...(prev?.copy?.[section] || {}),
             items: nextItems,
           },
         },
-      };
+      });
     });
   };
 
   const addArrayItem = (section, template) => {
-    setConfig((prev) => ({
-      ...prev,
-      copy: {
-        ...prev.copy,
-        [section]: {
-          ...prev.copy[section],
-          items: [...prev.copy[section].items, template],
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        copy: {
+          ...(prev?.copy || {}),
+          [section]: {
+            ...(prev?.copy?.[section] || {}),
+            items: [...(prev?.copy?.[section]?.items || []), template],
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   const removeArrayItem = (section, index) => {
-    setConfig((prev) => ({
-      ...prev,
-      copy: {
-        ...prev.copy,
-        [section]: {
-          ...prev.copy[section],
-          items: prev.copy[section].items.filter((_, i) => i !== index),
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        copy: {
+          ...(prev?.copy || {}),
+          [section]: {
+            ...(prev?.copy?.[section] || {}),
+            items: (prev?.copy?.[section]?.items || []).filter((_, i) => i !== index),
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   const moveArrayItem = (section, index, direction) => {
     setConfig((prev) => {
-      const arr = [...prev.copy[section].items];
+      const arr = [...(prev?.copy?.[section]?.items || [])];
       const target = index + direction;
-      if (target < 0 || target >= arr.length) return prev;
+      if (target < 0 || target >= arr.length) return ensureConfigShape(prev);
       [arr[index], arr[target]] = [arr[target], arr[index]];
 
-      return {
+      return ensureConfigShape({
         ...prev,
         copy: {
-          ...prev.copy,
+          ...(prev?.copy || {}),
           [section]: {
-            ...prev.copy[section],
+            ...(prev?.copy?.[section] || {}),
             items: arr,
           },
         },
-      };
+      });
     });
   };
 
   const updatePhoto = (index, value) => {
     setConfig((prev) => {
-      const photos = [...prev.copy.photoStrip.photos];
+      const photos = [...(prev?.copy?.photoStrip?.photos || [])];
       photos[index] = value;
 
-      return {
+      return ensureConfigShape({
         ...prev,
         copy: {
-          ...prev.copy,
+          ...(prev?.copy || {}),
           photoStrip: {
-            ...prev.copy.photoStrip,
+            ...(prev?.copy?.photoStrip || {}),
             photos,
           },
         },
-      };
+      });
     });
   };
 
   const addPhoto = () => {
-    setConfig((prev) => ({
-      ...prev,
-      copy: {
-        ...prev.copy,
-        photoStrip: {
-          ...prev.copy.photoStrip,
-          photos: [...prev.copy.photoStrip.photos, ""],
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        copy: {
+          ...(prev?.copy || {}),
+          photoStrip: {
+            ...(prev?.copy?.photoStrip || {}),
+            photos: [...(prev?.copy?.photoStrip?.photos || []), ""],
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   const removePhoto = (index) => {
-    setConfig((prev) => ({
-      ...prev,
-      copy: {
-        ...prev.copy,
-        photoStrip: {
-          ...prev.copy.photoStrip,
-          photos: prev.copy.photoStrip.photos.filter((_, i) => i !== index),
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
+        copy: {
+          ...(prev?.copy || {}),
+          photoStrip: {
+            ...(prev?.copy?.photoStrip || {}),
+            photos: (prev?.copy?.photoStrip?.photos || []).filter((_, i) => i !== index),
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   const exportConfig = async () => {
-    const str = toConfigFileString(config);
+    const str = toConfigFileString(safeConfig);
     setTextBox(str);
 
     try {
@@ -241,7 +424,7 @@ export default function Customize() {
   const importConfig = () => {
     try {
       const parsed = parseConfigText(textBox);
-      setConfig(parsed);
+      setConfig(ensureConfigShape(parsed));
       setMessage("✅ Config importada.");
     } catch {
       setMessage("❌ Import fallido. Revisa el texto pegado.");
@@ -301,23 +484,17 @@ export default function Customize() {
               <SectionTitle>General</SectionTitle>
 
               <div style={{ marginBottom: 24 }}>
-                <div style={{ fontWeight: 700, marginBottom: 10 }}>
-                  📂 Cargar cliente
-                </div>
-
+                <div style={{ fontWeight: 700, marginBottom: 10 }}>📂 Cargar cliente</div>
                 <ClientLoader setConfig={setConfig} />
               </div>
 
-              {/* 🚀 GENERADOR RÁPIDO */}
               <div style={{ marginBottom: 24 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>
                   🚀 Generador rápido con variantes
                 </div>
-
                 <QuickGenerator setConfig={setConfig} />
               </div>
 
-              {/* 🎨 PRESETS */}
               <div style={{ marginBottom: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Presets</div>
 
@@ -331,11 +508,11 @@ export default function Customize() {
                         borderRadius: "var(--btnRadius)",
                         border: "1px solid var(--border)",
                         background:
-                          config.theme.preset === preset.id
+                          safeConfig.theme.preset === preset.id
                             ? "var(--accentA)"
                             : "var(--bg)",
                         color:
-                          config.theme.preset === preset.id ? "#111" : "var(--text)",
+                          safeConfig.theme.preset === preset.id ? "#111" : "var(--text)",
                         fontWeight: 700,
                         cursor: "pointer",
                       }}
@@ -346,110 +523,117 @@ export default function Customize() {
                 </div>
               </div>
 
-              {/* INPUTS NORMALES */}
               <Input
                 label="Nombre negocio"
-                value={config.brand.name}
+                value={safeConfig.brand.name}
                 onChange={(v) => updateRoot("brand", "name", v)}
               />
 
               <Input
                 label="Tagline"
-                value={config.brand.tagline}
+                value={safeConfig.brand.tagline}
                 onChange={(v) => updateRoot("brand", "tagline", v)}
               />
 
               <Input
                 label="Emoji logo"
-                value={config.brand.emojiLogo}
+                value={safeConfig.brand.emojiLogo}
                 onChange={(v) => updateRoot("brand", "emojiLogo", v)}
               />
 
               <Input
                 label="WhatsApp URL"
-                value={config.links.whatsapp}
+                value={safeConfig.links.whatsapp}
                 onChange={(v) =>
-                  setConfig((prev) => ({
-                    ...prev,
-                    links: { ...prev.links, whatsapp: v },
-                  }))
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      links: { ...(prev?.links || {}), whatsapp: v },
+                    })
+                  )
                 }
               />
 
               <Input
                 label="Instagram URL"
-                value={config.links.instagram}
+                value={safeConfig.links.instagram}
                 onChange={(v) =>
-                  setConfig((prev) => ({
-                    ...prev,
-                    links: { ...prev.links, instagram: v },
-                  }))
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      links: { ...(prev?.links || {}), instagram: v },
+                    })
+                  )
                 }
               />
 
               <Input
                 label="Google Maps URL"
-                value={config.links.maps}
+                value={safeConfig.links.maps}
                 onChange={(v) =>
-                  setConfig((prev) => ({
-                    ...prev,
-                    links: { ...prev.links, maps: v },
-                  }))
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      links: { ...(prev?.links || {}), maps: v },
+                    })
+                  )
                 }
               />
 
               <Input
                 label="Dirección"
-                value={config.contact.address}
+                value={safeConfig.contact.address}
                 onChange={(v) =>
-                  setConfig((prev) => ({
-                    ...prev,
-                    contact: { ...prev.contact, address: v },
-                  }))
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      contact: { ...(prev?.contact || {}), address: v },
+                    })
+                  )
                 }
               />
 
               <Input
                 label="Horario"
-                value={config.contact.hours}
+                value={safeConfig.contact.hours}
                 onChange={(v) =>
-                  setConfig((prev) => ({
-                    ...prev,
-                    contact: { ...prev.contact, hours: v },
-                  }))
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      contact: { ...(prev?.contact || {}), hours: v },
+                    })
+                  )
                 }
               />
 
               <Input
                 label="Color fondo"
-                value={config.theme.overrides["--bg"] || ""}
+                value={safeConfig.theme.overrides["--bg"] || ""}
                 onChange={(v) => updateThemeOverride("--bg", v)}
               />
 
               <Input
                 label="Color card"
-                value={config.theme.overrides["--card"] || ""}
+                value={safeConfig.theme.overrides["--card"] || ""}
                 onChange={(v) => updateThemeOverride("--card", v)}
               />
 
               <Input
                 label="Color texto"
-                value={config.theme.overrides["--text"] || ""}
+                value={safeConfig.theme.overrides["--text"] || ""}
                 onChange={(v) => updateThemeOverride("--text", v)}
               />
 
               <Input
                 label="Color acento"
-                value={config.theme.overrides["--accentA"] || ""}
+                value={safeConfig.theme.overrides["--accentA"] || ""}
                 onChange={(v) => updateThemeOverride("--accentA", v)}
               />
 
               <div style={{ marginTop: 20 }}>
-                <div style={{ fontWeight: 700, marginBottom: 10 }}>
-                  Secciones Home
-                </div>
+                <div style={{ fontWeight: 700, marginBottom: 10 }}>Secciones Home</div>
 
-                {config.pages.home.sections.map((section) => (
+                {(safeConfig.pages.home.sections || []).map((section) => (
                   <label
                     key={section.id}
                     style={{
@@ -480,27 +664,27 @@ export default function Customize() {
           {active === "hero" && (
             <>
               <SectionTitle>Hero</SectionTitle>
-              <Input label="Badge" value={config.copy.hero.badge} onChange={(v) => updateCopy("hero", "badge", v)} />
-              <Input label="Título A" value={config.copy.hero.titleA} onChange={(v) => updateCopy("hero", "titleA", v)} />
-              <Input label="Título Highlight" value={config.copy.hero.titleHighlight} onChange={(v) => updateCopy("hero", "titleHighlight", v)} />
-              <Input label="Título B" value={config.copy.hero.titleB} onChange={(v) => updateCopy("hero", "titleB", v)} />
-              <Textarea label="Subtitle" value={config.copy.hero.subtitle} onChange={(v) => updateCopy("hero", "subtitle", v)} />
-              <Input label="CTA texto" value={config.copy.hero.ctaText} onChange={(v) => updateCopy("hero", "ctaText", v)} />
-              <Input label="CTA href" value={config.copy.hero.ctaHref} onChange={(v) => updateCopy("hero", "ctaHref", v)} />
-              <Input label="Imagen hero" value={config.copy.hero.imageSrc} onChange={(v) => updateCopy("hero", "imageSrc", v)} />
+              <Input label="Badge" value={safeConfig.copy.hero.badge} onChange={(v) => updateCopy("hero", "badge", v)} />
+              <Input label="Título A" value={safeConfig.copy.hero.titleA} onChange={(v) => updateCopy("hero", "titleA", v)} />
+              <Input label="Título Highlight" value={safeConfig.copy.hero.titleHighlight} onChange={(v) => updateCopy("hero", "titleHighlight", v)} />
+              <Input label="Título B" value={safeConfig.copy.hero.titleB} onChange={(v) => updateCopy("hero", "titleB", v)} />
+              <Textarea label="Subtitle" value={safeConfig.copy.hero.subtitle} onChange={(v) => updateCopy("hero", "subtitle", v)} />
+              <Input label="CTA texto" value={safeConfig.copy.hero.ctaText} onChange={(v) => updateCopy("hero", "ctaText", v)} />
+              <Input label="CTA href" value={safeConfig.copy.hero.ctaHref} onChange={(v) => updateCopy("hero", "ctaHref", v)} />
+              <Input label="Imagen hero" value={safeConfig.copy.hero.imageSrc} onChange={(v) => updateCopy("hero", "imageSrc", v)} />
             </>
           )}
 
           {active === "services" && (
             <>
               <SectionTitle>Services</SectionTitle>
-              <Input label="Kicker" value={config.copy.services.kicker} onChange={(v) => updateCopy("services", "kicker", v)} />
-              <Input label="Título" value={config.copy.services.title} onChange={(v) => updateCopy("services", "title", v)} />
-              <Textarea label="Descripción" value={config.copy.services.desc} onChange={(v) => updateCopy("services", "desc", v)} />
+              <Input label="Kicker" value={safeConfig.copy.services.kicker} onChange={(v) => updateCopy("services", "kicker", v)} />
+              <Input label="Título" value={safeConfig.copy.services.title} onChange={(v) => updateCopy("services", "title", v)} />
+              <Textarea label="Descripción" value={safeConfig.copy.services.desc} onChange={(v) => updateCopy("services", "desc", v)} />
 
               <div style={{ marginTop: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Items</div>
-                {config.copy.services.items.map((item, index) => (
+                {(safeConfig.copy.services.items || []).map((item, index) => (
                   <ArrayCard
                     key={`${item.title}-${index}`}
                     title={`Servicio ${index + 1}`}
@@ -528,17 +712,86 @@ export default function Customize() {
             </>
           )}
 
+          {active === "testimonials" && (
+            <>
+              <SectionTitle>Testimonials</SectionTitle>
+
+              <Input
+                label="Kicker"
+                value={safeConfig.copy.testimonials.kicker}
+                onChange={(v) => updateCopy("testimonials", "kicker", v)}
+              />
+
+              <Input
+                label="Título"
+                value={safeConfig.copy.testimonials.title}
+                onChange={(v) => updateCopy("testimonials", "title", v)}
+              />
+
+              <Textarea
+                label="Descripción"
+                value={safeConfig.copy.testimonials.desc}
+                onChange={(v) => updateCopy("testimonials", "desc", v)}
+              />
+
+              <div style={{ marginTop: 18 }}>
+                <div style={{ fontWeight: 700, marginBottom: 10 }}>Opiniones</div>
+
+                {(safeConfig.copy.testimonials.items || []).map((item, index) => (
+                  <ArrayCard
+                    key={`${item.name}-${index}`}
+                    title={`Opinión ${index + 1}`}
+                    onMoveUp={() => moveArrayItem("testimonials", index, -1)}
+                    onMoveDown={() => moveArrayItem("testimonials", index, 1)}
+                    onRemove={() => removeArrayItem("testimonials", index)}
+                  >
+                    <Input
+                      label="Nombre"
+                      value={item.name}
+                      onChange={(v) => updateArrayItem("testimonials", index, "name", v)}
+                    />
+
+                    <Input
+                      label="Servicio"
+                      value={item.service}
+                      onChange={(v) => updateArrayItem("testimonials", index, "service", v)}
+                    />
+
+                    <Textarea
+                      label="Texto"
+                      value={item.text}
+                      onChange={(v) => updateArrayItem("testimonials", index, "text", v)}
+                    />
+                  </ArrayCard>
+                ))}
+
+                <button
+                  onClick={() =>
+                    addArrayItem("testimonials", {
+                      name: "Nuevo cliente",
+                      service: "Servicio",
+                      text: "Añade aquí una opinión.",
+                    })
+                  }
+                  style={smallButtonStyle}
+                >
+                  + Añadir opinión
+                </button>
+              </div>
+            </>
+          )}
+
           {active === "prices" && (
             <>
               <SectionTitle>Prices</SectionTitle>
-              <Input label="Kicker" value={config.copy.prices.kicker} onChange={(v) => updateCopy("prices", "kicker", v)} />
-              <Input label="Título" value={config.copy.prices.title} onChange={(v) => updateCopy("prices", "title", v)} />
-              <Textarea label="Descripción" value={config.copy.prices.desc} onChange={(v) => updateCopy("prices", "desc", v)} />
+              <Input label="Kicker" value={safeConfig.copy.prices.kicker} onChange={(v) => updateCopy("prices", "kicker", v)} />
+              <Input label="Título" value={safeConfig.copy.prices.title} onChange={(v) => updateCopy("prices", "title", v)} />
+              <Textarea label="Descripción" value={safeConfig.copy.prices.desc} onChange={(v) => updateCopy("prices", "desc", v)} />
 
               <div style={{ marginTop: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Items</div>
 
-                {config.copy.prices.items.map((item, index) => (
+                {(safeConfig.copy.prices.items || []).map((item, index) => (
                   <ArrayCard
                     key={`${item.title}-${index}`}
                     title={`Precio ${index + 1}`}
@@ -571,14 +824,14 @@ export default function Customize() {
           {active === "photoStrip" && (
             <>
               <SectionTitle>PhotoStrip</SectionTitle>
-              <Input label="Kicker" value={config.copy.photoStrip.kicker} onChange={(v) => updateCopy("photoStrip", "kicker", v)} />
-              <Input label="Título" value={config.copy.photoStrip.title} onChange={(v) => updateCopy("photoStrip", "title", v)} />
-              <Textarea label="Nota" value={config.copy.photoStrip.note} onChange={(v) => updateCopy("photoStrip", "note", v)} />
+              <Input label="Kicker" value={safeConfig.copy.photoStrip.kicker} onChange={(v) => updateCopy("photoStrip", "kicker", v)} />
+              <Input label="Título" value={safeConfig.copy.photoStrip.title} onChange={(v) => updateCopy("photoStrip", "title", v)} />
+              <Textarea label="Nota" value={safeConfig.copy.photoStrip.note} onChange={(v) => updateCopy("photoStrip", "note", v)} />
 
               <div style={{ marginTop: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Fotos</div>
 
-                {config.copy.photoStrip.photos.map((photo, index) => (
+                {(safeConfig.copy.photoStrip.photos || []).map((photo, index) => (
                   <ArrayCard
                     key={`${photo}-${index}`}
                     title={`Foto ${index + 1}`}
@@ -598,20 +851,20 @@ export default function Customize() {
           {active === "booking" && (
             <>
               <SectionTitle>Booking</SectionTitle>
-              <Input label="Kicker" value={config.copy.booking.kicker} onChange={(v) => updateCopy("booking", "kicker", v)} />
-              <Input label="Título" value={config.copy.booking.title} onChange={(v) => updateCopy("booking", "title", v)} />
-              <Textarea label="Descripción" value={config.copy.booking.desc} onChange={(v) => updateCopy("booking", "desc", v)} />
-              <Input label="CTA texto" value={config.copy.booking.ctaText} onChange={(v) => updateCopy("booking", "ctaText", v)} />
-              <Input label="CTA href" value={config.copy.booking.ctaHref} onChange={(v) => updateCopy("booking", "ctaHref", v)} />
+              <Input label="Kicker" value={safeConfig.copy.booking.kicker} onChange={(v) => updateCopy("booking", "kicker", v)} />
+              <Input label="Título" value={safeConfig.copy.booking.title} onChange={(v) => updateCopy("booking", "title", v)} />
+              <Textarea label="Descripción" value={safeConfig.copy.booking.desc} onChange={(v) => updateCopy("booking", "desc", v)} />
+              <Input label="CTA texto" value={safeConfig.copy.booking.ctaText} onChange={(v) => updateCopy("booking", "ctaText", v)} />
+              <Input label="CTA href" value={safeConfig.copy.booking.ctaHref} onChange={(v) => updateCopy("booking", "ctaHref", v)} />
             </>
           )}
 
           {active === "footer" && (
             <>
               <SectionTitle>Footer</SectionTitle>
-              <Input label="Título" value={config.copy.footer.title} onChange={(v) => updateCopy("footer", "title", v)} />
-              <Input label="Subtitle" value={config.copy.footer.subtitle} onChange={(v) => updateCopy("footer", "subtitle", v)} />
-              <Input label="Small" value={config.copy.footer.small} onChange={(v) => updateCopy("footer", "small", v)} />
+              <Input label="Título" value={safeConfig.copy.footer.title} onChange={(v) => updateCopy("footer", "title", v)} />
+              <Input label="Subtitle" value={safeConfig.copy.footer.subtitle} onChange={(v) => updateCopy("footer", "subtitle", v)} />
+              <Input label="Small" value={safeConfig.copy.footer.small} onChange={(v) => updateCopy("footer", "small", v)} />
             </>
           )}
         </div>
@@ -637,20 +890,24 @@ export default function Customize() {
                 border: "1px solid var(--border)",
               }}
             >
-              {active === "hero" && <HeroSection brand={config.brand} data={config.copy.hero} />}
-              {active === "services" && <ServicesSection data={config.copy.services} />}
-              {active === "prices" && <PricesSection data={config.copy.prices} />}
-              {active === "photoStrip" && <PhotoStripSection data={config.copy.photoStrip} />}
-              {active === "booking" && <BookingSection data={config.copy.booking} />}
-              {active === "footer" && <Footer data={config.copy.footer} contact={config.contact} />}
+              {active === "hero" && <HeroSection brand={safeConfig.brand} data={safeConfig.copy.hero} />}
+              {active === "services" && <ServicesSection data={safeConfig.copy.services} />}
+              {active === "testimonials" && (
+                <TestimonialsSection data={safeConfig.copy.testimonials} />
+              )}
+              {active === "prices" && <PricesSection data={safeConfig.copy.prices} />}
+              {active === "photoStrip" && <PhotoStripSection data={safeConfig.copy.photoStrip} />}
+              {active === "booking" && <BookingSection data={safeConfig.copy.booking} />}
+              {active === "footer" && <Footer data={safeConfig.copy.footer} contact={safeConfig.contact} />}
               {active === "general" && (
                 <>
-                  <HeroSection brand={config.brand} data={config.copy.hero} />
-                  <ServicesSection data={config.copy.services} />
-                  <PricesSection data={config.copy.prices} />
-                  <PhotoStripSection data={config.copy.photoStrip} />
-                  <BookingSection data={config.copy.booking} />
-                  <Footer data={config.copy.footer} contact={config.contact} />
+                  <HeroSection brand={safeConfig.brand} data={safeConfig.copy.hero} />
+                  <ServicesSection data={safeConfig.copy.services} />
+                  <TestimonialsSection data={safeConfig.copy.testimonials} />
+                  <PricesSection data={safeConfig.copy.prices} />
+                  <PhotoStripSection data={safeConfig.copy.photoStrip} />
+                  <BookingSection data={safeConfig.copy.booking} />
+                  <Footer data={safeConfig.copy.footer} contact={safeConfig.contact} />
                 </>
               )}
             </div>
@@ -995,156 +1252,164 @@ function QuickGenerator({ setConfig }) {
       ],
     };
 
-    setConfig((prev) => ({
-      ...prev,
+    setConfig((prev) =>
+      ensureConfigShape({
+        ...prev,
 
-      brand: {
-        ...prev.brand,
-        name: cleanName,
-        tagline: `Barbería en ${zona} · Reserva rápida`,
-      },
-
-      links: {
-        ...prev.links,
-        whatsapp: whatsappLink,
-        instagram: form.instagram.trim(),
-        maps: form.maps.trim(),
-      },
-
-      contact: {
-        ...prev.contact,
-        address: zona,
-        phone: cleanWhatsapp,
-        phoneTel: cleanWhatsapp ? `+${cleanWhatsapp}` : "",
-        phoneDisplay: cleanWhatsapp ? `(+${cleanWhatsapp.slice(0, 2)}) ${cleanWhatsapp.slice(2)}` : "",
-      },
-
-      theme: {
-        ...prev.theme,
-        preset: style.preset,
-        overrides: { ...style.overrides },
-      },
-
-      pages: {
-        ...prev.pages,
-        home: {
-          ...prev.pages.home,
-          sections: layout,
-        },
-      },
-
-      copy: {
-        ...prev.copy,
-
-        hero: {
-          ...prev.copy.hero,
-          badge: `${copy.heroBadge} ${zona}`,
-          titleA: heroTitles.titleA,
-          titleHighlight: heroTitles.titleHighlight,
-          titleB: copy.titleB,
-          subtitle: copy.subtitle,
-          ctaText: "Reservar por WhatsApp",
-          ctaHref: whatsappLink,
-          imageSrc: heroImageByStyle[form.styleVariant],
+        brand: {
+          ...(prev?.brand || {}),
+          name: cleanName,
+          tagline: `Barbería en ${zona} · Reserva rápida`,
         },
 
-        services: {
-          ...prev.copy.services,
-          kicker: "Servicios",
-          title: copy.servicesTitle,
-          desc: copy.servicesDesc,
-          items: [
-            {
-              title:
-                form.styleVariant === "classic"
-                  ? "Corte clásico"
-                  : "Corte personalizado",
-              desc:
-                form.styleVariant === "classic"
-                  ? "Técnica tradicional con acabado limpio y profesional."
-                  : "Adaptado a tu estilo, facciones y rutina diaria.",
-            },
-            {
-              title:
-                form.styleVariant === "urban"
-                  ? "Fade / degradado"
-                  : "Barba y perfilado",
-              desc:
-                form.styleVariant === "urban"
-                  ? "Transiciones limpias y acabado moderno."
-                  : "Definición, recorte y limpieza para un look completo.",
-            },
-            {
-              title:
-                form.styleVariant === "premium"
-                  ? "Corte + barba"
-                  : "Arreglo completo",
-              desc:
-                form.styleVariant === "premium"
-                  ? "Servicio completo para una imagen impecable."
-                  : "Una opción completa para salir perfecto.",
-            },
-          ],
+        links: {
+          ...(prev?.links || {}),
+          whatsapp: whatsappLink,
+          instagram: form.instagram.trim(),
+          maps: form.maps.trim(),
         },
 
-        photoStrip: {
-          ...prev.copy.photoStrip,
-          kicker: form.styleVariant === "premium" ? "Galería" : "Trabajos",
-          title:
-            form.styleVariant === "classic"
-              ? "Detalles de una barbería de verdad."
-              : "Así se ve un buen corte.",
-          note:
-            form.styleVariant === "premium"
-              ? "Estilo, detalle y presencia."
-              : "Imagen, detalle y acabado profesional.",
-          photos: galleryByStyle[form.styleVariant],
+        contact: {
+          ...(prev?.contact || {}),
+          address: zona,
+          phone: cleanWhatsapp,
+          phoneTel: cleanWhatsapp ? `+${cleanWhatsapp}` : "",
+          phoneDisplay: cleanWhatsapp
+            ? `(+${cleanWhatsapp.slice(0, 2)}) ${cleanWhatsapp.slice(2)}`
+            : "",
         },
 
-        prices: {
-          ...prev.copy.prices,
-          kicker: "Precios",
-          title:
-            form.layoutVariant === "pricesFirst"
-              ? "Precios visibles desde el primer momento."
-              : "Tarifas claras, sin complicaciones.",
-          desc: "Elige tu servicio y reserva en un momento.",
-          items: [
-            {
-              price: form.styleVariant === "premium" ? "18€" : "15€",
-              title: "Corte",
-              desc: "Corte con acabado y peinado.",
-            },
-            {
-              price: form.styleVariant === "premium" ? "25€" : "20€",
-              title: "Corte + barba",
-              desc: "Servicio completo.",
-            },
-            {
-              price: form.styleVariant === "classic" ? "12€" : "10€",
-              title: "Arreglo de barba",
-              desc: "Perfilado profesional.",
-            },
-          ],
+        theme: {
+          ...(prev?.theme || {}),
+          preset: style.preset,
+          overrides: { ...style.overrides },
         },
 
-        booking: {
-          ...prev.copy.booking,
-          kicker: "Reserva",
-          title: copy.bookingTitle,
-          desc: copy.bookingDesc,
-          ctaText: "Abrir WhatsApp",
-          ctaHref: whatsappLink,
+        pages: {
+          ...(prev?.pages || {}),
+          home: {
+            ...(prev?.pages?.home || {}),
+            sections: layout,
+          },
         },
 
-        footer: {
-          ...prev.copy.footer,
-          title: cleanName,
-          subtitle: copy.footerSubtitle,
-          small: "© 2026",
+        copy: {
+          ...(prev?.copy || {}),
+
+          hero: {
+            ...(prev?.copy?.hero || {}),
+            badge: `${copy.heroBadge} ${zona}`,
+            titleA: heroTitles.titleA,
+            titleHighlight: heroTitles.titleHighlight,
+            titleB: copy.titleB,
+            subtitle: copy.subtitle,
+            ctaText: "Reservar por WhatsApp",
+            ctaHref: whatsappLink,
+            imageSrc: heroImageByStyle[form.styleVariant],
+          },
+
+          services: {
+            ...(prev?.copy?.services || {}),
+            kicker: "Servicios",
+            title: copy.servicesTitle,
+            desc: copy.servicesDesc,
+            items: [
+              {
+                title:
+                  form.styleVariant === "classic"
+                    ? "Corte clásico"
+                    : "Corte personalizado",
+                desc:
+                  form.styleVariant === "classic"
+                    ? "Técnica tradicional con acabado limpio y profesional."
+                    : "Adaptado a tu estilo, facciones y rutina diaria.",
+              },
+              {
+                title:
+                  form.styleVariant === "urban"
+                    ? "Fade / degradado"
+                    : "Barba y perfilado",
+                desc:
+                  form.styleVariant === "urban"
+                    ? "Transiciones limpias y acabado moderno."
+                    : "Definición, recorte y limpieza para un look completo.",
+              },
+              {
+                title:
+                  form.styleVariant === "premium"
+                    ? "Corte + barba"
+                    : "Arreglo completo",
+                desc:
+                  form.styleVariant === "premium"
+                    ? "Servicio completo para una imagen impecable."
+                    : "Una opción completa para salir perfecto.",
+              },
+            ],
+          },
+
+          testimonials: {
+            ...(prev?.copy?.testimonials || {}),
+          },
+
+          photoStrip: {
+            ...(prev?.copy?.photoStrip || {}),
+            kicker: form.styleVariant === "premium" ? "Galería" : "Trabajos",
+            title:
+              form.styleVariant === "classic"
+                ? "Detalles de una barbería de verdad."
+                : "Así se ve un buen corte.",
+            note:
+              form.styleVariant === "premium"
+                ? "Estilo, detalle y presencia."
+                : "Imagen, detalle y acabado profesional.",
+            photos: galleryByStyle[form.styleVariant],
+          },
+
+          prices: {
+            ...(prev?.copy?.prices || {}),
+            kicker: "Precios",
+            title:
+              form.layoutVariant === "pricesFirst"
+                ? "Precios visibles desde el primer momento."
+                : "Tarifas claras, sin complicaciones.",
+            desc: "Elige tu servicio y reserva en un momento.",
+            items: [
+              {
+                price: form.styleVariant === "premium" ? "18€" : "15€",
+                title: "Corte",
+                desc: "Corte con acabado y peinado.",
+              },
+              {
+                price: form.styleVariant === "premium" ? "25€" : "20€",
+                title: "Corte + barba",
+                desc: "Servicio completo.",
+              },
+              {
+                price: form.styleVariant === "classic" ? "12€" : "10€",
+                title: "Arreglo de barba",
+                desc: "Perfilado profesional.",
+              },
+            ],
+          },
+
+          booking: {
+            ...(prev?.copy?.booking || {}),
+            kicker: "Reserva",
+            title: copy.bookingTitle,
+            desc: copy.bookingDesc,
+            ctaText: "Abrir WhatsApp",
+            ctaHref: whatsappLink,
+          },
+
+          footer: {
+            ...(prev?.copy?.footer || {}),
+            title: cleanName,
+            subtitle: copy.footerSubtitle,
+            small: "© 2026",
+          },
         },
-      },
-    }));
+      })
+    );
   };
 
   return (
@@ -1221,10 +1486,10 @@ function ClientLoader({ setConfig }) {
   const loadClient = () => {
     if (!selected) return;
 
-    const config = clientConfigs[selected];
-    if (!config) return;
+    const foundConfig = clientConfigs[selected];
+    if (!foundConfig) return;
 
-    setConfig(config);
+    setConfig(ensureConfigShape(foundConfig));
   };
 
   return (

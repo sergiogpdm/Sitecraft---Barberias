@@ -949,3 +949,64 @@ section {
     font-size: 16px;
   }
 }
+
+/* =========================
+   Testimonials pro
+========================= */
+
+.testimonials-pro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.testimonial-pro-card {
+  padding: 24px 22px 20px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.testimonial-pro-stars {
+  color: var(--accentA);
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.testimonial-pro-text {
+  margin: 0;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+}
+
+.testimonial-pro-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.testimonial-pro-name {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.testimonial-pro-service {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .testimonials-pro-grid {
+    grid-template-columns: 1fr;
+  }
+}
