@@ -11,25 +11,32 @@ export default function Button({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
+    gap: 10,
     padding: "14px 22px",
     borderRadius: "var(--btnRadius)",
-    fontWeight: 700,
-    border: "1px solid var(--border)",
+    fontWeight: 800,
+    fontSize: 15,
+    letterSpacing: "-0.01em",
+    border: "1px solid transparent",
     cursor: "pointer",
-    transition: "0.2s ease",
+    transition:
+      "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease",
     textDecoration: "none",
+    whiteSpace: "nowrap",
   };
 
   const variants = {
     primary: {
       background: "var(--accentA)",
       color: "#111",
-      border: "1px solid var(--accentA)",
+      borderColor: "rgba(0,0,0,0.04)",
+      boxShadow: "0 14px 30px rgba(0,0,0,0.14)",
     },
     secondary: {
-      background: "transparent",
+      background: "rgba(255,255,255,0.03)",
       color: "var(--text)",
-      border: "1px solid var(--border)",
+      borderColor: "var(--border)",
+      boxShadow: "none",
     },
   };
 
@@ -39,16 +46,47 @@ export default function Button({
     ...style,
   };
 
+  const hoverHandlers =
+    variant === "primary"
+      ? {
+          onMouseEnter: (e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "0 18px 34px rgba(0,0,0,0.18)";
+          },
+          onMouseLeave: (e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = finalStyle.boxShadow || "none";
+          },
+        }
+      : {
+          onMouseEnter: (e) => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.borderColor = "rgba(212,175,55,0.24)";
+            e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+          },
+          onMouseLeave: (e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.borderColor = finalStyle.borderColor || "var(--border)";
+            e.currentTarget.style.background = finalStyle.background || "transparent";
+          },
+        };
+
   if (href) {
     return (
-      <a href={href} target={target} rel={rel} style={finalStyle}>
+      <a
+        href={href}
+        target={target}
+        rel={rel}
+        style={finalStyle}
+        {...hoverHandlers}
+      >
         {children}
       </a>
     );
   }
 
   return (
-    <button onClick={onClick} style={finalStyle}>
+    <button onClick={onClick} style={finalStyle} {...hoverHandlers}>
       {children}
     </button>
   );
