@@ -298,8 +298,19 @@ export default function Customize() {
             <>
               <SectionTitle>General</SectionTitle>
 
+              {/* 🚀 GENERADOR RÁPIDO */}
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ fontWeight: 700, marginBottom: 10 }}>
+                  🚀 Generador rápido con variantes
+                </div>
+
+                <QuickGenerator setConfig={setConfig} />
+              </div>
+
+              {/* 🎨 PRESETS */}
               <div style={{ marginBottom: 18 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Presets</div>
+
                 <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                   {presets.map((preset) => (
                     <button
@@ -310,8 +321,11 @@ export default function Customize() {
                         borderRadius: "var(--btnRadius)",
                         border: "1px solid var(--border)",
                         background:
-                          config.theme.preset === preset.id ? "var(--accentA)" : "var(--bg)",
-                        color: config.theme.preset === preset.id ? "#111" : "var(--text)",
+                          config.theme.preset === preset.id
+                            ? "var(--accentA)"
+                            : "var(--bg)",
+                        color:
+                          config.theme.preset === preset.id ? "#111" : "var(--text)",
                         fontWeight: 700,
                         cursor: "pointer",
                       }}
@@ -322,6 +336,7 @@ export default function Customize() {
                 </div>
               </div>
 
+              {/* INPUTS NORMALES */}
               <Input
                 label="Nombre negocio"
                 value={config.brand.name}
@@ -420,7 +435,9 @@ export default function Customize() {
               />
 
               <div style={{ marginTop: 20 }}>
-                <div style={{ fontWeight: 700, marginBottom: 10 }}>Secciones Home</div>
+                <div style={{ fontWeight: 700, marginBottom: 10 }}>
+                  Secciones Home
+                </div>
 
                 {config.pages.home.sections.map((section) => (
                   <label
@@ -749,3 +766,441 @@ const tinyButtonStyle = {
   color: "var(--text)",
   cursor: "pointer",
 };
+
+function QuickGenerator({ setConfig }) {
+  const [form, setForm] = useState({
+    name: "",
+    zona: "Madrid",
+    whatsapp: "",
+    maps: "",
+    instagram: "",
+    styleVariant: "premium",
+    copyVariant: "moderno",
+    layoutVariant: "standard",
+  });
+
+  const update = (key, value) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const stylePresets = {
+    premium: {
+      preset: "goldNight",
+      overrides: {
+        "--bg": "#0B0B0D",
+        "--card": "#141418",
+        "--text": "#F5F5F5",
+        "--muted": "#A1A1AA",
+        "--border": "#26262B",
+        "--accentA": "#D4AF37",
+        "--accentB": "#9C7A2B",
+        "--accentSoft": "#1A1710",
+        "--radius": "16px",
+        "--btnRadius": "12px",
+        "--shadowY": "18px",
+        "--shadowBlur": "44px",
+        "--shadowOpacity": "0.24",
+        "--fontDisplay": "Playfair Display, serif",
+        "--fontBody": "Inter, sans-serif",
+      },
+    },
+
+    urban: {
+      preset: "urbanSteel",
+      overrides: {
+        "--bg": "#0F1115",
+        "--card": "#171A21",
+        "--text": "#F3F4F6",
+        "--muted": "#9CA3AF",
+        "--border": "#2B313D",
+        "--accentA": "#60A5FA",
+        "--accentB": "#2563EB",
+        "--accentSoft": "#111827",
+        "--radius": "16px",
+        "--btnRadius": "12px",
+        "--shadowY": "18px",
+        "--shadowBlur": "44px",
+        "--shadowOpacity": "0.22",
+        "--fontDisplay": "Oswald, sans-serif",
+        "--fontBody": "Inter, sans-serif",
+      },
+    },
+
+    classic: {
+      preset: "classicCream",
+      overrides: {
+        "--bg": "#F7F3EB",
+        "--card": "#FFFDF8",
+        "--text": "#1F2937",
+        "--muted": "#6B7280",
+        "--border": "#E5E7EB",
+        "--accentA": "#8B5E3C",
+        "--accentB": "#6F4A2F",
+        "--accentSoft": "#F3E8D8",
+        "--radius": "16px",
+        "--btnRadius": "12px",
+        "--shadowY": "16px",
+        "--shadowBlur": "40px",
+        "--shadowOpacity": "0.12",
+        "--fontDisplay": "Playfair Display, serif",
+        "--fontBody": "Inter, sans-serif",
+      },
+    },
+  };
+
+  const copyPresets = {
+    moderno: {
+      heroBadge: "💈 Barbería moderna en",
+      titleB: "Cortes con estilo. Reserva en segundos.",
+      subtitle:
+        "Cortes modernos, degradados limpios y barba con acabado profesional. Reserva rápida por WhatsApp.",
+      servicesTitle: "Todo lo que necesitas para salir impecable.",
+      servicesDesc: "Precisión, estilo y resultados que se notan desde el primer vistazo.",
+      bookingTitle: "Reserva tu cita en menos de 1 minuto.",
+      bookingDesc: "Escríbenos por WhatsApp y te confirmamos disponibilidad.",
+      footerSubtitle: "Cortes · Fade · Reserva rápida",
+    },
+
+    premium: {
+      heroBadge: "💈 Experiencia premium en",
+      titleB: "Imagen cuidada. Reserva rápida.",
+      subtitle:
+        "Un espacio pensado para quienes valoran el detalle, la precisión y un servicio a la altura.",
+      servicesTitle: "Más que un corte, una experiencia.",
+      servicesDesc: "Atención cuidada, técnica precisa y una imagen que habla por ti.",
+      bookingTitle: "Pide tu cita y déjanos el resto.",
+      bookingDesc: "Te atendemos por WhatsApp de forma rápida y sencilla.",
+      footerSubtitle: "Estilo · Precisión · Reserva",
+    },
+
+    tradicional: {
+      heroBadge: "💈 Barbería de confianza en",
+      titleB: "Tradición, detalle y buen servicio.",
+      subtitle:
+        "Cortes clásicos, arreglos de barba y trato cercano para que salgas siempre como esperas.",
+      servicesTitle: "Los servicios de siempre, bien hechos.",
+      servicesDesc: "Profesionalidad, cercanía y resultados limpios en cada visita.",
+      bookingTitle: "Reserva tu próxima cita fácilmente.",
+      bookingDesc: "Contacta por WhatsApp y te confirmamos horario.",
+      footerSubtitle: "Cortes · Barba · Atención cercana",
+    },
+  };
+
+  const layoutPresets = {
+    standard: [
+      { id: "hero", enabled: true, label: "Inicio" },
+      { id: "services", enabled: true, label: "Servicios" },
+      { id: "photoStrip", enabled: true, label: "Galería" },
+      { id: "prices", enabled: true, label: "Precios" },
+      { id: "booking", enabled: true, label: "Reservar" },
+    ],
+
+    photosFirst: [
+      { id: "hero", enabled: true, label: "Inicio" },
+      { id: "photoStrip", enabled: true, label: "Galería" },
+      { id: "services", enabled: true, label: "Servicios" },
+      { id: "prices", enabled: true, label: "Precios" },
+      { id: "booking", enabled: true, label: "Reservar" },
+    ],
+
+    pricesFirst: [
+      { id: "hero", enabled: true, label: "Inicio" },
+      { id: "prices", enabled: true, label: "Precios" },
+      { id: "services", enabled: true, label: "Servicios" },
+      { id: "photoStrip", enabled: true, label: "Galería" },
+      { id: "booking", enabled: true, label: "Reservar" },
+    ],
+
+    compact: [
+      { id: "hero", enabled: true, label: "Inicio" },
+      { id: "services", enabled: true, label: "Servicios" },
+      { id: "prices", enabled: true, label: "Precios" },
+      { id: "booking", enabled: true, label: "Reservar" },
+      { id: "photoStrip", enabled: false, label: "Galería" },
+    ],
+  };
+
+  const buildHeroTitles = (name, styleVariant) => {
+    const words = String(name || "Barbería").trim().split(" ").filter(Boolean);
+
+    if (words.length === 1) {
+      return {
+        titleA: words[0].toUpperCase(),
+        titleHighlight: "BARBER",
+      };
+    }
+
+    if (styleVariant === "urban") {
+      return {
+        titleA: words[0].toUpperCase(),
+        titleHighlight: (words[1] || "STUDIO").toUpperCase(),
+      };
+    }
+
+    return {
+      titleA: words[0].toUpperCase(),
+      titleHighlight: words.slice(1).join(" ").toUpperCase(),
+    };
+  };
+
+  const generate = () => {
+    const cleanName = form.name.trim() || "Barbería";
+    const zona = form.zona.trim() || "Madrid";
+    const style = stylePresets[form.styleVariant];
+    const copy = copyPresets[form.copyVariant];
+    const layout = layoutPresets[form.layoutVariant];
+    const heroTitles = buildHeroTitles(cleanName, form.styleVariant);
+
+    const cleanWhatsapp = String(form.whatsapp || "").replace(/\s+/g, "");
+    const whatsappLink = cleanWhatsapp
+      ? `https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(
+          `Hola, quiero reservar una cita en ${cleanName} 💈`
+        )}`
+      : "";
+
+    const heroImageByStyle = {
+      premium:
+        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=80",
+      urban:
+        "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=1200&q=80",
+      classic:
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80",
+    };
+
+    const galleryByStyle = {
+      premium: [
+        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
+      ],
+      urban: [
+        "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80",
+      ],
+      classic: [
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80",
+      ],
+    };
+
+    setConfig((prev) => ({
+      ...prev,
+
+      brand: {
+        ...prev.brand,
+        name: cleanName,
+        tagline: `Barbería en ${zona} · Reserva rápida`,
+      },
+
+      links: {
+        ...prev.links,
+        whatsapp: whatsappLink,
+        instagram: form.instagram.trim(),
+        maps: form.maps.trim(),
+      },
+
+      contact: {
+        ...prev.contact,
+        address: zona,
+        phone: cleanWhatsapp,
+        phoneTel: cleanWhatsapp ? `+${cleanWhatsapp}` : "",
+        phoneDisplay: cleanWhatsapp ? `(+${cleanWhatsapp.slice(0, 2)}) ${cleanWhatsapp.slice(2)}` : "",
+      },
+
+      theme: {
+        ...prev.theme,
+        preset: style.preset,
+        overrides: { ...style.overrides },
+      },
+
+      pages: {
+        ...prev.pages,
+        home: {
+          ...prev.pages.home,
+          sections: layout,
+        },
+      },
+
+      copy: {
+        ...prev.copy,
+
+        hero: {
+          ...prev.copy.hero,
+          badge: `${copy.heroBadge} ${zona}`,
+          titleA: heroTitles.titleA,
+          titleHighlight: heroTitles.titleHighlight,
+          titleB: copy.titleB,
+          subtitle: copy.subtitle,
+          ctaText: "Reservar por WhatsApp",
+          ctaHref: whatsappLink,
+          imageSrc: heroImageByStyle[form.styleVariant],
+        },
+
+        services: {
+          ...prev.copy.services,
+          kicker: "Servicios",
+          title: copy.servicesTitle,
+          desc: copy.servicesDesc,
+          items: [
+            {
+              title:
+                form.styleVariant === "classic"
+                  ? "Corte clásico"
+                  : "Corte personalizado",
+              desc:
+                form.styleVariant === "classic"
+                  ? "Técnica tradicional con acabado limpio y profesional."
+                  : "Adaptado a tu estilo, facciones y rutina diaria.",
+            },
+            {
+              title:
+                form.styleVariant === "urban"
+                  ? "Fade / degradado"
+                  : "Barba y perfilado",
+              desc:
+                form.styleVariant === "urban"
+                  ? "Transiciones limpias y acabado moderno."
+                  : "Definición, recorte y limpieza para un look completo.",
+            },
+            {
+              title:
+                form.styleVariant === "premium"
+                  ? "Corte + barba"
+                  : "Arreglo completo",
+              desc:
+                form.styleVariant === "premium"
+                  ? "Servicio completo para una imagen impecable."
+                  : "Una opción completa para salir perfecto.",
+            },
+          ],
+        },
+
+        photoStrip: {
+          ...prev.copy.photoStrip,
+          kicker: form.styleVariant === "premium" ? "Galería" : "Trabajos",
+          title:
+            form.styleVariant === "classic"
+              ? "Detalles de una barbería de verdad."
+              : "Así se ve un buen corte.",
+          note:
+            form.styleVariant === "premium"
+              ? "Estilo, detalle y presencia."
+              : "Imagen, detalle y acabado profesional.",
+          photos: galleryByStyle[form.styleVariant],
+        },
+
+        prices: {
+          ...prev.copy.prices,
+          kicker: "Precios",
+          title:
+            form.layoutVariant === "pricesFirst"
+              ? "Precios visibles desde el primer momento."
+              : "Tarifas claras, sin complicaciones.",
+          desc: "Elige tu servicio y reserva en un momento.",
+          items: [
+            {
+              price: form.styleVariant === "premium" ? "18€" : "15€",
+              title: "Corte",
+              desc: "Corte con acabado y peinado.",
+            },
+            {
+              price: form.styleVariant === "premium" ? "25€" : "20€",
+              title: "Corte + barba",
+              desc: "Servicio completo.",
+            },
+            {
+              price: form.styleVariant === "classic" ? "12€" : "10€",
+              title: "Arreglo de barba",
+              desc: "Perfilado profesional.",
+            },
+          ],
+        },
+
+        booking: {
+          ...prev.copy.booking,
+          kicker: "Reserva",
+          title: copy.bookingTitle,
+          desc: copy.bookingDesc,
+          ctaText: "Abrir WhatsApp",
+          ctaHref: whatsappLink,
+        },
+
+        footer: {
+          ...prev.copy.footer,
+          title: cleanName,
+          subtitle: copy.footerSubtitle,
+          small: "© 2026",
+        },
+      },
+    }));
+  };
+
+  return (
+    <div
+      style={{
+        border: "1px solid var(--border)",
+        background: "var(--bg)",
+        borderRadius: 14,
+        padding: 14,
+        marginBottom: 18,
+      }}
+    >
+      <Input label="Nombre barbería" value={form.name} onChange={(v) => update("name", v)} />
+      <Input label="Zona" value={form.zona} onChange={(v) => update("zona", v)} />
+      <Input
+        label="WhatsApp (ej: 34612345678)"
+        value={form.whatsapp}
+        onChange={(v) => update("whatsapp", v)}
+      />
+      <Input label="Google Maps URL" value={form.maps} onChange={(v) => update("maps", v)} />
+      <Input
+        label="Instagram URL"
+        value={form.instagram}
+        onChange={(v) => update("instagram", v)}
+      />
+
+      <label style={{ display: "block", marginBottom: 12 }}>
+        <div>Estilo visual</div>
+        <select
+          value={form.styleVariant}
+          onChange={(e) => update("styleVariant", e.target.value)}
+        >
+          <option value="premium">Premium</option>
+          <option value="urban">Urbana</option>
+          <option value="classic">Clásica</option>
+        </select>
+      </label>
+
+      <label style={{ display: "block", marginBottom: 12 }}>
+        <div>Tono del copy</div>
+        <select
+          value={form.copyVariant}
+          onChange={(e) => update("copyVariant", e.target.value)}
+        >
+          <option value="moderno">Moderno</option>
+          <option value="premium">Premium</option>
+          <option value="tradicional">Tradicional</option>
+        </select>
+      </label>
+
+      <label style={{ display: "block", marginBottom: 12 }}>
+        <div>Orden de secciones</div>
+        <select
+          value={form.layoutVariant}
+          onChange={(e) => update("layoutVariant", e.target.value)}
+        >
+          <option value="standard">Estándar</option>
+          <option value="photosFirst">Fotos primero</option>
+          <option value="pricesFirst">Precios primero</option>
+          <option value="compact">Compacta</option>
+        </select>
+      </label>
+
+      <button onClick={generate} style={smallButtonStyle}>
+        Generar web automática
+      </button>
+    </div>
+  );
+}
