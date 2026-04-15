@@ -12,14 +12,28 @@ export default function Footer({ data, contact }) {
       style={{
         padding: "70px 0 30px",
         borderTop: "1px solid var(--border)",
+        background: "var(--card)", // 🔥 fondo sólido
       }}
     >
       <Container wide>
         <div className="footer-clean-shell">
+          {/* TOP */}
           <div className="footer-clean-top">
             <div className="footer-clean-brand">
+              
+              {/* 🔥 LOGO / EMOJI */}
               <div className="footer-clean-mark">
-                {brand.emojiLogo}
+                {brand.logoImage ? (
+                  <img
+                    src={brand.logoImage}
+                    alt={brand.name}
+                    className="footer-clean-logo"
+                  />
+                ) : (
+                  <span className="footer-clean-emoji">
+                    {brand.emojiLogo}
+                  </span>
+                )}
               </div>
 
               <div>
@@ -40,11 +54,13 @@ export default function Footer({ data, contact }) {
             </div>
           </div>
 
+          {/* GRID */}
           <div className="footer-clean-grid">
             <div className="footer-clean-col">
               <div className="footer-clean-label">Ubicación</div>
               <div className="footer-clean-text">{contact.address}</div>
-              {links.maps ? (
+
+              {links.maps && (
                 <a
                   href={links.maps}
                   target="_blank"
@@ -53,7 +69,7 @@ export default function Footer({ data, contact }) {
                 >
                   Ver en Maps
                 </a>
-              ) : null}
+              )}
             </div>
 
             <div className="footer-clean-col">
@@ -64,7 +80,8 @@ export default function Footer({ data, contact }) {
             <div className="footer-clean-col">
               <div className="footer-clean-label">Contacto</div>
               <div className="footer-clean-text">{contact.phoneDisplay}</div>
-              {links.instagram ? (
+
+              {links.instagram && (
                 <a
                   href={links.instagram}
                   target="_blank"
@@ -73,10 +90,11 @@ export default function Footer({ data, contact }) {
                 >
                   Instagram
                 </a>
-              ) : null}
+              )}
             </div>
           </div>
 
+          {/* BOTTOM */}
           <div className="footer-clean-bottom">
             <div className="footer-clean-small">{data.small}</div>
 
