@@ -10,6 +10,7 @@ import Container from "../components/Container.jsx";
 import Button from "../components/ui/Button.jsx";
 import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
 
+
 export default function Home() {
   const { config } = useSiteConfig();
   const { brand, copy, contact, pages, links, layout, theme } = config;
@@ -154,17 +155,30 @@ export default function Home() {
         )}
       </div>
 
-      <div id="testimonials">
-        {enabledSections.some((s) => s.id === "testimonials") && (
-          <TestimonialsSection data={copy.testimonials} />
-        )}
-      </div>
+      {(enabledSections.some((s) => s.id === "testimonials") ||
+  enabledSections.some((s) => s.id === "photoStrip")) && (
+  <section
+    style={{
+      padding: "110px 0 95px",
+    }}
+  >
+    <Container wide>
+      <div className="testimonials-gallery-split">
+        <div id="photoStrip">
+          {enabledSections.some((s) => s.id === "photoStrip") && (
+            <PhotoStripSection data={copy.photoStrip} compact />
+          )}
+        </div>
 
-      <div id="photoStrip">
-        {enabledSections.some((s) => s.id === "photoStrip") && (
-          <PhotoStripSection data={copy.photoStrip} />
-        )}
+        <div id="testimonials">
+          {enabledSections.some((s) => s.id === "testimonials") && (
+            <TestimonialsSection data={copy.testimonials} compact />
+          )}
+        </div>
       </div>
+    </Container>
+  </section>
+)}
 
       <div id="prices">
         {enabledSections.some((s) => s.id === "prices") && (

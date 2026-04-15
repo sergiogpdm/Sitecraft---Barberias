@@ -1,23 +1,22 @@
 import Container from "../Container.jsx";
-import Button from "../ui/Button.jsx";
 
-export default function PhotoStripSection({ data }) {
-  const photos = Array.isArray(data?.photos) ? data.photos.filter(Boolean) : [];
+export default function PhotoStripSection({ data, compact = false }) {
+  const photos = Array.isArray(data?.photos) ? data.photos : [];
 
   return (
     <section
       id="photoStrip"
       style={{
-        padding: "100px 0 90px",
-        overflow: "visible",
+        padding: compact ? "0" : "100px 0 90px",
+        overflow: "hidden",
       }}
     >
-      <Container wide>
+      <Container wide={!compact}>
         <div
           style={{
-            maxWidth: 900,
-            margin: "0 auto",
-            textAlign: "center",
+            maxWidth: compact ? "100%" : 900,
+            margin: compact ? "0" : "0 auto",
+            textAlign: compact ? "left" : "center",
           }}
         >
           {data.kicker ? (
@@ -38,11 +37,13 @@ export default function PhotoStripSection({ data }) {
           <h2
             style={{
               margin: 0,
-              fontSize: "clamp(38px, 5vw, 68px)",
+              fontSize: compact
+                ? "clamp(30px, 4vw, 52px)"
+                : "clamp(38px, 5vw, 68px)",
               lineHeight: 0.96,
               letterSpacing: "-0.04em",
-              maxWidth: 760,
-              marginInline: "auto",
+              maxWidth: compact ? 520 : 760,
+              marginInline: compact ? "0" : "auto",
             }}
           >
             {data.title}
@@ -51,10 +52,10 @@ export default function PhotoStripSection({ data }) {
           {data.note ? (
             <p
               style={{
-                margin: "22px auto 0",
-                maxWidth: 680,
+                margin: "18px 0 0",
+                maxWidth: compact ? 520 : 700,
                 color: "var(--muted)",
-                fontSize: 18,
+                fontSize: compact ? 16 : 18,
                 lineHeight: 1.8,
               }}
             >
@@ -64,99 +65,34 @@ export default function PhotoStripSection({ data }) {
         </div>
 
         <div
-          className="photo-runway-wrap"
           style={{
-            marginTop: 56,
+            marginTop: compact ? 30 : 56,
           }}
         >
-          <div className="photo-runway-track" tabIndex={0}>
-            {photos.map((photo, index) => (
-              <RunwayPhotoCard
-                key={`${photo}-${index}`}
-                src={photo}
-                alt={`Trabajo ${index + 1}`}
-                index={index}
-              />
-            ))}
+          <div className={`photo-runway-wrap ${compact ? "is-compact" : ""}`}>
+            <div className={`photo-runway-track ${compact ? "is-compact" : ""}`}>
+              {photos.map((src, index) => (
+                <div
+                  key={index}
+                  className={`photo-runway-card ${
+                    index === 1 ? "is-featured" : ""
+                  } ${compact ? "is-compact" : ""}`}
+                >
+                  <img
+                    src={src}
+                    alt={`Trabajo ${index + 1}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-
-        <div
-          style={{
-            marginTop: 30,
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: 12,
-          }}
-        >
-          <Button href="#booking" variant="secondary">
-            Reservar cita
-          </Button>
         </div>
       </Container>
     </section>
-  );
-}
-
-function RunwayPhotoCard({ src, alt, index }) {
-  const desktopTransforms = [
-    "rotate(-2deg)",
-    "rotate(1.5deg)",
-    "rotate(-1deg)",
-    "rotate(2deg)",
-    "rotate(-1.5deg)",
-    "rotate(1deg)",
-  ];
-
-  const desktopHeights = [360, 420, 390, 440, 380, 410];
-  const transform = desktopTransforms[index % desktopTransforms.length];
-  const height = desktopHeights[index % desktopHeights.length];
-  const featured = index === 1 || index === 3;
-
-  return (
-    <div
-      className={`photo-runway-card ${featured ? "is-featured" : ""}`}
-      style={{
-        height,
-        transform,
-        border: featured
-          ? "1px solid rgba(212,175,55,0.20)"
-          : "1px solid var(--border)",
-      }}
-    >
-      <img
-        src={src}
-        alt={alt}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          display: "block",
-        }}
-      />
-
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0.03) 35%, rgba(0,0,0,0))",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div
-        style={{
-          position: "absolute",
-          left: 14,
-          bottom: 14,
-          width: 42,
-          height: 1,
-          background: featured ? "var(--accentA)" : "rgba(255,255,255,0.65)",
-          opacity: 0.9,
-        }}
-      />
-    </div>
   );
 }

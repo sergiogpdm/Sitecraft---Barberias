@@ -1096,11 +1096,42 @@ section {
   }
 }
 
+/* =========================
+   Testimonials + Gallery split
+========================= */
+
+.testimonials-gallery-split {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.testimonials-gallery-split > div {
+  min-width: 0;
+}
+
+@media (max-width: 980px) {
+  .testimonials-gallery-split {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
 
 
 /* =========================
    Testimonials adaptive glass
 ========================= */
+
+/* =========================
+   Compact mode tweaks
+========================= */
+
+.testimonials-grid.is-compact {
+  margin-top: 40px;
+  grid-template-columns: 1fr;
+}
 
 .testimonials-grid {
   margin-top: 70px;
@@ -1416,4 +1447,145 @@ body::after {
   100% {
     transform: translateX(-50%) translateY(0) scale(1);
   }
+}
+
+
+/* =========================
+   Testimonials + Gallery split
+========================= */
+
+.testimonials-gallery-split {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.testimonials-gallery-split > div {
+  min-width: 0;
+}
+
+@media (max-width: 980px) {
+  .testimonials-gallery-split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* =========================
+   PhotoStrip compact
+========================= */
+
+.photo-runway-wrap.is-compact {
+  overflow: visible;
+}
+
+.photo-runway-track.is-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  padding: 0;
+}
+
+.photo-runway-card.is-compact {
+  width: 100%;
+  height: 280px;
+  flex: initial;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+  transform: none !important;
+}
+
+.photo-runway-card.is-compact.is-featured {
+  height: 320px;
+}
+
+.photo-runway-card.is-compact:hover {
+  transform: translateY(-4px) !important;
+}
+
+@media (max-width: 980px) {
+  .photo-runway-track.is-compact {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-runway-card.is-compact,
+  .photo-runway-card.is-compact.is-featured {
+    height: 240px;
+  }
+}
+
+/* =========================
+   Testimonials compact
+========================= */
+
+.testimonials-grid.is-compact {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.testimonial-card.is-compact {
+  padding: 22px 22px 20px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, white 18%);
+  color: var(--text);
+  box-shadow:
+    0 16px 36px rgba(0,0,0,0.16),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.testimonial-card.is-compact:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accentA) 18%, var(--border));
+  box-shadow:
+    0 22px 50px rgba(0,0,0,0.20),
+    0 0 0 1px color-mix(in srgb, var(--accentA) 8%, transparent);
+}
+
+.testimonial-card.is-compact .testimonial-stars {
+  color: var(--accentA);
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.testimonial-card.is-compact .testimonial-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 0.95;
+}
+
+.testimonial-card.is-compact .testimonial-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, white 30%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.testimonial-card.is-compact .testimonial-footer strong {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.testimonial-card.is-compact .testimonial-footer span {
+  font-size: 13px;
+  color: var(--muted);
 }
