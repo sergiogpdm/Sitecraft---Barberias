@@ -1,14 +1,14 @@
 import Container from "../Container.jsx";
 import Button from "../ui/Button.jsx";
 
-export default function PricesSection({ data }) {
+export default function PricesSection({ data, compactTop = false }) {
   const items = Array.isArray(data?.items) ? data.items : [];
 
   return (
     <section
       id="prices"
       style={{
-        padding: "110px 0 95px",
+        padding: compactTop ? "30px 0 95px" : "60px 0 95px",
       }}
     >
       <Container wide>

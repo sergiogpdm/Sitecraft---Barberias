@@ -30,6 +30,11 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id],
+div[id] {
+  scroll-margin-top: 110px;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -240,7 +245,7 @@ section {
 
 .prices-band-grid {
   max-width: 1080px;
-  margin: 64px auto 0;
+  margin: 60px auto 0;
   display: grid;
   gap: 18px;
 }
@@ -770,7 +775,7 @@ section {
 }
 
 .navbar-pro-inner {
-  min-height: 86px;
+  min-height: 84px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -995,6 +1000,7 @@ section {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  padding-top: 40px;
 }
 
 /* overlay oscuro para legibilidad */
