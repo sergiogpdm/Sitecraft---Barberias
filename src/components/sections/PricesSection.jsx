@@ -1,14 +1,14 @@
 import Container from "../Container.jsx";
 import Button from "../ui/Button.jsx";
 
-export default function PricesSection({ data, compactTop = false }) {
+export default function PricesSection({ data }) {
   const items = Array.isArray(data?.items) ? data.items : [];
 
   return (
     <section
       id="prices"
       style={{
-        padding: compactTop ? "30px 0 95px" : "60px 0 95px",
+        padding: "60px 0 85px",
       }}
     >
       <Container wide>
@@ -62,13 +62,14 @@ export default function PricesSection({ data, compactTop = false }) {
           ) : null}
         </div>
 
-        <div className="prices-band-grid">
+        <div className="prices-showcase-grid">
           {items.map((item, index) => (
-            <PriceBand
+            <PriceShowcaseCard
               key={`${item.title}-${index}`}
               title={item.title}
               desc={item.desc}
               price={item.price}
+              image={item.image}
               featured={index === 1}
             />
           ))}
@@ -84,30 +85,36 @@ export default function PricesSection({ data, compactTop = false }) {
   );
 }
 
-function PriceBand({ title, desc, price, featured = false }) {
+function PriceShowcaseCard({ title, desc, price, image, featured = false }) {
   return (
-    <article className={`price-band ${featured ? "is-featured" : ""}`}>
-      <div className="price-band-left">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            flexWrap: "wrap",
-          }}
-        >
-          <h3 className="price-band-title">{title}</h3>
+    <article className={`price-showcase-card ${featured ? "is-featured" : ""}`}>
+      <div className="price-showcase-media">
+        {image ? (
+          <img src={image} alt={title} />
+        ) : (
+          <div className="price-showcase-placeholder" />
+        )}
 
+        <div className="price-showcase-overlay" />
+
+        <div className="price-showcase-topbar">
           {featured ? (
-            <span className="price-band-badge">Más pedido</span>
-          ) : null}
+            <span className="price-showcase-badge">Más pedido</span>
+          ) : (
+            <span className="price-showcase-badge is-ghost">Servicio</span>
+          )}
         </div>
-
-        <p className="price-band-desc">{desc}</p>
       </div>
 
-      <div className="price-band-right">
-        <div className="price-band-price">{price}</div>
+      <div className="price-showcase-body">
+        <div className="price-showcase-head">
+          <h3 className="price-showcase-title">{title}</h3>
+          <div className="price-showcase-price">{price}</div>
+        </div>
+
+        <p className="price-showcase-desc">{desc}</p>
+
+        <div className="price-showcase-line" />
       </div>
     </article>
   );
