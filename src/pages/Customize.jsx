@@ -105,16 +105,16 @@ function ensureConfigShape(config) {
     },
 
     pages: {
-  ...(config?.pages || {}),
-  home: {
-    ...(config?.pages?.home || {}),
-    sections: ensureHomeSections(config?.pages?.home?.sections || []),
-  },
-  customize: {
-    enabled: true,
-    ...(config?.pages?.customize || {}),
-  },
-},
+      ...(config?.pages || {}),
+      home: {
+        ...(config?.pages?.home || {}),
+        sections: ensureHomeSections(config?.pages?.home?.sections || []),
+      },
+      customize: {
+        enabled: true,
+        ...(config?.pages?.customize || {}),
+      },
+    },
 
     copy: {
       ...(config?.copy || {}),
@@ -617,27 +617,27 @@ export default function Customize() {
                 }
               />
 
-              <Input
+              <ColorInput
                 label="Color fondo"
-                value={safeConfig.theme.overrides["--bg"] || ""}
+                value={safeConfig.theme.overrides["--bg"] || "#0B0B0D"}
                 onChange={(v) => updateThemeOverride("--bg", v)}
               />
 
-              <Input
+              <ColorInput
                 label="Color card"
-                value={safeConfig.theme.overrides["--card"] || ""}
+                value={safeConfig.theme.overrides["--card"] || "#141418"}
                 onChange={(v) => updateThemeOverride("--card", v)}
               />
 
-              <Input
+              <ColorInput
                 label="Color texto"
-                value={safeConfig.theme.overrides["--text"] || ""}
+                value={safeConfig.theme.overrides["--text"] || "#F5F5F5"}
                 onChange={(v) => updateThemeOverride("--text", v)}
               />
 
-              <Input
+              <ColorInput
                 label="Color acento"
-                value={safeConfig.theme.overrides["--accentA"] || ""}
+                value={safeConfig.theme.overrides["--accentA"] || "#D4AF37"}
                 onChange={(v) => updateThemeOverride("--accentA", v)}
               />
 
@@ -989,6 +989,50 @@ function Textarea({ label, value, onChange }) {
       <textarea value={value ?? ""} onChange={(e) => onChange(e.target.value)} style={{ minHeight: 100 }} />
     </label>
   );
+}
+
+function ColorInput({ label, value, onChange }) {
+  const safeValue = isValidHexColor(value) ? value : "#000000";
+
+  return (
+    <label style={{ display: "block", marginBottom: 14 }}>
+      <div style={{ marginBottom: 8 }}>{label}</div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "56px 1fr",
+          gap: 10,
+          alignItems: "center",
+        }}
+      >
+        <input
+          type="color"
+          value={safeValue}
+          onChange={(e) => onChange(e.target.value)}
+          style={{
+            width: 56,
+            height: 42,
+            padding: 4,
+            border: "1px solid var(--border)",
+            borderRadius: 10,
+            background: "var(--bg)",
+            cursor: "pointer",
+          }}
+        />
+
+        <input
+          value={value ?? ""}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="#000000"
+        />
+      </div>
+    </label>
+  );
+}
+
+function isValidHexColor(value) {
+  return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(String(value || "").trim());
 }
 
 function ArrayCard({ title, children, onMoveUp, onMoveDown, onRemove }) {
