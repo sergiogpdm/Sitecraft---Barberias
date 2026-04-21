@@ -38,6 +38,8 @@ div[id] {
 
 body {
   margin: 0;
+  position: relative;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   font-family: var(--fontBody);
@@ -71,7 +73,7 @@ select {
   width: 100%;
   margin-top: 6px;
   padding: 12px 14px;
-  background: var(--bg);
+  background: var(--surface);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -112,6 +114,30 @@ section {
 ::selection {
   background: rgba(212, 175, 55, 0.2);
   color: var(--text);
+}
+
+/* =========================
+   SURFACE SYSTEM (GLOBAL)
+========================= */
+
+.surface {
+  background: var(--surface);
+}
+
+.surface-soft {
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.surface-glass {
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.surface-border {
+  border: 1px solid color-mix(in srgb, var(--border) 70%, white 30%);
 }
 
 /* =========================
@@ -160,10 +186,10 @@ section {
   justify-content: space-between;
 
   background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--card) 94%, var(--accentA) 6%),
-    var(--card)
-  );
+  180deg,
+  var(--surface),
+  var(--card)
+);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 26px;
@@ -215,7 +241,7 @@ section {
 
 .services-solid-card:hover {
   transform: translateY(-8px);
-  border-color: color-mix(in srgb, var(--accentA) 36%, var(--border));
+  border-color: color-mix(in srgb, var(--accentA) 25%, var(--border));
   box-shadow:
     0 30px 70px rgba(0, 0, 0, 0.35),
     0 0 0 1px color-mix(in srgb, var(--accentA) 20%, transparent);
@@ -261,12 +287,7 @@ section {
   border-radius: 28px;
 
   /* fondo adaptable al tema */
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--card) 92%, white 8%),
-      var(--card)
-    );
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
 
   border: 1px solid color-mix(in srgb, var(--border) 82%, white 18%);
   box-shadow:
@@ -301,9 +322,7 @@ section {
 .price-band:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--accentA) 22%, var(--border));
-  box-shadow:
-    0 24px 56px rgba(0,0,0,0.18),
-    0 0 0 1px color-mix(in srgb, var(--accentA) 10%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accentA) 10%, transparent);
 }
 
 .price-band:hover::before {
@@ -311,12 +330,11 @@ section {
 }
 
 .price-band.is-featured {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--card) 88%, var(--accentA) 12%),
-      var(--card)
-    );
+  background: linear-gradient(
+  180deg,
+  color-mix(in srgb, var(--surface) 92%, var(--accentA) 8%),
+  color-mix(in srgb, var(--surface) 96%, transparent)
+);
   border-color: color-mix(in srgb, var(--accentA) 24%, var(--border));
 }
 
@@ -359,7 +377,7 @@ section {
   padding: 7px 11px;
   border-radius: 999px;
 
-  background: color-mix(in srgb, var(--accentA) 14%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
   border: 1px solid color-mix(in srgb, var(--accentA) 24%, var(--border));
   color: var(--accentA);
 
@@ -510,7 +528,7 @@ section {
   border-radius: var(--radius);
 
   /* 🔥 GLASS EFFECT */
-  background: color-mix(in srgb, var(--card) 75%, transparent);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
   backdrop-filter: blur(18px);
 
   border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
@@ -773,14 +791,20 @@ section {
   position: sticky;
   top: 0;
   z-index: 50;
+  transition: all 0.3s ease;
 }
 
 .navbar-pro-inner {
-  min-height: 84px;
+  min-height: 86px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 28px;
+
+  background: color-mix(in srgb, var(--surface) 75%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, white 30%);
 }
 
 .navbar-pro-brand {
@@ -1153,12 +1177,7 @@ section {
   border-radius: 22px;
 
   /* fondo adaptable */
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--card) 90%, white 10%),
-      color-mix(in srgb, var(--card) 96%, transparent)
-    );
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
 
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -1182,10 +1201,10 @@ section {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at top left,
-    color-mix(in srgb, var(--accentA) 10%, transparent),
-    transparent 60%
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.05),
+    transparent 45%
   );
   opacity: 0.55;
   pointer-events: none;
@@ -1243,11 +1262,7 @@ section {
    Background global barber v6
 ========================= */
 
-body {
-  position: relative;
-  overflow-x: hidden;
-  background: var(--bg);
-}
+
 
 body::before {
   content: "";
@@ -1596,3 +1611,4 @@ body::after {
   font-size: 13px;
   color: var(--muted);
 }
+
