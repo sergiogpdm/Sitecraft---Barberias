@@ -624,6 +624,12 @@ export default function Customize() {
               />
 
               <ColorInput
+                label="Color superficie"
+                value={safeConfig.theme.overrides["--surface"] || "#1a1a1f"}
+                onChange={(v) => updateThemeOverride("--surface", v)}
+              />
+
+              <ColorInput
                 label="Color card"
                 value={safeConfig.theme.overrides["--card"] || "#141418"}
                 onChange={(v) => updateThemeOverride("--card", v)}
