@@ -12,7 +12,7 @@ export default function Footer({ data, contact }) {
       style={{
         padding: "70px 0 30px",
         borderTop: "1px solid var(--border)",
-        background: "var(--card)", // 🔥 fondo sólido
+        background: "linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent), var(--surface))",
       }}
     >
       <Container wide>
@@ -20,7 +20,7 @@ export default function Footer({ data, contact }) {
           {/* TOP */}
           <div className="footer-clean-top">
             <div className="footer-clean-brand">
-              
+
               {/* 🔥 LOGO / EMOJI */}
               <div className="footer-clean-mark">
                 {brand.logoImage ? (

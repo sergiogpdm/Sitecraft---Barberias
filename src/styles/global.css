@@ -2,7 +2,7 @@
   --bg: #0b0b0d;
   --card: #141418;
   --text: #f5f5f5;
-  --muted: #a1a1aa;
+  --muted: #ffffff;
   --border: #26262b;
   --accentA: #d4af37;
   --accentB: #9c7a2b;
@@ -791,7 +791,15 @@ section {
   position: sticky;
   top: 0;
   z-index: 50;
-  transition: all 0.3s ease;
+}
+
+.navbar-pro-shell {
+  width: 100%;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, white 30%);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .navbar-pro-inner {
@@ -800,11 +808,6 @@ section {
   align-items: center;
   justify-content: space-between;
   gap: 28px;
-
-  background: color-mix(in srgb, var(--surface) 75%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, white 30%);
 }
 
 .navbar-pro-brand {
@@ -873,7 +876,7 @@ section {
 }
 
 .navbar-pro-link {
-  color: var(--muted);
+  color: var(255,255,255,0.65);
   font-size: 15px;
   font-weight: 600;
   position: relative;
