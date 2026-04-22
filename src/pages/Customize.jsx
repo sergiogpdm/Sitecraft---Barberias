@@ -167,7 +167,13 @@ function ensureConfigShape(config) {
         kicker: "",
         title: "",
         desc: "",
-        items: [],
+        items: (config?.copy?.prices?.items || []).map((item) => ({
+          price: "",
+          title: "",
+          desc: "",
+          image: "",
+          ...item,
+        })),
         ...(config?.copy?.prices || {}),
       },
 
@@ -816,9 +822,29 @@ export default function Customize() {
                     onMoveDown={() => moveArrayItem("prices", index, 1)}
                     onRemove={() => removeArrayItem("prices", index)}
                   >
-                    <Input label="Precio" value={item.price} onChange={(v) => updateArrayItem("prices", index, "price", v)} />
-                    <Input label="Título" value={item.title} onChange={(v) => updateArrayItem("prices", index, "title", v)} />
-                    <Textarea label="Descripción" value={item.desc} onChange={(v) => updateArrayItem("prices", index, "desc", v)} />
+                    <Input
+                      label="Precio"
+                      value={item.price}
+                      onChange={(v) => updateArrayItem("prices", index, "price", v)}
+                    />
+
+                    <Input
+                      label="Título"
+                      value={item.title}
+                      onChange={(v) => updateArrayItem("prices", index, "title", v)}
+                    />
+
+                    <Textarea
+                      label="Descripción"
+                      value={item.desc}
+                      onChange={(v) => updateArrayItem("prices", index, "desc", v)}
+                    />
+
+                    <Input
+                      label="Imagen (URL)"
+                      value={item.image || ""}
+                      onChange={(v) => updateArrayItem("prices", index, "image", v)}
+                    />
                   </ArrayCard>
                 ))}
 
@@ -828,6 +854,7 @@ export default function Customize() {
                       price: "15€",
                       title: "Nuevo servicio",
                       desc: "Descripción del precio",
+                      image: "",
                     })
                   }
                   style={smallButtonStyle}
@@ -1463,16 +1490,22 @@ function QuickGenerator({ setConfig }) {
                 price: form.styleVariant === "premium" ? "18€" : "15€",
                 title: "Corte",
                 desc: "Corte con acabado y peinado.",
+                image:
+                  "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80",
               },
               {
                 price: form.styleVariant === "premium" ? "25€" : "20€",
                 title: "Corte + barba",
                 desc: "Servicio completo.",
+                image:
+                  "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80",
               },
               {
                 price: form.styleVariant === "classic" ? "12€" : "10€",
                 title: "Arreglo de barba",
                 desc: "Perfilado profesional.",
+                image:
+                  "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
               },
             ],
           },

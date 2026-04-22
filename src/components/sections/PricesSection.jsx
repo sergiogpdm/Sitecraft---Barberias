@@ -100,9 +100,7 @@ function PriceShowcaseCard({ title, desc, price, image, featured = false }) {
         <div className="price-showcase-topbar">
           {featured ? (
             <span className="price-showcase-badge">Más pedido</span>
-          ) : (
-            <span className="price-showcase-badge is-ghost">Servicio</span>
-          )}
+          ) : null}
         </div>
       </div>
 
