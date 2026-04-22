@@ -1,16 +1,15 @@
 import Container from "../Container.jsx";
-import Button from "../ui/Button.jsx";
 import { useSiteConfig } from "../../context/SiteConfigContext.jsx";
 
 export default function BookingSection({ data }) {
   const { config } = useSiteConfig();
   const { contact, links } = config;
 
+  const bookingLink = resolveBookingLink(config, data);
+
   const sideImages = Array.isArray(data?.sideImages) ? data.sideImages : [];
   const leftImage = sideImages[0] || "";
   const rightImage = sideImages[1] || "";
-
-  const bookingLink = resolveBookingLink(config, data);
 
   return (
     <section
@@ -35,8 +34,10 @@ export default function BookingSection({ data }) {
           ) : null}
 
           <div className="booking-convert-card">
-            <div className="booking-convert-kicker">
-              {data.kicker || "Reserva"}
+            <div className="booking-convert-kicker-wrap">
+              <div className="booking-convert-kicker">
+                {data.kicker || "Reserva"}
+              </div>
             </div>
 
             <h2 className="booking-convert-title">
@@ -47,54 +48,73 @@ export default function BookingSection({ data }) {
               <p className="booking-convert-desc">{data.desc}</p>
             ) : null}
 
-            <div className="booking-convert-points">
-              <div className="booking-convert-point">
+            <div className="booking-convert-points booking-convert-points-v2">
+              <div className="booking-convert-point booking-convert-point-v2">
+                <div className="booking-point-icon">⚡</div>
                 <div className="booking-convert-point-label">Respuesta</div>
                 <div className="booking-convert-point-value">Rápida</div>
+                <div className="booking-convert-point-sub">
+                  Te respondemos al instante.
+                </div>
               </div>
 
-              <div className="booking-convert-point">
+              <div className="booking-convert-point booking-convert-point-v2">
+                <div className="booking-point-icon">📅</div>
                 <div className="booking-convert-point-label">Reserva</div>
                 <div className="booking-convert-point-value">
                   {getBookingPlatformLabel(config)}
                 </div>
+                <div className="booking-convert-point-sub">
+                  Reserva online en segundos.
+                </div>
               </div>
 
-              <div className="booking-convert-point">
+              <div className="booking-convert-point booking-convert-point-v2">
+                <div className="booking-point-icon">🕒</div>
                 <div className="booking-convert-point-label">Horario</div>
                 <div className="booking-convert-point-value">
                   {contact?.hours || "Flexible"}
                 </div>
+                <div className="booking-convert-point-sub">
+                  Atendemos durante todo el día.
+                </div>
               </div>
             </div>
 
-            <div className="booking-convert-actions">
+            <div className="booking-actions-divider">
+              <span>✂</span>
+            </div>
+
+            <div className="booking-convert-actions booking-convert-actions-v2">
               {bookingLink.href ? (
                 <a
                   href={bookingLink.href}
                   target="_blank"
                   rel="noreferrer"
-                  className={`booking-platform-btn booking-platform-btn-${bookingLink.platform}`}
+                  className={`booking-platform-btn booking-platform-btn-${bookingLink.platform} booking-platform-btn-wide`}
                 >
                   {bookingLink.label}
                 </a>
               ) : null}
 
               {links?.maps ? (
-                <Button
+                <a
                   href={links.maps}
                   target="_blank"
                   rel="noreferrer"
-                  variant="secondary"
+                  className="booking-platform-btn booking-platform-btn-secondary booking-platform-btn-wide"
                 >
                   Ver ubicación
-                </Button>
+                </a>
               ) : null}
             </div>
 
-            <div className="booking-convert-note">
-              {contact?.address ? <span>{contact.address}</span> : null}
-              {contact?.phoneDisplay ? <span> · {contact.phoneDisplay}</span> : null}
+            <div className="booking-convert-note booking-convert-note-v2">
+              {contact?.address ? (
+                <span className="booking-location-chip">
+                  📍 {contact.address}
+                </span>
+              ) : null}
             </div>
           </div>
         </div>
