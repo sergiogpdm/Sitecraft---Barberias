@@ -150,7 +150,11 @@ export const siteConfig = {
       "title": "Pide tu cita y déjanos el resto.",
       "desc": "Te atendemos por WhatsApp de forma rápida y sencilla.",
       "ctaText": "Abrir WhatsApp",
-      "ctaHref": ""
+      "ctaHref": "",
+      "sideImages": [
+        "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
+      ]
     },
     "footer": {
       "title": "De la Rue Studio",

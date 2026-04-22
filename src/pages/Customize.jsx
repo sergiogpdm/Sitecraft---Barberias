@@ -191,6 +191,7 @@ function ensureConfigShape(config) {
         desc: "",
         ctaText: "",
         ctaHref: "",
+        sideImages: ["", ""],
         ...(config?.copy?.booking || {}),
       },
 
@@ -895,11 +896,58 @@ export default function Customize() {
           {active === "booking" && (
             <>
               <SectionTitle>Booking</SectionTitle>
-              <Input label="Kicker" value={safeConfig.copy.booking.kicker} onChange={(v) => updateCopy("booking", "kicker", v)} />
-              <Input label="Título" value={safeConfig.copy.booking.title} onChange={(v) => updateCopy("booking", "title", v)} />
-              <Textarea label="Descripción" value={safeConfig.copy.booking.desc} onChange={(v) => updateCopy("booking", "desc", v)} />
-              <Input label="CTA texto" value={safeConfig.copy.booking.ctaText} onChange={(v) => updateCopy("booking", "ctaText", v)} />
-              <Input label="CTA href" value={safeConfig.copy.booking.ctaHref} onChange={(v) => updateCopy("booking", "ctaHref", v)} />
+
+              <Input
+                label="Kicker"
+                value={safeConfig.copy.booking.kicker}
+                onChange={(v) => updateCopy("booking", "kicker", v)}
+              />
+
+              <Input
+                label="Título"
+                value={safeConfig.copy.booking.title}
+                onChange={(v) => updateCopy("booking", "title", v)}
+              />
+
+              <Textarea
+                label="Descripción"
+                value={safeConfig.copy.booking.desc}
+                onChange={(v) => updateCopy("booking", "desc", v)}
+              />
+
+              <Input
+                label="CTA texto"
+                value={safeConfig.copy.booking.ctaText}
+                onChange={(v) => updateCopy("booking", "ctaText", v)}
+              />
+
+              <Input
+                label="CTA href"
+                value={safeConfig.copy.booking.ctaHref}
+                onChange={(v) => updateCopy("booking", "ctaHref", v)}
+              />
+
+              <Input
+                label="Imagen lateral izquierda"
+                value={safeConfig.copy.booking.sideImages?.[0] || ""}
+                onChange={(v) =>
+                  updateCopy("booking", "sideImages", [
+                    v,
+                    safeConfig.copy.booking.sideImages?.[1] || "",
+                  ])
+                }
+              />
+
+              <Input
+                label="Imagen lateral derecha"
+                value={safeConfig.copy.booking.sideImages?.[1] || ""}
+                onChange={(v) =>
+                  updateCopy("booking", "sideImages", [
+                    safeConfig.copy.booking.sideImages?.[0] || "",
+                    v,
+                  ])
+                }
+              />
             </>
           )}
 
@@ -1517,6 +1565,10 @@ function QuickGenerator({ setConfig }) {
             desc: copy.bookingDesc,
             ctaText: "Abrir WhatsApp",
             ctaHref: whatsappLink,
+            sideImages: [
+              "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80",
+              "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
+            ],
           },
 
           footer: {
