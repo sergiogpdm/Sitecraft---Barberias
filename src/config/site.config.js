@@ -6,9 +6,9 @@ export const siteConfig = {
     "logoImage": ""
   },
   "links": {
-    "whatsapp": "",
-    "instagram": "",
-    "maps": ""
+    "whatsapp": "https://www.instagram.com",
+    "instagram": "https://www.instagram.com",
+    "maps": "https://www.instagram.com"
   },
   "contact": {
     "phoneDisplay": "",
@@ -189,7 +189,7 @@ export const siteConfig = {
     }
   },
   "bookingPlatform": {
-    "type": "none",
+    "type": "booksy",
     "label": "Reservar",
     "url": "https://www.instagram.com"
   }

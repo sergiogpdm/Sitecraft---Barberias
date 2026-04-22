@@ -7,7 +7,6 @@ import PhotoStripSection from "../components/sections/PhotoStripSection.jsx";
 import BookingSection from "../components/sections/BookingSection.jsx";
 import Footer from "../components/Footer.jsx";
 import Container from "../components/Container.jsx";
-import Button from "../components/ui/Button.jsx";
 import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
 
 export default function Home() {
@@ -18,7 +17,15 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const enabledSections = pages.home.sections.filter((s) => s.enabled);
-  const bookingLink = resolveBookingLink(config, copy?.booking);
+
+  const externalBookingLink = resolveBookingLink(config, copy?.booking);
+  const navbarBookingLink = externalBookingLink.href
+    ? externalBookingLink
+    : {
+        href: links?.whatsapp || copy?.booking?.ctaHref || "",
+        label: "Reservar",
+        platform: "custom",
+      };
 
   useEffect(() => {
     const onScroll = () => {
@@ -61,7 +68,10 @@ export default function Home() {
       <div className="site-bg-glow-bottom" />
       <div className="site-bg-vignette" />
 
-      <header className={`navbar-pro ${isScrolled ? "is-scrolled" : "is-top"}`} style={navbarStyle}>
+      <header
+        className={`navbar-pro ${isScrolled ? "is-scrolled" : "is-top"}`}
+        style={navbarStyle}
+      >
         <Container wide>
           <div className="navbar-pro-inner">
             <a href="#hero" className="navbar-pro-brand">
@@ -96,10 +106,15 @@ export default function Home() {
                 </a>
               ))}
 
-              {layout.showNavbarCta && bookingLink.href && (
-                <Button href={bookingLink.href} target="_blank" rel="noreferrer">
-                  {bookingLink.label}
-                </Button>
+              {layout.showNavbarCta && navbarBookingLink.href && (
+                <a
+                  href={navbarBookingLink.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`booking-platform-btn booking-platform-btn-${navbarBookingLink.platform}`}
+                >
+                  {navbarBookingLink.label}
+                </a>
               )}
             </nav>
 
@@ -128,11 +143,16 @@ export default function Home() {
                   </a>
                 ))}
 
-                {layout.showNavbarCta && bookingLink.href && (
+                {layout.showNavbarCta && navbarBookingLink.href && (
                   <div style={{ marginTop: 8 }}>
-                    <Button href={bookingLink.href} target="_blank" rel="noreferrer">
-                      {bookingLink.label}
-                    </Button>
+                    <a
+                      href={navbarBookingLink.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`booking-platform-btn booking-platform-btn-${navbarBookingLink.platform}`}
+                    >
+                      {navbarBookingLink.label}
+                    </a>
                   </div>
                 )}
               </div>
@@ -193,15 +213,15 @@ export default function Home() {
       <Footer data={copy.footer} contact={contact} />
 
       {layout.showFloatingBooking &&
-        bookingLink.href &&
+        externalBookingLink.href &&
         config?.bookingPlatform?.type !== "none" && (
           <a
-            href={bookingLink.href}
+            href={externalBookingLink.href}
             target="_blank"
             rel="noreferrer"
-            className="floating-booking-btn"
+            className={`floating-booking-btn floating-booking-btn-${externalBookingLink.platform}`}
           >
-            {bookingLink.label}
+            {externalBookingLink.label}
           </a>
         )}
 
@@ -210,18 +230,8 @@ export default function Home() {
           href={links.whatsapp}
           target="_blank"
           rel="noreferrer"
-          style={{
-            position: "fixed",
-            right: 18,
-            bottom: 18,
-            zIndex: 40,
-            background: "#25D366",
-            color: "#111",
-            fontWeight: 800,
-            borderRadius: 999,
-            padding: "14px 18px",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
-          }}
+          className="floating-whatsapp-btn"
+          style={{ bottom: 18, zIndex: 40 }}
         >
           WhatsApp
         </a>
@@ -239,7 +249,10 @@ function makeAlphaColor(color, alpha) {
     let hex = c.slice(1);
 
     if (hex.length === 3) {
-      hex = hex.split("").map((x) => x + x).join("");
+      hex = hex
+        .split("")
+        .map((x) => x + x)
+        .join("");
     }
 
     if (hex.length !== 6) return color;
@@ -256,40 +269,55 @@ function makeAlphaColor(color, alpha) {
   }
 
   if (c.startsWith("rgba(")) {
-    return c.replace(/rgba\(([^,]+),([^,]+),([^,]+),([^)]+)\)/, `rgba($1,$2,$3,${alpha})`);
+    return c.replace(
+      /rgba\(([^,]+),([^,]+),([^,]+),([^)]+)\)/,
+      `rgba($1,$2,$3,${alpha})`
+    );
   }
 
   return color;
 }
 
 function resolveBookingLink(config, bookingData) {
-  const type = config?.bookingPlatform?.type || "whatsapp";
+  const type = config?.bookingPlatform?.type || "none";
   const platformUrl = config?.bookingPlatform?.url || "";
-  const whatsappUrl = config?.links?.whatsapp || "";
   const dataHref = bookingData?.ctaHref || "";
-  const dataLabel = bookingData?.ctaText || "Reservar";
 
   if (type === "none") {
     return {
       href: "",
-      label: config?.bookingPlatform?.label || dataLabel,
+      label: "",
+      platform: "none",
     };
   }
 
-  const href =
-    platformUrl ||
-    whatsappUrl ||
-    dataHref ||
-    "";
-
-  let label = config?.bookingPlatform?.label || dataLabel;
-
-  if (!config?.bookingPlatform?.label) {
-    if (type === "yeasy") label = "Reservar en Yeasy";
-    else if (type === "booksy") label = "Reservar en Booksy";
-    else if (type === "custom") label = "Reservar";
-    else label = dataLabel;
+  if (type === "yeasy") {
+    return {
+      href: platformUrl,
+      label: "Yeasy",
+      platform: "yeasy",
+    };
   }
 
-  return { href, label };
+  if (type === "booksy") {
+    return {
+      href: platformUrl,
+      label: "Booksy",
+      platform: "booksy",
+    };
+  }
+
+  if (type === "custom") {
+    return {
+      href: platformUrl || dataHref,
+      label: config?.bookingPlatform?.label || "Reservar",
+      platform: "custom",
+    };
+  }
+
+  return {
+    href: "",
+    label: "",
+    platform: "none",
+  };
 }

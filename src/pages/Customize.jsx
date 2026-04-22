@@ -81,7 +81,7 @@ function ensureConfigShape(config) {
     },
 
     bookingPlatform: {
-      type: "whatsapp", // whatsapp | yeasy | booksy | custom | none
+      type: "none", // yeasy | booksy | custom | none
       label: "Reservar",
       url: "",
       ...(config?.bookingPlatform || {}),
@@ -633,9 +633,9 @@ export default function Customize() {
               />
 
               <label style={{ display: "block", marginBottom: 12 }}>
-                <div>Plataforma de reserva</div>
+                <div>Plataforma externa de reserva</div>
                 <select
-                  value={safeConfig.bookingPlatform?.type || "whatsapp"}
+                  value={safeConfig.bookingPlatform?.type || "none"}
                   onChange={(e) =>
                     setConfig((prev) =>
                       ensureConfigShape({
@@ -648,16 +648,15 @@ export default function Customize() {
                     )
                   }
                 >
-                  <option value="whatsapp">WhatsApp</option>
+                  <option value="none">Ninguna</option>
                   <option value="yeasy">Yeasy</option>
                   <option value="booksy">Booksy</option>
                   <option value="custom">Custom</option>
-                  <option value="none">Ninguna</option>
                 </select>
               </label>
 
               <Input
-                label="Texto botón reserva"
+                label="Texto botón custom"
                 value={safeConfig.bookingPlatform?.label || "Reservar"}
                 onChange={(v) =>
                   setConfig((prev) =>
@@ -673,7 +672,7 @@ export default function Customize() {
               />
 
               <Input
-                label="URL plataforma reserva"
+                label="URL plataforma externa"
                 value={safeConfig.bookingPlatform?.url || ""}
                 onChange={(v) =>
                   setConfig((prev) =>
@@ -1530,9 +1529,9 @@ function QuickGenerator({ setConfig }) {
         },
 
         bookingPlatform: {
-          type: "whatsapp",
+          type: "none",
           label: "Reservar",
-          url: whatsappLink,
+          url: "",
         },
 
         copy: {

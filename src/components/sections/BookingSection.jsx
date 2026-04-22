@@ -55,7 +55,9 @@ export default function BookingSection({ data }) {
 
               <div className="booking-convert-point">
                 <div className="booking-convert-point-label">Reserva</div>
-                <div className="booking-convert-point-value">YA</div>
+                <div className="booking-convert-point-value">
+                  {getBookingPlatformLabel(config)}
+                </div>
               </div>
 
               <div className="booking-convert-point">
@@ -68,9 +70,14 @@ export default function BookingSection({ data }) {
 
             <div className="booking-convert-actions">
               {bookingLink.href ? (
-                <Button href={bookingLink.href} target="_blank" rel="noreferrer">
+                <a
+                  href={bookingLink.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`booking-platform-btn booking-platform-btn-${bookingLink.platform}`}
+                >
                   {bookingLink.label}
-                </Button>
+                </a>
               ) : null}
 
               {links?.maps ? (
@@ -97,33 +104,47 @@ export default function BookingSection({ data }) {
 }
 
 function resolveBookingLink(config, data) {
-  const type = config?.bookingPlatform?.type || "whatsapp";
+  const type = config?.bookingPlatform?.type || "none";
   const platformUrl = config?.bookingPlatform?.url || "";
   const whatsappUrl = config?.links?.whatsapp || "";
   const dataHref = data?.ctaHref || "";
-  const dataLabel = data?.ctaText || "Reservar";
 
-  if (type === "none") {
+  if (type === "yeasy") {
     return {
-      href: "",
-      label: config?.bookingPlatform?.label || dataLabel,
+      href: platformUrl,
+      label: "Yeasy",
+      platform: "yeasy",
     };
   }
 
-  const href =
-    platformUrl ||
-    whatsappUrl ||
-    dataHref ||
-    "";
-
-  let label = config?.bookingPlatform?.label || dataLabel;
-
-  if (!config?.bookingPlatform?.label) {
-    if (type === "yeasy") label = "Reservar en Yeasy";
-    else if (type === "booksy") label = "Reservar en Booksy";
-    else if (type === "custom") label = "Reservar";
-    else label = dataLabel;
+  if (type === "booksy") {
+    return {
+      href: platformUrl,
+      label: "Booksy",
+      platform: "booksy",
+    };
   }
 
-  return { href, label };
+  if (type === "custom") {
+    return {
+      href: platformUrl || dataHref,
+      label: config?.bookingPlatform?.label || "Reservar",
+      platform: "custom",
+    };
+  }
+
+  return {
+    href: whatsappUrl || dataHref,
+    label: "WhatsApp",
+    platform: "whatsapp",
+  };
+}
+
+function getBookingPlatformLabel(config) {
+  const type = config?.bookingPlatform?.type || "none";
+
+  if (type === "yeasy") return "En Yeasy";
+  if (type === "booksy") return "En Booksy";
+  if (type === "custom") return "Online";
+  return "Por WhatsApp";
 }
