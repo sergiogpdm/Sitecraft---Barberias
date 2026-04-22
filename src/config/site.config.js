@@ -20,7 +20,8 @@ export const siteConfig = {
   },
   "layout": {
     "showNavbarCta": true,
-    "showFloatingWhatsApp": true
+    "showFloatingWhatsApp": true,
+    "showFloatingBooking": true
   },
   "theme": {
     "preset": "goldNight",
@@ -131,17 +132,20 @@ export const siteConfig = {
         {
           "price": "18€",
           "title": "Corte",
-          "desc": "Corte con acabado y peinado."
+          "desc": "Corte con acabado y peinado.",
+          "image": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80"
         },
         {
           "price": "25€",
           "title": "Corte + barba",
-          "desc": "Servicio completo."
+          "desc": "Servicio completo.",
+          "image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80"
         },
         {
           "price": "10€",
           "title": "Arreglo de barba",
-          "desc": "Perfilado profesional."
+          "desc": "Perfilado profesional.",
+          "image": "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80"
         }
       ]
     },
@@ -183,5 +187,10 @@ export const siteConfig = {
         }
       ]
     }
+  },
+  "bookingPlatform": {
+    "type": "none",
+    "label": "Reservar",
+    "url": "https://www.instagram.com"
   }
 };

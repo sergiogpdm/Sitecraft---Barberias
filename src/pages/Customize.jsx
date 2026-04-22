@@ -76,7 +76,15 @@ function ensureConfigShape(config) {
     layout: {
       showNavbarCta: true,
       showFloatingWhatsApp: true,
+      showFloatingBooking: true,
       ...(config?.layout || {}),
+    },
+
+    bookingPlatform: {
+      type: "whatsapp", // whatsapp | yeasy | booksy | custom | none
+      label: "Reservar",
+      url: "",
+      ...(config?.bookingPlatform || {}),
     },
 
     theme: {
@@ -623,6 +631,94 @@ export default function Customize() {
                   )
                 }
               />
+
+              <label style={{ display: "block", marginBottom: 12 }}>
+                <div>Plataforma de reserva</div>
+                <select
+                  value={safeConfig.bookingPlatform?.type || "whatsapp"}
+                  onChange={(e) =>
+                    setConfig((prev) =>
+                      ensureConfigShape({
+                        ...prev,
+                        bookingPlatform: {
+                          ...(prev?.bookingPlatform || {}),
+                          type: e.target.value,
+                        },
+                      })
+                    )
+                  }
+                >
+                  <option value="whatsapp">WhatsApp</option>
+                  <option value="yeasy">Yeasy</option>
+                  <option value="booksy">Booksy</option>
+                  <option value="custom">Custom</option>
+                  <option value="none">Ninguna</option>
+                </select>
+              </label>
+
+              <Input
+                label="Texto botón reserva"
+                value={safeConfig.bookingPlatform?.label || "Reservar"}
+                onChange={(v) =>
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      bookingPlatform: {
+                        ...(prev?.bookingPlatform || {}),
+                        label: v,
+                      },
+                    })
+                  )
+                }
+              />
+
+              <Input
+                label="URL plataforma reserva"
+                value={safeConfig.bookingPlatform?.url || ""}
+                onChange={(v) =>
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      bookingPlatform: {
+                        ...(prev?.bookingPlatform || {}),
+                        url: v,
+                      },
+                    })
+                  )
+                }
+              />
+
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  padding: "10px 12px",
+                  marginBottom: 10,
+                  borderRadius: 12,
+                  border: "1px solid var(--border)",
+                  background: "var(--bg)",
+                }}
+              >
+                <span>Mostrar botón flotante de reserva</span>
+                <input
+                  type="checkbox"
+                  checked={!!safeConfig.layout.showFloatingBooking}
+                  onChange={() =>
+                    setConfig((prev) =>
+                      ensureConfigShape({
+                        ...prev,
+                        layout: {
+                          ...(prev?.layout || {}),
+                          showFloatingBooking: !prev?.layout?.showFloatingBooking,
+                        },
+                      })
+                    )
+                  }
+                  style={{ width: 18, height: 18 }}
+                />
+              </label>
 
               <ColorInput
                 label="Color fondo"
@@ -1431,6 +1527,12 @@ function QuickGenerator({ setConfig }) {
             ...(prev?.pages?.home || {}),
             sections: layout,
           },
+        },
+
+        bookingPlatform: {
+          type: "whatsapp",
+          label: "Reservar",
+          url: whatsappLink,
         },
 
         copy: {

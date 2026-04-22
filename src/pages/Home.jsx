@@ -10,7 +10,6 @@ import Container from "../components/Container.jsx";
 import Button from "../components/ui/Button.jsx";
 import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
 
-
 export default function Home() {
   const { config } = useSiteConfig();
   const { brand, copy, contact, pages, links, layout, theme } = config;
@@ -19,6 +18,7 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const enabledSections = pages.home.sections.filter((s) => s.enabled);
+  const bookingLink = resolveBookingLink(config, copy?.booking);
 
   useEffect(() => {
     const onScroll = () => {
@@ -55,14 +55,12 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: "100vh" }}>
-
       <div className="site-bg-glow-left" />
-  <div className="site-bg-glow-right" />
+      <div className="site-bg-glow-right" />
+      <div className="site-bg-glow-top" />
+      <div className="site-bg-glow-bottom" />
+      <div className="site-bg-vignette" />
 
-  <div className="site-bg-glow-top" />
-  <div className="site-bg-glow-bottom" />
-
-  <div className="site-bg-vignette" />
       <header className={`navbar-pro ${isScrolled ? "is-scrolled" : "is-top"}`} style={navbarStyle}>
         <Container wide>
           <div className="navbar-pro-inner">
@@ -98,9 +96,9 @@ export default function Home() {
                 </a>
               ))}
 
-              {layout.showNavbarCta && (
-                <Button href={links.whatsapp} target="_blank" rel="noreferrer">
-                  Reservar
+              {layout.showNavbarCta && bookingLink.href && (
+                <Button href={bookingLink.href} target="_blank" rel="noreferrer">
+                  {bookingLink.label}
                 </Button>
               )}
             </nav>
@@ -130,10 +128,10 @@ export default function Home() {
                   </a>
                 ))}
 
-                {layout.showNavbarCta && (
+                {layout.showNavbarCta && bookingLink.href && (
                   <div style={{ marginTop: 8 }}>
-                    <Button href={links.whatsapp} target="_blank" rel="noreferrer">
-                      Reservar
+                    <Button href={bookingLink.href} target="_blank" rel="noreferrer">
+                      {bookingLink.label}
                     </Button>
                   </div>
                 )}
@@ -156,29 +154,29 @@ export default function Home() {
       </div>
 
       {(enabledSections.some((s) => s.id === "testimonials") ||
-  enabledSections.some((s) => s.id === "photoStrip")) && (
-  <section
-    style={{
-      padding: "110px 0 95px",
-    }}
-  >
-    <Container wide>
-      <div className="testimonials-gallery-split">
-        <div id="photoStrip">
-          {enabledSections.some((s) => s.id === "photoStrip") && (
-            <PhotoStripSection data={copy.photoStrip} compact />
-          )}
-        </div>
+        enabledSections.some((s) => s.id === "photoStrip")) && (
+        <section
+          style={{
+            padding: "110px 0 95px",
+          }}
+        >
+          <Container wide>
+            <div className="testimonials-gallery-split">
+              <div id="photoStrip">
+                {enabledSections.some((s) => s.id === "photoStrip") && (
+                  <PhotoStripSection data={copy.photoStrip} compact />
+                )}
+              </div>
 
-        <div id="testimonials">
-          {enabledSections.some((s) => s.id === "testimonials") && (
-            <TestimonialsSection data={copy.testimonials} compact />
-          )}
-        </div>
-      </div>
-    </Container>
-  </section>
-)}
+              <div id="testimonials">
+                {enabledSections.some((s) => s.id === "testimonials") && (
+                  <TestimonialsSection data={copy.testimonials} compact />
+                )}
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
 
       <div id="prices">
         {enabledSections.some((s) => s.id === "prices") && (
@@ -194,7 +192,20 @@ export default function Home() {
 
       <Footer data={copy.footer} contact={contact} />
 
-      {layout.showFloatingWhatsApp && (
+      {layout.showFloatingBooking &&
+        bookingLink.href &&
+        config?.bookingPlatform?.type !== "none" && (
+          <a
+            href={bookingLink.href}
+            target="_blank"
+            rel="noreferrer"
+            className="floating-booking-btn"
+          >
+            {bookingLink.label}
+          </a>
+        )}
+
+      {layout.showFloatingWhatsApp && links.whatsapp && (
         <a
           href={links.whatsapp}
           target="_blank"
@@ -249,4 +260,36 @@ function makeAlphaColor(color, alpha) {
   }
 
   return color;
+}
+
+function resolveBookingLink(config, bookingData) {
+  const type = config?.bookingPlatform?.type || "whatsapp";
+  const platformUrl = config?.bookingPlatform?.url || "";
+  const whatsappUrl = config?.links?.whatsapp || "";
+  const dataHref = bookingData?.ctaHref || "";
+  const dataLabel = bookingData?.ctaText || "Reservar";
+
+  if (type === "none") {
+    return {
+      href: "",
+      label: config?.bookingPlatform?.label || dataLabel,
+    };
+  }
+
+  const href =
+    platformUrl ||
+    whatsappUrl ||
+    dataHref ||
+    "";
+
+  let label = config?.bookingPlatform?.label || dataLabel;
+
+  if (!config?.bookingPlatform?.label) {
+    if (type === "yeasy") label = "Reservar en Yeasy";
+    else if (type === "booksy") label = "Reservar en Booksy";
+    else if (type === "custom") label = "Reservar";
+    else label = dataLabel;
+  }
+
+  return { href, label };
 }
