@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSiteConfig } from "../context/SiteConfigContext.jsx";
 import HeroSection from "../components/sections/HeroSection.jsx";
-import ServicesSection from "../components/sections/ServicesSection.jsx";
 import PricesSection from "../components/sections/PricesSection.jsx";
 import PhotoStripSection from "../components/sections/PhotoStripSection.jsx";
 import BookingSection from "../components/sections/BookingSection.jsx";
@@ -16,9 +15,21 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const enabledSections = pages.home.sections.filter((s) => s.enabled);
+  // 🔥 NAVBAR CONTROLADO (NO DEPENDE DE LABELS VIEJOS)
+  const enabledSections = [
+    { id: "hero", label: "Inicio" },
+    { id: "prices", label: "Servicios" },
+    { id: "testimonials", label: "Opiniones" },
+    { id: "photoStrip", label: "Galería" },
+    { id: "booking", label: "Reservar" },
+  ].filter((base) =>
+    (pages.home.sections || []).some(
+      (s) => s.id === base.id && s.enabled
+    )
+  );
 
   const externalBookingLink = resolveBookingLink(config, copy?.booking);
+
   const navbarBookingLink = externalBookingLink.href
     ? externalBookingLink
     : {
@@ -68,6 +79,7 @@ export default function Home() {
       <div className="site-bg-glow-bottom" />
       <div className="site-bg-vignette" />
 
+      {/* NAVBAR */}
       <header
         className={`navbar-pro ${isScrolled ? "is-scrolled" : "is-top"}`}
         style={navbarStyle}
@@ -102,7 +114,7 @@ export default function Home() {
                   href={`#${section.id}`}
                   className="navbar-pro-link"
                 >
-                  {section.label || section.id}
+                  {section.label}
                 </a>
               ))}
 
@@ -139,7 +151,7 @@ export default function Home() {
                     className="navbar-pro-mobile-link"
                     onClick={() => setMenuOpen(false)}
                   >
-                    {section.label || section.id}
+                    {section.label}
                   </a>
                 ))}
 
@@ -161,25 +173,24 @@ export default function Home() {
         </Container>
       </header>
 
+      {/* HERO */}
       <div id="hero">
         {enabledSections.some((s) => s.id === "hero") && (
           <HeroSection brand={brand} data={copy.hero} />
         )}
       </div>
 
-      <div id="services">
-        {enabledSections.some((s) => s.id === "services") && (
-          <ServicesSection data={copy.services} />
+      {/* SERVICIOS (ANTES PRECIOS) */}
+      <div id="prices">
+        {enabledSections.some((s) => s.id === "prices") && (
+          <PricesSection data={copy.prices} />
         )}
       </div>
 
+      {/* TESTIMONIOS + GALERÍA */}
       {(enabledSections.some((s) => s.id === "testimonials") ||
         enabledSections.some((s) => s.id === "photoStrip")) && (
-        <section
-          style={{
-            padding: "110px 0 95px",
-          }}
-        >
+        <section style={{ padding: "110px 0 95px" }}>
           <Container wide>
             <div className="testimonials-gallery-split">
               <div id="photoStrip">
@@ -198,12 +209,7 @@ export default function Home() {
         </section>
       )}
 
-      <div id="prices">
-        {enabledSections.some((s) => s.id === "prices") && (
-          <PricesSection data={copy.prices} />
-        )}
-      </div>
-
+      {/* BOOKING */}
       <div id="booking">
         {enabledSections.some((s) => s.id === "booking") && (
           <BookingSection data={copy.booking} />
@@ -212,6 +218,7 @@ export default function Home() {
 
       <Footer data={copy.footer} contact={contact} />
 
+      {/* FLOATING BOOKING */}
       {layout.showFloatingBooking &&
         externalBookingLink.href &&
         config?.bookingPlatform?.type !== "none" && (
@@ -225,6 +232,7 @@ export default function Home() {
           </a>
         )}
 
+      {/* FLOATING WHATSAPP */}
       {layout.showFloatingWhatsApp && links.whatsapp && (
         <a
           href={links.whatsapp}
@@ -249,10 +257,7 @@ function makeAlphaColor(color, alpha) {
     let hex = c.slice(1);
 
     if (hex.length === 3) {
-      hex = hex
-        .split("")
-        .map((x) => x + x)
-        .join("");
+      hex = hex.split("").map((x) => x + x).join("");
     }
 
     if (hex.length !== 6) return color;
@@ -264,60 +269,21 @@ function makeAlphaColor(color, alpha) {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  if (c.startsWith("rgb(")) {
-    return c.replace("rgb(", "rgba(").replace(")", `, ${alpha})`);
-  }
-
-  if (c.startsWith("rgba(")) {
-    return c.replace(
-      /rgba\(([^,]+),([^,]+),([^,]+),([^)]+)\)/,
-      `rgba($1,$2,$3,${alpha})`
-    );
-  }
-
   return color;
 }
 
 function resolveBookingLink(config, bookingData) {
   const type = config?.bookingPlatform?.type || "none";
-  const platformUrl = config?.bookingPlatform?.url || "";
-  const dataHref = bookingData?.ctaHref || "";
+  const url = config?.bookingPlatform?.url || "";
 
-  if (type === "none") {
+  if (type === "yeasy") return { href: url, label: "Yeasy", platform: "yeasy" };
+  if (type === "booksy") return { href: url, label: "Booksy", platform: "booksy" };
+  if (type === "custom")
     return {
-      href: "",
-      label: "",
-      platform: "none",
-    };
-  }
-
-  if (type === "yeasy") {
-    return {
-      href: platformUrl,
-      label: "Yeasy",
-      platform: "yeasy",
-    };
-  }
-
-  if (type === "booksy") {
-    return {
-      href: platformUrl,
-      label: "Booksy",
-      platform: "booksy",
-    };
-  }
-
-  if (type === "custom") {
-    return {
-      href: platformUrl || dataHref,
+      href: url,
       label: config?.bookingPlatform?.label || "Reservar",
       platform: "custom",
     };
-  }
 
-  return {
-    href: "",
-    label: "",
-    platform: "none",
-  };
+  return { href: "", label: "", platform: "none" };
 }

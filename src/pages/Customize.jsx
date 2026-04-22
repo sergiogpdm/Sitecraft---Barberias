@@ -3,7 +3,6 @@ import { useSiteConfig } from "../context/SiteConfigContext.jsx";
 import { presets } from "../config/presets.js";
 
 import HeroSection from "../components/sections/HeroSection.jsx";
-import ServicesSection from "../components/sections/ServicesSection.jsx";
 import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
 import PricesSection from "../components/sections/PricesSection.jsx";
 import PhotoStripSection from "../components/sections/PhotoStripSection.jsx";
@@ -29,18 +28,24 @@ function parseConfigText(text) {
 function ensureHomeSections(existingSections = []) {
   const defaults = [
     { id: "hero", enabled: true, label: "Inicio" },
-    { id: "services", enabled: true, label: "Servicios" },
+    { id: "prices", enabled: true, label: "Servicios" },
     { id: "testimonials", enabled: true, label: "Opiniones" },
     { id: "photoStrip", enabled: true, label: "Galería" },
-    { id: "prices", enabled: true, label: "Precios" },
     { id: "booking", enabled: true, label: "Reservar" },
   ];
 
-  const byId = new Map((existingSections || []).map((s) => [s.id, s]));
+  const cleaned = (existingSections || []).filter(
+    (s) => s.id !== "services" && s.id !== "prices_old"
+  );
+
+  const byId = new Map(cleaned.map((s) => [s.id, s]));
 
   return defaults.map((base) => ({
     ...base,
-    ...(byId.get(base.id) || {}),
+    enabled: byId.has(base.id)
+      ? (byId.get(base.id)?.enabled ?? base.enabled)
+      : base.enabled,
+    label: base.label,
   }));
 }
 
@@ -216,7 +221,6 @@ function ensureConfigShape(config) {
 const TABS = [
   { key: "general", label: "General" },
   { key: "hero", label: "Hero" },
-  { key: "services", label: "Services" },
   { key: "testimonials", label: "Testimonials" },
   { key: "prices", label: "Prices" },
   { key: "photoStrip", label: "PhotoStrip" },
@@ -794,42 +798,7 @@ export default function Customize() {
             </>
           )}
 
-          {active === "services" && (
-            <>
-              <SectionTitle>Services</SectionTitle>
-              <Input label="Kicker" value={safeConfig.copy.services.kicker} onChange={(v) => updateCopy("services", "kicker", v)} />
-              <Input label="Título" value={safeConfig.copy.services.title} onChange={(v) => updateCopy("services", "title", v)} />
-              <Textarea label="Descripción" value={safeConfig.copy.services.desc} onChange={(v) => updateCopy("services", "desc", v)} />
-
-              <div style={{ marginTop: 18 }}>
-                <div style={{ fontWeight: 700, marginBottom: 10 }}>Items</div>
-                {(safeConfig.copy.services.items || []).map((item, index) => (
-                  <ArrayCard
-                    key={`${item.title}-${index}`}
-                    title={`Servicio ${index + 1}`}
-                    onMoveUp={() => moveArrayItem("services", index, -1)}
-                    onMoveDown={() => moveArrayItem("services", index, 1)}
-                    onRemove={() => removeArrayItem("services", index)}
-                  >
-                    <Input label="Título" value={item.title} onChange={(v) => updateArrayItem("services", index, "title", v)} />
-                    <Textarea label="Descripción" value={item.desc} onChange={(v) => updateArrayItem("services", index, "desc", v)} />
-                  </ArrayCard>
-                ))}
-
-                <button
-                  onClick={() =>
-                    addArrayItem("services", {
-                      title: "Nuevo servicio",
-                      desc: "Descripción del servicio",
-                    })
-                  }
-                  style={smallButtonStyle}
-                >
-                  + Añadir servicio
-                </button>
-              </div>
-            </>
-          )}
+          
 
           {active === "testimonials" && (
             <>
@@ -1078,7 +1047,7 @@ export default function Customize() {
               }}
             >
               {active === "hero" && <HeroSection brand={safeConfig.brand} data={safeConfig.copy.hero} />}
-              {active === "services" && <ServicesSection data={safeConfig.copy.services} />}
+              
               {active === "testimonials" && (
                 <TestimonialsSection data={safeConfig.copy.testimonials} />
               )}
@@ -1089,7 +1058,6 @@ export default function Customize() {
               {active === "general" && (
                 <>
                   <HeroSection brand={safeConfig.brand} data={safeConfig.copy.hero} />
-                  <ServicesSection data={safeConfig.copy.services} />
                   <TestimonialsSection data={safeConfig.copy.testimonials} />
                   <PricesSection data={safeConfig.copy.prices} />
                   <PhotoStripSection data={safeConfig.copy.photoStrip} />
@@ -1387,26 +1355,23 @@ function QuickGenerator({ setConfig }) {
   const layoutPresets = {
     standard: [
       { id: "hero", enabled: true, label: "Inicio" },
-      { id: "services", enabled: true, label: "Servicios" },
+      { id: "prices", enabled: true, label: "Servicios" },
       { id: "testimonials", enabled: true, label: "Opiniones" },
       { id: "photoStrip", enabled: true, label: "Galería" },
-      { id: "prices", enabled: true, label: "Precios" },
       { id: "booking", enabled: true, label: "Reservar" },
     ],
 
     photosFirst: [
       { id: "hero", enabled: true, label: "Inicio" },
+      { id: "prices", enabled: true, label: "Servicios" },
       { id: "photoStrip", enabled: true, label: "Galería" },
-      { id: "services", enabled: true, label: "Servicios" },
       { id: "testimonials", enabled: true, label: "Opiniones" },
-      { id: "prices", enabled: true, label: "Precios" },
       { id: "booking", enabled: true, label: "Reservar" },
     ],
 
     pricesFirst: [
       { id: "hero", enabled: true, label: "Inicio" },
-      { id: "prices", enabled: true, label: "Precios" },
-      { id: "services", enabled: true, label: "Servicios" },
+      { id: "prices", enabled: true, label: "Servicios" },
       { id: "testimonials", enabled: true, label: "Opiniones" },
       { id: "photoStrip", enabled: true, label: "Galería" },
       { id: "booking", enabled: true, label: "Reservar" },
@@ -1414,9 +1379,8 @@ function QuickGenerator({ setConfig }) {
 
     compact: [
       { id: "hero", enabled: true, label: "Inicio" },
-      { id: "services", enabled: true, label: "Servicios" },
       { id: "testimonials", enabled: true, label: "Opiniones" },
-      { id: "prices", enabled: true, label: "Precios" },
+      { id: "prices", enabled: true, label: "Servicios" },
       { id: "booking", enabled: true, label: "Reservar" },
       { id: "photoStrip", enabled: false, label: "Galería" },
     ],
@@ -1549,44 +1513,7 @@ function QuickGenerator({ setConfig }) {
             imageSrc: heroImageByStyle[form.styleVariant],
           },
 
-          services: {
-            ...(prev?.copy?.services || {}),
-            kicker: "Servicios",
-            title: copy.servicesTitle,
-            desc: copy.servicesDesc,
-            items: [
-              {
-                title:
-                  form.styleVariant === "classic"
-                    ? "Corte clásico"
-                    : "Corte personalizado",
-                desc:
-                  form.styleVariant === "classic"
-                    ? "Técnica tradicional con acabado limpio y profesional."
-                    : "Adaptado a tu estilo, facciones y rutina diaria.",
-              },
-              {
-                title:
-                  form.styleVariant === "urban"
-                    ? "Fade / degradado"
-                    : "Barba y perfilado",
-                desc:
-                  form.styleVariant === "urban"
-                    ? "Transiciones limpias y acabado moderno."
-                    : "Definición, recorte y limpieza para un look completo.",
-              },
-              {
-                title:
-                  form.styleVariant === "premium"
-                    ? "Corte + barba"
-                    : "Arreglo completo",
-                desc:
-                  form.styleVariant === "premium"
-                    ? "Servicio completo para una imagen impecable."
-                    : "Una opción completa para salir perfecto.",
-              },
-            ],
-          },
+          
 
           testimonials: {
             ...(prev?.copy?.testimonials || {}),
@@ -1628,12 +1555,12 @@ function QuickGenerator({ setConfig }) {
 
           prices: {
             ...(prev?.copy?.prices || {}),
-            kicker: "Precios",
+            kicker: "Servicios y precios",
             title:
               form.layoutVariant === "pricesFirst"
-                ? "Precios visibles desde el primer momento."
-                : "Tarifas claras, sin complicaciones.",
-            desc: "Elige tu servicio y reserva en un momento.",
+                ? "Elige tu servicio desde el primer momento."
+                : "Todo lo que necesitas para salir impecable.",
+            desc: "Servicios claros, tarifas claras y reserva rápida.",
             items: [
               {
                 price: form.styleVariant === "premium" ? "18€" : "15€",
