@@ -1,7 +1,13 @@
 import Container from "../Container.jsx";
 import Button from "../ui/Button.jsx";
+import { useSiteConfig } from "../../context/SiteConfigContext.jsx";
 
 export default function HeroSection({ brand, data }) {
+  const { config } = useSiteConfig();
+  const { links } = config;
+
+  const booking = resolveBookingLink(config, data, links);
+
   return (
     <section
       id="hero"
@@ -33,13 +39,16 @@ export default function HeroSection({ brand, data }) {
             {data.subtitle}
           </p>
 
+          {/* 🔥 BOTONES */}
           <div className="hero-full-actions">
-            <Button href={data.ctaHref} target="_blank">
-              {data.ctaText}
-            </Button>
+            {booking.href && (
+              <Button href={booking.href} target="_blank">
+                {booking.label}
+              </Button>
+            )}
 
             <Button
-              href="#services"
+              href="#prices" // 🔥 CAMBIO CLAVE
               variant="secondary"
               style={{
                 color: "#fff",
@@ -61,6 +70,51 @@ export default function HeroSection({ brand, data }) {
     </section>
   );
 }
+
+/* =========================
+   🔥 LÓGICA DE RESERVA
+========================= */
+
+function resolveBookingLink(config, data, links) {
+  const type = config?.bookingPlatform?.type || "none";
+  const url = config?.bookingPlatform?.url || "";
+
+  // 🔥 WHATSAPP SIEMPRE DISPONIBLE
+  if (type === "none") {
+    return {
+      href: links?.whatsapp || data?.ctaHref || "",
+      label: "WhatsApp",
+    };
+  }
+
+  if (type === "yeasy") {
+    return {
+      href: url,
+      label: "Reservar en Yeasy",
+    };
+  }
+
+  if (type === "booksy") {
+    return {
+      href: url,
+      label: "Reservar en Booksy",
+    };
+  }
+
+  if (type === "custom") {
+    return {
+      href: url || data?.ctaHref || "",
+      label: config?.bookingPlatform?.label || "Reservar",
+    };
+  }
+
+  return {
+    href: "",
+    label: "",
+  };
+}
+
+/* ========================= */
 
 function HeroTag({ children }) {
   return <div className="hero-full-tag">{children}</div>;
