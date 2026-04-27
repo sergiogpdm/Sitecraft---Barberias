@@ -60,11 +60,13 @@ export default function HeroSection({ brand, data }) {
             </Button>
           </div>
 
-          <div className="hero-full-trust">
-            <HeroTag>Reserva rápida</HeroTag>
-            <HeroTag>Atención directa</HeroTag>
-            <HeroTag>Corte y barba</HeroTag>
-          </div>
+          {false && (
+            <div className="hero-full-trust">
+              <HeroTag>Reserva rápida</HeroTag>
+              <HeroTag>Atención directa</HeroTag>
+              <HeroTag>Corte y barba</HeroTag>
+            </div>
+          )}
         </div>
       </Container>
     </section>

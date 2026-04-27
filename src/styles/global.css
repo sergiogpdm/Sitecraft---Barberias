@@ -1454,7 +1454,7 @@ section {
 
 @media (max-width: 700px) {
   .hero-full-bg {
-    min-height: 85vh;
+    min-height: 90vh;
   }
 
   .hero-full-subtitle {
