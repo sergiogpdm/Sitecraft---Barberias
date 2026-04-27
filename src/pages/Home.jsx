@@ -116,8 +116,9 @@ export default function Home() {
             </nav>
 
             <button
-              className="navbar-pro-toggle mobile-only"
+              className={`navbar-pro-toggle mobile-only ${menuOpen ? "is-open" : ""}`}
               onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             >
               <span />
               <span />
@@ -125,19 +126,65 @@ export default function Home() {
             </button>
           </div>
 
-          {menuOpen && (
-            <div className="navbar-pro-mobile-panel mobile-only">
-              {enabledSections.map((section) => (
+          <div
+            className={`mobile-drawer-overlay mobile-only ${menuOpen ? "is-open" : ""}`}
+            onClick={() => setMenuOpen(false)}
+          >
+            <aside
+              className={`mobile-drawer ${menuOpen ? "is-open" : ""}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mobile-drawer-head">
                 <a
-                  key={section.id}
-                  href={`#${section.id}`}
+                  href="#hero"
+                  className="mobile-drawer-brand"
                   onClick={() => setMenuOpen(false)}
                 >
-                  {section.label}
+                  <div className="mobile-drawer-logo">
+                    {brand.logoImage ? (
+                      <img src={brand.logoImage} alt={brand.name} />
+                    ) : (
+                      <span>{brand.emojiLogo}</span>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className="mobile-drawer-name">{brand.name}</div>
+                    <div className="mobile-drawer-sub">Menú</div>
+                  </div>
                 </a>
-              ))}
-            </div>
-          )}
+              </div>
+
+              <div className="mobile-drawer-body">
+                <div className="mobile-drawer-label">Secciones</div>
+
+                <nav className="mobile-drawer-links">
+                  {enabledSections.map((section) => (
+                    <a
+                      key={section.id}
+                      href={`#${section.id}`}
+                      className="mobile-drawer-link"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {section.label}
+                    </a>
+                  ))}
+
+                  {layout.showNavbarCta && navbarBookingLink.href && (
+                    <a
+                      href={navbarBookingLink.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`mobile-drawer-cta booking-platform-btn booking-platform-btn-${navbarBookingLink.platform}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {navbarBookingLink.label}
+                    </a>
+                  )}
+                </nav>
+              </div>
+            </aside>
+          </div>
         </Container>
       </header>
 

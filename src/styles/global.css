@@ -1349,6 +1349,257 @@ section {
 }
 
 /* =========================
+   Navbar mobile menu upgrade
+========================= */
+
+.navbar-pro-mobile-panel {
+  padding: 0 0 18px;
+}
+
+.navbar-pro-mobile-links {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, white 24%);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 92%, transparent),
+      color-mix(in srgb, var(--card) 86%, transparent)
+    );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  box-shadow:
+    0 22px 46px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.navbar-pro-mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 16px;
+  color: var(--text);
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.navbar-pro-mobile-link::after {
+  content: "→";
+  opacity: 0.45;
+}
+
+.navbar-pro-mobile-panel .booking-platform-btn {
+  width: 100%;
+  min-width: 0;
+  height: 54px;
+  border-radius: 16px;
+  margin-top: 8px;
+}
+
+/* =========================
+   Mobile drawer menu
+========================= */
+
+.navbar-pro-toggle {
+  position: relative;
+  z-index: 120;
+}
+
+.navbar-pro-toggle span {
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.navbar-pro-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-pro-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-pro-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  opacity: 0;
+  pointer-events: none;
+
+  background: rgba(0, 0, 0, 0.52);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  transition: opacity 0.28s ease;
+}
+
+.mobile-drawer-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: min(86vw, 360px);
+  height: 100vh;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 96%, white 4%),
+      color-mix(in srgb, var(--card) 96%, transparent)
+    );
+
+  border-left: 1px solid color-mix(in srgb, var(--border) 75%, white 25%);
+
+  box-shadow:
+    -24px 0 60px rgba(0,0,0,0.42),
+    inset 1px 0 0 rgba(255,255,255,0.04);
+
+  transform: translateX(100%);
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+
+  overflow-y: auto;
+}
+
+.mobile-drawer.is-open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-head {
+  min-height: 76px;
+  padding: 14px 72px 14px 16px;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 75%, white 25%);
+}
+
+.mobile-drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.mobile-drawer-logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: color-mix(in srgb, var(--accentA) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 75%, white 25%);
+  flex-shrink: 0;
+}
+
+.mobile-drawer-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mobile-drawer-logo span {
+  font-size: 22px;
+}
+
+.mobile-drawer-name {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-drawer-sub {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mobile-drawer-body {
+  padding: 18px 16px 28px;
+}
+
+.mobile-drawer-label {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.mobile-drawer-links {
+  display: grid;
+  gap: 10px;
+}
+
+.mobile-drawer-link {
+  min-height: 50px;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 82%, white 8%);
+  border: 1px solid color-mix(in srgb, var(--border) 74%, white 26%);
+
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 750;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.mobile-drawer-link::after {
+  content: "→";
+  opacity: 0.45;
+  font-weight: 900;
+}
+
+.mobile-drawer-link:hover {
+  background: color-mix(in srgb, var(--accentA) 13%, var(--surface));
+  border-color: color-mix(in srgb, var(--accentA) 28%, var(--border));
+}
+
+.mobile-drawer-cta {
+  width: 100%;
+  min-width: 0;
+  height: 54px;
+  margin-top: 8px;
+  border-radius: 14px;
+}
+
+/* =========================
    Hero full background
 ========================= */
 
@@ -2049,7 +2300,7 @@ body::after {
 .floating-whatsapp-btn {
   position: fixed;
   right: 18px;
-  z-index: 50;
+  z-index: 40;
 
   display: inline-flex;
   align-items: center;
