@@ -92,7 +92,7 @@ export const siteConfig = {
       "subtitle": "Un espacio pensado para quienes valoran el detalle, la precisión y un servicio a la altura.",
       "ctaText": "Reservar por WhatsApp",
       "ctaHref": "",
-      "imageSrc": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=80"
+      "imageSrc": "/fondos/fondo_id21.webp"
     },
     "services": {
       "kicker": "Servicios",
