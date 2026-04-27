@@ -77,7 +77,13 @@ export default function Home() {
 
       {/* NAVBAR */}
       <header className="navbar-pro" style={navbarStyle}>
-        <Container wide>
+        <Container
+          wide
+          style={{
+            maxWidth: "1600px",
+            padding: "0 40px",
+          }}
+        >
           <div className="navbar-pro-inner">
             <a href="#hero" className="navbar-pro-brand">
               <div className="navbar-pro-brand-mark">
