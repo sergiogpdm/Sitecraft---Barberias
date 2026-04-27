@@ -15,7 +15,6 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // 🔥 NAVBAR CONTROLADO (NO DEPENDE DE LABELS VIEJOS)
   const enabledSections = [
     { id: "hero", label: "Inicio" },
     { id: "prices", label: "Servicios" },
@@ -28,20 +27,18 @@ export default function Home() {
     )
   );
 
-  const externalBookingLink = resolveBookingLink(config, copy?.booking);
+  const externalBookingLink = resolveBookingLink(config);
 
   const navbarBookingLink = externalBookingLink.href
     ? externalBookingLink
     : {
-        href: links?.whatsapp || copy?.booking?.ctaHref || "",
+        href: links?.whatsapp || "",
         label: "Reservar",
         platform: "custom",
       };
 
   useEffect(() => {
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 24);
-    };
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -63,16 +60,15 @@ export default function Home() {
         : `1px solid ${makeAlphaColor(borderColor, 0.18)}`,
       boxShadow: isScrolled
         ? "0 12px 34px rgba(0,0,0,0.10)"
-        : "0 0 0 rgba(0,0,0,0)",
+        : "none",
       backdropFilter: isScrolled ? "blur(16px)" : "blur(10px)",
-      WebkitBackdropFilter: isScrolled ? "blur(16px)" : "blur(10px)",
-      transition:
-        "background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, backdrop-filter 0.28s ease",
+      transition: "all 0.25s ease",
     };
   }, [isScrolled, bgColor, cardColor, borderColor]);
 
   return (
     <main style={{ minHeight: "100vh" }}>
+      {/* BACKGROUND */}
       <div className="site-bg-glow-left" />
       <div className="site-bg-glow-right" />
       <div className="site-bg-glow-top" />
@@ -80,40 +76,29 @@ export default function Home() {
       <div className="site-bg-vignette" />
 
       {/* NAVBAR */}
-      <header
-        className={`navbar-pro ${isScrolled ? "is-scrolled" : "is-top"}`}
-        style={navbarStyle}
-      >
+      <header className="navbar-pro" style={navbarStyle}>
         <Container wide>
           <div className="navbar-pro-inner">
             <a href="#hero" className="navbar-pro-brand">
               <div className="navbar-pro-brand-mark">
                 {brand.logoImage ? (
-                  <img
-                    src={brand.logoImage}
-                    alt={brand.name}
-                    className="navbar-pro-logo-image"
-                  />
+                  <img src={brand.logoImage} alt={brand.name} />
                 ) : (
-                  <span className="navbar-pro-logo-emoji">
-                    {brand.emojiLogo}
-                  </span>
+                  <span>{brand.emojiLogo}</span>
                 )}
               </div>
 
-              <div className="navbar-pro-brand-text">
+              <div>
                 <div className="navbar-pro-brand-name">{brand.name}</div>
-                <div className="navbar-pro-brand-tagline">{brand.tagline}</div>
+                <div className="navbar-pro-brand-tagline">
+                  {brand.tagline}
+                </div>
               </div>
             </a>
 
             <nav className="navbar-pro-links desktop-only">
               {enabledSections.map((section) => (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className="navbar-pro-link"
-                >
+                <a key={section.id} href={`#${section.id}`}>
                   {section.label}
                 </a>
               ))}
@@ -133,7 +118,6 @@ export default function Home() {
             <button
               className="navbar-pro-toggle mobile-only"
               onClick={() => setMenuOpen((v) => !v)}
-              aria-label="Abrir menú"
             >
               <span />
               <span />
@@ -143,31 +127,15 @@ export default function Home() {
 
           {menuOpen && (
             <div className="navbar-pro-mobile-panel mobile-only">
-              <div className="navbar-pro-mobile-links">
-                {enabledSections.map((section) => (
-                  <a
-                    key={section.id}
-                    href={`#${section.id}`}
-                    className="navbar-pro-mobile-link"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {section.label}
-                  </a>
-                ))}
-
-                {layout.showNavbarCta && navbarBookingLink.href && (
-                  <div style={{ marginTop: 8 }}>
-                    <a
-                      href={navbarBookingLink.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`booking-platform-btn booking-platform-btn-${navbarBookingLink.platform}`}
-                    >
-                      {navbarBookingLink.label}
-                    </a>
-                  </div>
-                )}
-              </div>
+              {enabledSections.map((section) => (
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {section.label}
+                </a>
+              ))}
             </div>
           )}
         </Container>
@@ -175,62 +143,56 @@ export default function Home() {
 
       {/* HERO */}
       <div id="hero">
-        {enabledSections.some((s) => s.id === "hero") && (
-          <HeroSection brand={brand} data={copy.hero} />
-        )}
+        <HeroSection brand={brand} data={copy.hero} />
       </div>
 
-      {/* SERVICIOS (ANTES PRECIOS) */}
+      {/* SERVICIOS */}
       <div id="prices">
-        {enabledSections.some((s) => s.id === "prices") && (
-          <PricesSection data={copy.prices} />
-        )}
+        <PricesSection data={copy.prices} />
       </div>
 
-      {/* TESTIMONIOS + GALERÍA */}
-      {(enabledSections.some((s) => s.id === "testimonials") ||
-        enabledSections.some((s) => s.id === "photoStrip")) && (
-        <section style={{ padding: "110px 0 95px" }}>
-          <Container wide>
-            <div className="testimonials-gallery-split">
-              <div id="photoStrip">
-                {enabledSections.some((s) => s.id === "photoStrip") && (
-                  <PhotoStripSection data={copy.photoStrip} compact />
-                )}
-              </div>
-
-              <div id="testimonials">
-                {enabledSections.some((s) => s.id === "testimonials") && (
-                  <TestimonialsSection data={copy.testimonials} compact />
-                )}
-              </div>
-            </div>
-          </Container>
-        </section>
-      )}
+      {/* TESTIMONIOS + GALERIA */}
+      <section style={{ padding: "110px 0 95px" }}>
+        <Container wide>
+          <div className="testimonials-gallery-split">
+            <PhotoStripSection data={copy.photoStrip} compact />
+            <TestimonialsSection data={copy.testimonials} compact />
+          </div>
+        </Container>
+      </section>
 
       {/* BOOKING */}
       <div id="booking">
-        {enabledSections.some((s) => s.id === "booking") && (
-          <BookingSection data={copy.booking} />
-        )}
+        <BookingSection data={copy.booking} />
       </div>
 
       <Footer data={copy.footer} contact={contact} />
 
       {/* FLOATING BOOKING */}
-      {layout.showFloatingBooking &&
-        externalBookingLink.href &&
-        config?.bookingPlatform?.type !== "none" && (
-          <a
-            href={externalBookingLink.href}
-            target="_blank"
-            rel="noreferrer"
-            className={`floating-booking-btn floating-booking-btn-${externalBookingLink.platform}`}
-          >
+      {layout.showFloatingBooking && externalBookingLink.href && (
+        <a
+          href={externalBookingLink.href}
+          target="_blank"
+          rel="noreferrer"
+          className={`floating-booking-btn floating-booking-btn-${externalBookingLink.platform}`}
+        >
+          <span className="floating-btn-text">
             {externalBookingLink.label}
-          </a>
-        )}
+          </span>
+
+          <span className="floating-btn-icon">
+            {externalBookingLink.platform === "booksy" && (
+              <img src="/logos/booksy.png" />
+            )}
+            {externalBookingLink.platform === "yeasy" && (
+              <img src="/logos/yeasy.png" />
+            )}
+            {externalBookingLink.platform === "custom" && (
+              <img src="/logos/custom.png" />
+            )}
+          </span>
+        </a>
+      )}
 
       {/* FLOATING WHATSAPP */}
       {layout.showFloatingWhatsApp && links.whatsapp && (
@@ -239,45 +201,40 @@ export default function Home() {
           target="_blank"
           rel="noreferrer"
           className="floating-whatsapp-btn"
-          style={{ bottom: 18, zIndex: 40 }}
         >
-          WhatsApp
+          <span className="floating-btn-text">WhatsApp</span>
+
+          <span className="floating-btn-icon">
+            <img src="/logos/whatsapp.png" />
+          </span>
         </a>
       )}
     </main>
   );
 }
 
+/* helpers */
+
 function makeAlphaColor(color, alpha) {
   if (!color) return `rgba(0,0,0,${alpha})`;
 
-  const c = String(color).trim();
-
-  if (c.startsWith("#")) {
-    let hex = c.slice(1);
-
-    if (hex.length === 3) {
-      hex = hex.split("").map((x) => x + x).join("");
-    }
-
-    if (hex.length !== 6) return color;
-
-    const r = parseInt(hex.slice(0, 2), 16);
-    const g = parseInt(hex.slice(2, 4), 16);
-    const b = parseInt(hex.slice(4, 6), 16);
-
+  if (color.startsWith("#")) {
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
   return color;
 }
 
-function resolveBookingLink(config, bookingData) {
+function resolveBookingLink(config) {
   const type = config?.bookingPlatform?.type || "none";
   const url = config?.bookingPlatform?.url || "";
 
   if (type === "yeasy") return { href: url, label: "Yeasy", platform: "yeasy" };
   if (type === "booksy") return { href: url, label: "Booksy", platform: "booksy" };
+
   if (type === "custom")
     return {
       href: url,

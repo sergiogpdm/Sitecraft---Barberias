@@ -1979,36 +1979,25 @@ body::after {
 
 
 
-.floating-booking-btn:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 24px 42px rgba(0,0,0,0.28),
-    0 0 0 1px color-mix(in srgb, var(--accentA) 18%, transparent);
-}
-
-@media (max-width: 700px) {
-  .floating-booking-btn {
-    right: 16px;
-    bottom: 82px;
-    min-width: 132px;
-    height: 48px;
-    font-size: 14px;
-    padding: 0 16px;
-  }
-}
+/* =========================
+   Booking platform buttons
+========================= */
 
 .booking-platform-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   min-width: 180px;
   height: 52px;
   padding: 0 18px;
+
   border-radius: 999px;
   text-decoration: none;
   font-weight: 800;
   font-size: 15px;
   letter-spacing: -0.01em;
+
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -2022,31 +2011,27 @@ body::after {
   transform: translateY(-3px);
 }
 
-/* WhatsApp */
 .booking-platform-btn-whatsapp {
   color: #111;
-  background: #25D366;
+  background: #25d366;
   border: 1px solid #1ebe5a;
   box-shadow: 0 14px 30px rgba(37, 211, 102, 0.28);
 }
 
-/* Yeasy */
 .booking-platform-btn-yeasy {
   color: #fff;
-  background: linear-gradient(135deg, #5b6cff, #7c4dff);
+  background: linear-gradient(135deg, #111, #000);
   border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 14px 30px rgba(91, 108, 255, 0.28);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
 }
 
-/* Booksy */
 .booking-platform-btn-booksy {
   color: #fff;
-  background: linear-gradient(135deg, #0ba2add2, #0ba3ad);
+  background: #0ba3ad;
   border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 14px 30px rgba(17, 24, 39, 0.28);
+  box-shadow: 0 14px 30px rgba(11, 163, 173, 0.28);
 }
 
-/* Custom */
 .booking-platform-btn-custom {
   color: #111;
   background: var(--accentA);
@@ -2056,88 +2041,15 @@ body::after {
     0 0 0 1px color-mix(in srgb, var(--accentA) 10%, transparent);
 }
 
-/* Floating booking button */
-.floating-booking-btn {
-  position: fixed;
-  right: 18px;
-  bottom: 86px;
-  z-index: 45;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 148px;
-  height: 52px;
-  padding: 0 18px;
-
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    opacity 0.25s ease;
-}
-
-.floating-booking-btn:hover {
-  transform: translateY(-3px);
-}
-
-.floating-booking-btn-whatsapp {
-  color: #111;
-  background: #25D366;
-  border: 1px solid #1ebe5a;
-  box-shadow: 0 18px 34px rgba(37, 211, 102, 0.28);
-}
-
-.floating-booking-btn-yeasy {
-  color: #fff;
-  background: linear-gradient(135deg, #5b6cff, #7c4dff);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 18px 34px rgba(91, 108, 255, 0.28);
-}
-
-.floating-booking-btn-booksy {
-  color: #fff;
-  background: linear-gradient(135deg, #0ba3ad, #0ba3ad);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 18px 34px rgba(17, 24, 39, 0.28);
-}
-
-.floating-booking-btn-custom {
-  color: #111;
-  background: var(--accentA);
-  border: 1px solid color-mix(in srgb, var(--accentA) 70%, black 30%);
-  box-shadow:
-    0 18px 34px rgba(0,0,0,0.22),
-    0 0 0 1px color-mix(in srgb, var(--accentA) 10%, transparent);
-}
-
-@media (max-width: 700px) {
-  .floating-booking-btn {
-    right: 16px;
-    bottom: 82px;
-    min-width: 132px;
-    height: 48px;
-    font-size: 14px;
-    padding: 0 16px;
-  }
-
-  .booking-platform-btn {
-    min-width: 160px;
-    height: 48px;
-    font-size: 14px;
-  }
-}
+/* =========================
+   Floating buttons
+========================= */
 
 .floating-booking-btn,
 .floating-whatsapp-btn {
   position: fixed;
   right: 18px;
+  z-index: 50;
 
   display: inline-flex;
   align-items: center;
@@ -2153,10 +2065,24 @@ body::after {
   font-size: 15px;
   letter-spacing: -0.01em;
 
+  overflow: hidden;
+
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
     opacity 0.25s ease;
+}
+
+.floating-booking-btn {
+  bottom: 90px;
+}
+
+.floating-whatsapp-btn {
+  bottom: 18px;
+  background: #25d366;
+  color: #111;
+  border: 1px solid #1ebe5a;
+  box-shadow: 0 18px 34px rgba(37, 211, 102, 0.28);
 }
 
 .floating-booking-btn:hover,
@@ -2164,20 +2090,99 @@ body::after {
   transform: translateY(-3px);
 }
 
-.floating-whatsapp-btn {
-  background: #25D366;
-  color: #111;
-  border: 1px solid #1ebe5a;
-  box-shadow: 0 18px 34px rgba(37, 211, 102, 0.28);
+/* colores escritorio para el botón de reserva */
+.floating-booking-btn-yeasy {
+  color: #fff;
+  background: linear-gradient(135deg, #111, #000);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 34px rgba(0,0,0,0.28);
 }
+
+.floating-booking-btn-booksy {
+  color: #fff;
+  background: #0ba3ad;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 34px rgba(11, 163, 173, 0.28);
+}
+
+.floating-booking-btn-custom {
+  color: #111;
+  background: var(--accentA);
+  border: 1px solid color-mix(in srgb, var(--accentA) 70%, black 30%);
+  box-shadow:
+    0 18px 34px rgba(0,0,0,0.22),
+    0 0 0 1px color-mix(in srgb, var(--accentA) 10%, transparent);
+}
+
+/* texto/icono */
+.floating-btn-text {
+  display: inline-flex;
+}
+
+.floating-btn-icon {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-btn-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* =========================
+   Mobile: app icon style
+========================= */
 
 @media (max-width: 700px) {
   .floating-booking-btn,
   .floating-whatsapp-btn {
     right: 16px;
-    width: 160px;
-    height: 48px;
-    font-size: 14px;
-    padding: 0 16px;
+
+    width: 62px;
+    min-width: 62px;
+    height: 62px;
+    padding: 0;
+
+    border-radius: 18px;
+  }
+
+  .floating-booking-btn {
+    bottom: 92px;
+  }
+
+  .floating-whatsapp-btn {
+    bottom: 18px !important;
+  }
+
+  .floating-btn-text {
+    display: none;
+  }
+
+  .floating-btn-icon {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .floating-whatsapp-btn .floating-btn-icon img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+  }
+
+  .floating-booking-btn .floating-btn-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .floating-booking-btn-yeasy,
+  .floating-booking-btn-booksy,
+  .floating-booking-btn-custom {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.28);
   }
 }
