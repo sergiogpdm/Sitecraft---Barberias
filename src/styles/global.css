@@ -271,7 +271,7 @@ section {
 }
 
 /* =========================
-   Prices showcase cards (THEME SAFE)
+   Prices showcase cards
 ========================= */
 
 .prices-showcase-grid {
@@ -283,20 +283,15 @@ section {
   align-items: stretch;
 }
 
-/* CARD BASE */
 .price-showcase-card {
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-
   background: var(--card);
   border: 1px solid var(--border);
-
   box-shadow:
-    0 var(--shadowY) var(--shadowBlur)
-    rgba(0, 0, 0, var(--shadowOpacity)),
-    inset 0 1px 0 color-mix(in srgb, var(--text) 6%, transparent);
-
+    0 var(--shadowY) var(--shadowBlur) rgba(0, 0, 0, var(--shadowOpacity)),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 7%, transparent);
   transition:
     transform 0.28s ease,
     border-color 0.28s ease,
@@ -305,34 +300,26 @@ section {
 
 .price-showcase-card:hover {
   transform: translateY(-6px);
-
-  border-color: color-mix(in srgb, var(--accentA) 35%, var(--border));
-
+  border-color: color-mix(in srgb, var(--accentA) 38%, var(--border));
   box-shadow:
-    0 calc(var(--shadowY) + 10px)
-      calc(var(--shadowBlur) + 18px)
+    0 calc(var(--shadowY) + 10px) calc(var(--shadowBlur) + 18px)
       rgba(0, 0, 0, calc(var(--shadowOpacity) + 0.06)),
-    0 0 0 1px color-mix(in srgb, var(--accentA) 16%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--accentA) 18%, transparent);
 }
 
 .price-showcase-card.is-featured {
-  border-color: color-mix(in srgb, var(--accentA) 42%, var(--border));
+  border-color: color-mix(in srgb, var(--accentA) 45%, var(--border));
 }
-
-/* =========================
-   MEDIA
-========================= */
 
 .price-showcase-media {
   position: relative;
   height: 290px;
   overflow: hidden;
-
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--accentA) 65%, var(--card)),
-      color-mix(in srgb, var(--accentB) 50%, var(--surface))
+      color-mix(in srgb, var(--accentCard) 88%, var(--card)),
+      color-mix(in srgb, var(--accentB) 70%, var(--surface))
     );
 }
 
@@ -342,7 +329,6 @@ section {
   height: 100%;
   object-fit: cover;
   display: block;
-
   transition: transform 0.5s ease;
 }
 
@@ -354,30 +340,23 @@ section {
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--accentA) 72%, var(--card)),
-      color-mix(in srgb, var(--accentB) 58%, var(--surface))
+      color-mix(in srgb, var(--accentCard) 90%, var(--card)),
+      color-mix(in srgb, var(--accentB) 72%, var(--surface))
     );
 }
 
-/* overlay adaptable */
 .price-showcase-overlay {
   position: absolute;
   inset: 0;
-
   background:
     linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--bg) 6%, transparent),
-      transparent 45%,
-      color-mix(in srgb, var(--bg) 32%, transparent)
+      transparent 0%,
+      color-mix(in srgb, var(--bg) 6%, transparent) 42%,
+      color-mix(in srgb, var(--bg) 38%, transparent) 100%
     );
-
   pointer-events: none;
 }
-
-/* =========================
-   BADGE
-========================= */
 
 .price-showcase-topbar {
   position: absolute;
@@ -393,29 +372,19 @@ section {
   display: inline-flex;
   align-items: center;
   padding: 7px 11px;
-
   border-radius: 999px;
-
-  background: color-mix(in srgb, var(--accentA) 85%, var(--card));
-  border: 1px solid color-mix(in srgb, var(--accentA) 55%, var(--border));
-
-  color: color-mix(in srgb, var(--bg) 90%, black);
-
+  background: var(--accentCard);
+  border: 1px solid color-mix(in srgb, var(--accentCard) 65%, var(--border));
+  color: var(--accentCardText);
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, var(--shadowOpacity));
 }
-
-/* =========================
-   BODY
-========================= */
 
 .price-showcase-body {
   padding: 22px 22px 20px;
-
   background:
     linear-gradient(
       180deg,
@@ -436,7 +405,6 @@ section {
   font-size: clamp(24px, 2.2vw, 34px);
   line-height: 1.02;
   letter-spacing: -0.04em;
-
   color: var(--text);
 }
 
@@ -445,7 +413,6 @@ section {
   line-height: 1;
   letter-spacing: -0.05em;
   font-weight: 900;
-
   color: var(--text);
   white-space: nowrap;
 }
@@ -456,7 +423,6 @@ section {
 
 .price-showcase-desc {
   margin: 14px 0 0;
-
   color: var(--muted);
   font-size: 15px;
   line-height: 1.75;
@@ -466,31 +432,20 @@ section {
   margin-top: 18px;
   width: 72px;
   height: 2px;
-
   border-radius: 999px;
-
   background: linear-gradient(
     90deg,
     var(--accentA),
     color-mix(in srgb, var(--accentA) 0%, transparent)
   );
-
   opacity: 0.95;
 }
-
-/* =========================
-   CTA
-========================= */
 
 .prices-band-cta {
   margin-top: 30px;
   display: flex;
   justify-content: center;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 980px) {
   .prices-showcase-grid {
@@ -616,7 +571,7 @@ section {
 }
 
 /* =========================
-   Booking redesign editorial (THEME SAFE)
+   Booking redesign editorial
 ========================= */
 
 #booking {
@@ -634,9 +589,7 @@ section {
   overflow: visible;
 }
 
-/* =========================
-   TARJETAS LATERALES
-========================= */
+/* LATERALES */
 
 .booking-side-card {
   position: absolute;
@@ -647,14 +600,11 @@ section {
   overflow: hidden;
   z-index: 1;
   opacity: 0.92;
-
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 12%);
-
+  background: var(--card);
+  border: 1px solid var(--border);
   box-shadow:
     0 30px 80px rgba(0, 0, 0, var(--shadowOpacity)),
-    inset 0 1px 0 color-mix(in srgb, var(--text) 7%, transparent);
-
+    inset 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent);
   transition: all 0.5s ease;
 }
 
@@ -663,7 +613,7 @@ section {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: brightness(0.78) saturate(0.92);
+  filter: brightness(0.78) saturate(0.95);
 }
 
 .booking-side-card::after {
@@ -674,8 +624,8 @@ section {
     linear-gradient(
       to right,
       color-mix(in srgb, var(--bg) 78%, transparent),
-      color-mix(in srgb, var(--bg) 24%, transparent) 42%,
-      color-mix(in srgb, var(--bg) 82%, transparent)
+      color-mix(in srgb, var(--bg) 22%, transparent) 42%,
+      color-mix(in srgb, var(--bg) 84%, transparent)
     );
 }
 
@@ -684,8 +634,8 @@ section {
     linear-gradient(
       to left,
       color-mix(in srgb, var(--bg) 78%, transparent),
-      color-mix(in srgb, var(--bg) 24%, transparent) 42%,
-      color-mix(in srgb, var(--bg) 82%, transparent)
+      color-mix(in srgb, var(--bg) 22%, transparent) 42%,
+      color-mix(in srgb, var(--bg) 84%, transparent)
     );
 }
 
@@ -699,9 +649,7 @@ section {
   transform: translate(15%, -50%) scale(1.05);
 }
 
-/* =========================
-   CARD CENTRAL
-========================= */
+/* CARD CENTRAL */
 
 .booking-convert-card {
   position: relative;
@@ -711,25 +659,17 @@ section {
   margin: 0 auto;
   padding: 48px 34px 34px;
   border-radius: 34px;
-
   background:
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--card) 94%, var(--surface)),
       color-mix(in srgb, var(--card) 88%, var(--bg))
     );
-
   color: var(--text);
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
   border: 1px solid color-mix(in srgb, var(--border) 80%, var(--text) 14%);
-
   box-shadow:
     0 30px 80px rgba(0, 0, 0, var(--shadowOpacity)),
     inset 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent);
-
   text-align: center;
   overflow: hidden;
 }
@@ -752,9 +692,7 @@ section {
   z-index: 1;
 }
 
-/* =========================
-   KICKER + TITLES
-========================= */
+/* TEXTOS */
 
 .booking-convert-kicker-wrap {
   display: flex;
@@ -775,26 +713,21 @@ section {
 .booking-convert-title {
   margin: 0 auto;
   max-width: 720px;
-
   font-size: clamp(42px, 6vw, 78px);
   line-height: 0.94;
   letter-spacing: -0.05em;
-
   color: var(--text);
 }
 
 .booking-convert-desc {
   margin: 20px auto 0;
   max-width: 620px;
-
   color: var(--muted);
   font-size: 18px;
   line-height: 1.75;
 }
 
-/* =========================
-   INFO CARDS
-========================= */
+/* TARJETAS INTERNAS */
 
 .booking-convert-points-v2 {
   margin-top: 34px;
@@ -807,84 +740,73 @@ section {
   padding: 22px 18px 20px;
   min-height: 182px;
   border-radius: 24px;
-
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--accentA) 88%, var(--card)),
-      color-mix(in srgb, var(--accentB) 74%, var(--card))
+      var(--accentCard),
+      color-mix(in srgb, var(--accentCard) 70%, var(--accentB))
     );
-
-  border: 1px solid color-mix(in srgb, var(--accentA) 42%, var(--border));
-
+  border: 1px solid color-mix(in srgb, var(--accentCard) 52%, var(--border));
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--text) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--accentCardText) 12%, transparent),
     0 16px 34px rgba(0, 0, 0, calc(var(--shadowOpacity) + 0.04));
-
-  color: #fff;
-
+  color: var(--accentCardText);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 
-/* Icono */
+/* ICONO */
+
 .booking-point-icon {
   width: 50px;
   height: 50px;
   border-radius: 999px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-bottom: 14px;
   font-size: 24px;
-
-  background: color-mix(in srgb, var(--bg) 22%, transparent);
-  border: 1px solid color-mix(in srgb, #fff 16%, transparent);
-
-  color: #fff;
+  background: color-mix(in srgb, var(--accentCardText) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accentCardText) 18%, transparent);
+  color: var(--accentCardText);
 }
 
-/* Textos dentro de las tarjetas rojas/acento */
 .booking-convert-point-label {
   font-size: 12px;
-  color: color-mix(in srgb, #fff 88%, var(--accentA));
+  color: var(--accentCardText);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 900;
   margin-bottom: 8px;
+  opacity: 0.9;
 }
 
 .booking-convert-point-value {
   font-weight: 900;
   font-size: 18px;
   line-height: 1.35;
-  color: #fff;
+  color: var(--accentCardText);
 }
 
 .booking-convert-point-sub {
   margin-top: 10px;
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--accentCardText);
+  opacity: 0.86;
   max-width: 180px;
 }
 
-/* =========================
-   DIVIDER
-========================= */
+/* DIVIDER */
 
 .booking-actions-divider {
   position: relative;
   margin: 28px 0 22px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   color: var(--accentA);
 }
 
@@ -907,12 +829,9 @@ section {
 .booking-actions-divider span {
   font-size: 18px;
   line-height: 1;
-  opacity: 0.95;
 }
 
-/* =========================
-   ACTION BUTTONS
-========================= */
+/* BOTONES */
 
 .booking-convert-actions-v2 {
   margin-top: 0;
@@ -931,32 +850,25 @@ section {
   font-weight: 900;
 }
 
-/* Botón secundario adaptado */
 .booking-platform-btn-secondary {
-  color: var(--text);
-
+  color: var(--buttonSecondaryText);
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--surface) 94%, var(--card)),
-      color-mix(in srgb, var(--card) 96%, var(--bg))
+      var(--buttonSecondaryBg),
+      color-mix(in srgb, var(--buttonSecondaryBg) 82%, var(--bg))
     );
-
-  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 18%);
-
+  border: 1px solid color-mix(in srgb, var(--buttonSecondaryBg) 65%, var(--border));
   box-shadow:
     0 16px 34px rgba(0, 0, 0, var(--shadowOpacity)),
-    inset 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent);
+    inset 0 1px 0 color-mix(in srgb, var(--buttonSecondaryText) 8%, transparent);
 }
 
 .booking-platform-btn-secondary:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--accentA) 32%, var(--border));
 }
 
-/* =========================
-   LOCATION
-========================= */
+/* UBICACIÓN */
 
 .booking-convert-note-v2 {
   margin-top: 18px;
@@ -969,23 +881,18 @@ section {
   align-items: center;
   justify-content: center;
   gap: 8px;
-
   min-height: 44px;
   padding: 0 18px;
   border-radius: 999px;
-
-  color: var(--text);
-  background: color-mix(in srgb, var(--surface) 70%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, var(--text) 14%);
-
+  color: var(--accentText);
+  background: color-mix(in srgb, var(--accentA) 78%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--accentA) 54%, var(--border));
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.08em;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media (max-width: 1200px) {
   .booking-side-card {
@@ -1030,133 +937,176 @@ section {
 }
 
 /* =========================
-   Footer clean v2
+   Footer clean v5
 ========================= */
+
+.footer-clean {
+  position: relative;
+  overflow: hidden;
+  padding: 76px 0 32px;
+
+  background: color-mix(in srgb, var(--bg) 86%, var(--text) 14%);
+  border-top: 1px solid var(--border);
+  color: var(--text);
+
+  /* Cambia estas rutas por tus logos reales */
+  --agencyLogoDark: url("/logos/logonoosblanco.png");
+  --agencyLogoLight: url("/logos/logonoosnegro.png");
+}
 
 .footer-clean-shell {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 22px;
 }
 
-/* =========================
-   TOP
-========================= */
+/* TOP */
 
-.footer-clean-top {
+.footer-clean-main {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 28px;
+
+  padding: 26px 28px;
+  border-radius: var(--radiusLg);
+
+  background: var(--card);
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, calc(var(--shadowOpacity) * 0.9)),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 7%, transparent);
 }
 
 .footer-clean-brand {
   display: flex;
   align-items: center;
   gap: 16px;
+  min-width: 0;
 }
 
-/* LOGO CONTAINER */
 .footer-clean-mark {
+  width: 58px;
+  min-width: 58px;
+  height: 58px;
+  border-radius: 18px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
-  min-width: 54px;
-  height: 54px;
+  background: color-mix(in srgb, var(--accentCard) 18%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accentA) 30%, var(--border));
 
-  border-radius: 14px;
-
-  background: color-mix(in srgb, var(--accentA) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, calc(var(--shadowOpacity) * 0.8)),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent);
 }
 
-/* LOGO IMAGE */
 .footer-clean-logo {
-  height: 42px;
-  width: auto;
-  object-fit: contain;
-  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* EMOJI FALLBACK */
 .footer-clean-emoji {
   font-size: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 1;
 }
 
-/* TEXT */
+.footer-clean-brand-copy {
+  min-width: 0;
+}
+
 .footer-clean-name {
-  font-size: clamp(26px, 3vw, 38px);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  font-weight: 800;
   color: var(--text);
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-weight: 900;
 }
 
 .footer-clean-subtitle {
-  margin-top: 6px;
+  margin-top: 8px;
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.5;
+  font-weight: 700;
 }
 
-/* CTA */
+.footer-clean-cta {
+  flex-shrink: 0;
+}
+
 .footer-clean-cta a {
-  padding: 14px 22px;
+  min-height: 52px;
+  padding-inline: 24px;
 }
 
-/* =========================
-   GRID
-========================= */
+/* GRID */
 
 .footer-clean-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .footer-clean-col {
+  padding: 20px;
+  border-radius: 20px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, calc(var(--shadowOpacity) * 0.75)),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 7%, transparent);
+
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 12px;
+
+  min-height: unset;
 }
 
 .footer-clean-label {
+  margin-bottom: 18px;
   color: var(--accentA);
   font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-weight: 900;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
 .footer-clean-text {
-  font-size: 16px;
-  line-height: 1.6;
-  font-weight: 600;
   color: var(--text);
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 850;
+  word-break: break-word;
 }
 
 .footer-clean-link {
+  width: fit-content;
   color: var(--muted);
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.2s ease;
+  font-weight: 800;
+
+  transition:
+    color 0.22s ease,
+    transform 0.22s ease;
 }
 
 .footer-clean-link:hover {
   color: var(--accentA);
+  transform: translateX(3px);
 }
 
-/* =========================
-   BOTTOM
-========================= */
+/* BOTTOM */
 
 .footer-clean-bottom {
   display: flex;
@@ -1164,55 +1114,183 @@ section {
   align-items: center;
   gap: 18px;
 
-  padding-top: 22px;
+  padding-top: 24px;
   border-top: 1px solid var(--border);
+
   flex-wrap: wrap;
 }
 
 .footer-clean-small {
   color: var(--muted);
   font-size: 14px;
+  font-weight: 750;
+}
+
+.footer-clean-bottom-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .footer-clean-nav {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .footer-clean-nav a {
-  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 999px;
+
+  color: var(--buttonSecondaryText);
+  background: var(--buttonSecondaryBg);
+  border: 1px solid color-mix(in srgb, var(--buttonSecondaryBg) 72%, var(--border));
+
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.2s ease;
+  font-weight: 850;
+
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, calc(var(--shadowOpacity) * 0.65)),
+    inset 0 1px 0 color-mix(in srgb, var(--buttonSecondaryText) 10%, transparent);
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
 }
 
 .footer-clean-nav a:hover {
-  color: var(--accentA);
+  color: var(--buttonText);
+  background: var(--buttonBg);
+  border-color: color-mix(in srgb, var(--buttonBg) 70%, var(--border));
+  transform: translateY(-2px);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* AGENCY LOGO */
+
+.footer-agency {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+
+  text-decoration: none;
+
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, calc(var(--shadowOpacity) * 0.55)),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent);
+
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.footer-agency:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accentA) 40%, var(--border));
+  background: color-mix(in srgb, var(--accentA) 8%, var(--card));
+}
+
+.footer-agency-logo {
+  width: 142px;
+  height: 34px;
+
+  background-image: var(--agencyLogoLight);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  opacity: 1;
+}
+
+/* Fuerza logo claro si lo necesitas */
+.footer-clean.is-dark-footer .footer-agency-logo {
+  background-image: var(--agencyLogoDark);
+}
+
+/* RESPONSIVE */
 
 @media (max-width: 900px) {
+  .footer-clean {
+    padding: 56px 0 28px;
+  }
+
+  .footer-clean-main {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 22px;
+  }
+
   .footer-clean-grid {
     grid-template-columns: 1fr;
   }
 
-  .footer-clean-top {
+  .footer-clean-cta,
+  .footer-clean-cta a {
+    width: 100%;
+  }
+
+  .footer-clean-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-clean-bottom-right {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer-clean-brand {
     align-items: flex-start;
   }
 
   .footer-clean-mark {
-    min-width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 52px;
+    min-width: 52px;
+    height: 52px;
+    border-radius: 16px;
   }
 
-  .footer-clean-logo {
-    height: 36px;
+  .footer-clean-name {
+    font-size: 28px;
+  }
+
+  .footer-clean-nav {
+    width: 100%;
+  }
+
+  .footer-clean-nav a {
+    flex: 1;
+  }
+
+  .footer-agency {
+    width: 100%;
+  }
+
+  .footer-agency-logo {
+    width: 160px;
+    height: 38px;
   }
 }
 

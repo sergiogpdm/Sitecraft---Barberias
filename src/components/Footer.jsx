@@ -6,107 +6,114 @@ export default function Footer({ data, contact }) {
   const { config } = useSiteConfig();
   const { brand, links } = config;
 
+  const year = new Date().getFullYear();
+
   return (
-    <footer
-      id="footer"
-      style={{
-        padding: "70px 0 30px",
-        borderTop: "1px solid var(--border)",
-        background: "linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent), var(--surface))",
-      }}
-    >
+    <footer id="footer" className="footer-clean">
       <Container wide>
         <div className="footer-clean-shell">
-          {/* TOP */}
-          <div className="footer-clean-top">
+          <div className="footer-clean-main">
             <div className="footer-clean-brand">
-
-              {/* 🔥 LOGO / EMOJI */}
               <div className="footer-clean-mark">
-                {brand.logoImage ? (
+                {brand?.logoImage ? (
                   <img
                     src={brand.logoImage}
-                    alt={brand.name}
+                    alt={brand?.name || "Logo"}
                     className="footer-clean-logo"
                   />
                 ) : (
                   <span className="footer-clean-emoji">
-                    {brand.emojiLogo}
+                    {brand?.emojiLogo || "💈"}
                   </span>
                 )}
               </div>
 
-              <div>
+              <div className="footer-clean-brand-copy">
                 <div className="footer-clean-name">
-                  {data.title || brand.name}
+                  {data?.title || brand?.name}
                 </div>
 
-                <div className="footer-clean-subtitle">
-                  {data.subtitle}
-                </div>
+                {data?.subtitle ? (
+                  <div className="footer-clean-subtitle">{data.subtitle}</div>
+                ) : null}
               </div>
             </div>
 
-            <div className="footer-clean-cta">
-              <Button href={links.whatsapp} target="_blank" rel="noreferrer">
-                Reservar cita
-              </Button>
-            </div>
+            {links?.whatsapp ? (
+              <div className="footer-clean-cta">
+                <Button href={links.whatsapp} target="_blank" rel="noreferrer">
+                  Reservar cita
+                </Button>
+              </div>
+            ) : null}
           </div>
 
-          {/* GRID */}
           <div className="footer-clean-grid">
-            <div className="footer-clean-col">
-              <div className="footer-clean-label">Ubicación</div>
-              <div className="footer-clean-text">{contact.address}</div>
+            <FooterBlock
+              label="Ubicación"
+              value={contact?.address}
+              link={links?.maps}
+              linkLabel="Ver en Maps"
+            />
 
-              {links.maps && (
-                <a
-                  href={links.maps}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="footer-clean-link"
-                >
-                  Ver en Maps
-                </a>
-              )}
-            </div>
+            <FooterBlock label="Horario" value={contact?.hours} />
 
-            <div className="footer-clean-col">
-              <div className="footer-clean-label">Horario</div>
-              <div className="footer-clean-text">{contact.hours}</div>
-            </div>
-
-            <div className="footer-clean-col">
-              <div className="footer-clean-label">Contacto</div>
-              <div className="footer-clean-text">{contact.phoneDisplay}</div>
-
-              {links.instagram && (
-                <a
-                  href={links.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="footer-clean-link"
-                >
-                  Instagram
-                </a>
-              )}
-            </div>
+            <FooterBlock
+              label="Contacto"
+              value={contact?.phoneDisplay || contact?.phone}
+              link={links?.instagram}
+              linkLabel="Instagram"
+            />
           </div>
 
-          {/* BOTTOM */}
           <div className="footer-clean-bottom">
-            <div className="footer-clean-small">{data.small}</div>
+            <div className="footer-clean-small">
+              {data?.small || `© ${year} ${brand?.name || ""}`}
+            </div>
 
-            <div className="footer-clean-nav">
-              <a href="#hero">Inicio</a>
-              <a href="#services">Servicios</a>
-              <a href="#prices">Precios</a>
-              <a href="#booking">Reservar</a>
+            <div className="footer-clean-bottom-right">
+              <nav className="footer-clean-nav" aria-label="Footer navigation">
+                <a href="#hero">Inicio</a>
+                <a href="#prices">Servicios</a>
+                <a href="#testimonials">Opiniones</a>
+                <a href="#booking">Reservar</a>
+              </nav>
+
+              <a
+                className="footer-agency"
+                href="https://www.noos-solutions.es"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="NOOS"
+              >
+                <span className="footer-agency-logo" aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>
       </Container>
     </footer>
+  );
+}
+
+function FooterBlock({ label, value, link, linkLabel }) {
+  return (
+    <div className="footer-clean-col">
+      <div>
+        <div className="footer-clean-label">{label}</div>
+        {value ? <div className="footer-clean-text">{value}</div> : null}
+      </div>
+
+      {link ? (
+        <a
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+          className="footer-clean-link"
+        >
+          {linkLabel}
+        </a>
+      ) : null}
+    </div>
   );
 }
