@@ -54,11 +54,10 @@ function ensureConfigShape(config) {
     ...config,
 
     brand: {
-      name: "",
-      tagline: "",
-      emojiLogo: "💈",
-      logoImage: "",
-      ...(config?.brand || {}),
+      name: config?.brand?.name || "",
+      tagline: config?.brand?.tagline || "",
+      emojiLogo: config?.brand?.emojiLogo || "💈",
+      logoImage: config?.brand?.logoImage || "/logos_id/logo_id21.png",
     },
 
     links: {
@@ -577,6 +576,12 @@ export default function Customize() {
                 label="Emoji logo"
                 value={safeConfig.brand.emojiLogo}
                 onChange={(v) => updateRoot("brand", "emojiLogo", v)}
+              />
+
+              <Input
+                label="Logo negocio (URL o ruta)"
+                value={safeConfig.brand.logoImage}
+                onChange={(v) => updateRoot("brand", "logoImage", v)}
               />
 
               <Input

@@ -2,10 +2,11 @@ import Container from "../Container.jsx";
 import Button from "../ui/Button.jsx";
 import { useSiteConfig } from "../../context/SiteConfigContext.jsx";
 
-export default function HeroSection({ brand, data }) {
+export default function HeroSection({ brand: brandProp, data }) {
   const { config } = useSiteConfig();
-  const { links } = config;
 
+  const brand = brandProp || config?.brand || {};
+  const links = config?.links || {};
   const booking = resolveBookingLink(config, data, links);
 
   return (
@@ -17,6 +18,13 @@ export default function HeroSection({ brand, data }) {
       }}
     >
       <div className="hero-full-overlay" />
+
+      {/* 🔥 LOGO */}
+      <img
+        src={brand?.logoImage || "/logos_id/logo_id21.png"}
+        alt={brand?.name || "Logo"}
+        className="hero-corner-logo-img"
+      />
 
       <Container wide>
         <div className="hero-full-content">
@@ -39,7 +47,6 @@ export default function HeroSection({ brand, data }) {
             {data.subtitle}
           </p>
 
-          {/* 🔥 BOTONES */}
           <div className="hero-full-actions">
             {booking.href && (
               <Button href={booking.href} target="_blank">
@@ -47,26 +54,10 @@ export default function HeroSection({ brand, data }) {
               </Button>
             )}
 
-            <Button
-              href="#prices" // 🔥 CAMBIO CLAVE
-              variant="secondary"
-              style={{
-                color: "#fff",
-                borderColor: "rgba(255,255,255,0.25)",
-                background: "rgba(0,0,0,0.25)"
-              }}
-            >
+            <Button href="#prices" variant="secondary">
               Ver servicios
             </Button>
           </div>
-
-          {false && (
-            <div className="hero-full-trust">
-              <HeroTag>Reserva rápida</HeroTag>
-              <HeroTag>Atención directa</HeroTag>
-              <HeroTag>Corte y barba</HeroTag>
-            </div>
-          )}
         </div>
       </Container>
     </section>
@@ -81,7 +72,6 @@ function resolveBookingLink(config, data, links) {
   const type = config?.bookingPlatform?.type || "none";
   const url = config?.bookingPlatform?.url || "";
 
-  // 🔥 WHATSAPP SIEMPRE DISPONIBLE
   if (type === "none") {
     return {
       href: links?.whatsapp || data?.ctaHref || "",
@@ -114,10 +104,4 @@ function resolveBookingLink(config, data, links) {
     href: "",
     label: "",
   };
-}
-
-/* ========================= */
-
-function HeroTag({ children }) {
-  return <div className="hero-full-tag">{children}</div>;
 }
