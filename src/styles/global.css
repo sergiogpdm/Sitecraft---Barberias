@@ -945,7 +945,7 @@ section {
   overflow: hidden;
   padding: 76px 0 32px;
 
-  background: color-mix(in srgb, var(--bg) 86%, var(--text) 14%);
+  background: color-mix(in srgb, var(--bg) 99%, var(--text) 14%);
   border-top: 1px solid var(--border);
   color: var(--text);
 

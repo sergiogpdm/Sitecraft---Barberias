@@ -3,7 +3,7 @@ export const siteConfig = {
     "name": "De la Rue Studio",
     "tagline": "Barbería en Manzanares · Reserva rápida",
     "emojiLogo": "💈",
-    "logoImage": ""
+    "logoImage": "/logos_id/logo_id21.png"
   },
   "links": {
     "whatsapp": "https://wa.link/ic2cun",
@@ -121,9 +121,9 @@ export const siteConfig = {
       "title": "Así se ve un buen corte.",
       "note": "Estilo, detalle y presencia.",
       "photos": [
-        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80",
-        "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80",
-        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
+        "/imagenesprueba/barberia3.jpg",
+        "/imagenesprueba/barberia1.png",
+        "/imagenesprueba/barberia4.jpg"
       ]
     },
     "prices": {
@@ -135,19 +135,19 @@ export const siteConfig = {
           "price": "18€",
           "title": "Corte",
           "desc": "Corte con acabado y peinado.",
-          "image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80"
+          "image": "/imagenesprueba/barberia1.png"
         },
         {
           "price": "25€",
           "title": "Corte + barba",
           "desc": "Servicio completo.",
-          "image": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80"
+          "image": "/imagenesprueba/barberia4.jpg"
         },
         {
           "price": "10€",
           "title": "Arreglo de barba",
           "desc": "Perfilado profesional.",
-          "image": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
+          "image": "/imagenesprueba/barberia2.jpg"
         }
       ]
     },
@@ -158,8 +158,8 @@ export const siteConfig = {
       "ctaText": "Abrir Booksy",
       "ctaHref": "https://booksy.com/es-es/136278_de-la-rue_otro_35362_manzanares#ba_s=seo",
       "sideImages": [
-        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
-        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80"
+        "/imagenesprueba/image.png",
+        "/imagenesprueba/barberia3.jpg"
       ]
     },
     "footer": {
