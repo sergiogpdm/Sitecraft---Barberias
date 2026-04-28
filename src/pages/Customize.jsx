@@ -106,6 +106,14 @@ function ensureConfigShape(config) {
         "--accentA": "#D4AF37",
         "--accentB": "#9C7A2B",
         "--accentSoft": "#1A1710",
+
+        "--accentText": "#111111",
+        "--accentCard": "#D4AF37",
+        "--accentCardText": "#111111",
+        "--buttonText": "#111111",
+        "--buttonBg": "#D4AF37",
+        "--buttonSecondaryBg": "#141418",
+        "--buttonSecondaryText": "#F5F5F5",
         "--radius": "16px",
         "--btnRadius": "12px",
         "--shadowY": "18px",
@@ -753,6 +761,54 @@ export default function Customize() {
                 onChange={(v) => updateThemeOverride("--accentA", v)}
               />
 
+              <ColorInput
+                label="Color acento secundario"
+                value={safeConfig.theme.overrides["--accentB"] || "#9C7A2B"}
+                onChange={(v) => updateThemeOverride("--accentB", v)}
+              />
+
+              <ColorInput
+                label="Texto sobre acento"
+                value={safeConfig.theme.overrides["--accentText"] || "#111111"}
+                onChange={(v) => updateThemeOverride("--accentText", v)}
+              />
+
+              <ColorInput
+                label="Fondo tarjetas destacadas"
+                value={safeConfig.theme.overrides["--accentCard"] || "#D4AF37"}
+                onChange={(v) => updateThemeOverride("--accentCard", v)}
+              />
+
+              <ColorInput
+                label="Texto tarjetas destacadas"
+                value={safeConfig.theme.overrides["--accentCardText"] || "#111111"}
+                onChange={(v) => updateThemeOverride("--accentCardText", v)}
+              />
+
+              <ColorInput
+                label="Fondo botón principal"
+                value={safeConfig.theme.overrides["--buttonBg"] || "#D4AF37"}
+                onChange={(v) => updateThemeOverride("--buttonBg", v)}
+              />
+
+              <ColorInput
+                label="Texto botón principal"
+                value={safeConfig.theme.overrides["--buttonText"] || "#111111"}
+                onChange={(v) => updateThemeOverride("--buttonText", v)}
+              />
+
+              <ColorInput
+                label="Fondo botón secundario"
+                value={safeConfig.theme.overrides["--buttonSecondaryBg"] || "#141418"}
+                onChange={(v) => updateThemeOverride("--buttonSecondaryBg", v)}
+              />
+
+              <ColorInput
+                label="Texto botón secundario"
+                value={safeConfig.theme.overrides["--buttonSecondaryText"] || "#F5F5F5"}
+                onChange={(v) => updateThemeOverride("--buttonSecondaryText", v)}
+              />
+
               <div style={{ marginTop: 20 }}>
                 <div style={{ fontWeight: 700, marginBottom: 10 }}>Secciones Home</div>
 
@@ -1261,6 +1317,13 @@ function QuickGenerator({ setConfig }) {
         "--accentA": "#D4AF37",
         "--accentB": "#9C7A2B",
         "--accentSoft": "#1A1710",
+        "--accentText": "#111111",
+        "--accentCard": "#D4AF37",
+        "--accentCardText": "#111111",
+        "--buttonBg": "#D4AF37",
+        "--buttonText": "#111111",
+        "--buttonSecondaryBg": "#141418",
+        "--buttonSecondaryText": "#F5F5F5",
         "--radius": "16px",
         "--btnRadius": "12px",
         "--shadowY": "18px",
@@ -1282,6 +1345,13 @@ function QuickGenerator({ setConfig }) {
         "--accentA": "#60A5FA",
         "--accentB": "#2563EB",
         "--accentSoft": "#111827",
+        "--accentText": "#ffffff",
+        "--accentCard": "#2563EB",
+        "--accentCardText": "#ffffff",
+        "--buttonBg": "#60A5FA",
+        "--buttonText": "#07111f",
+        "--buttonSecondaryBg": "#171A21",
+        "--buttonSecondaryText": "#F3F4F6",
         "--radius": "16px",
         "--btnRadius": "12px",
         "--shadowY": "18px",
@@ -1303,6 +1373,13 @@ function QuickGenerator({ setConfig }) {
         "--accentA": "#8B5E3C",
         "--accentB": "#6F4A2F",
         "--accentSoft": "#F3E8D8",
+        "--accentText": "#ffffff",
+        "--accentCard": "#8B5E3C",
+        "--accentCardText": "#ffffff",
+        "--buttonBg": "#8B5E3C",
+        "--buttonText": "#ffffff",
+        "--buttonSecondaryBg": "#FFFDF8",
+        "--buttonSecondaryText": "#1F2937",
         "--radius": "16px",
         "--btnRadius": "12px",
         "--shadowY": "16px",

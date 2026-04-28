@@ -21,6 +21,14 @@
   --fontBody: "Inter", sans-serif;
 
   --ease: 0.25s ease;
+
+  --accentText: #111111;
+    --accentCard: #D4AF37;
+    --accentCardText: #111111;
+    --buttonText: #111111;
+    --buttonBg: #D4AF37;
+    --buttonSecondaryBg: #141418;
+    --buttonSecondaryText: #F5F5F5;
 }
 
 * {
