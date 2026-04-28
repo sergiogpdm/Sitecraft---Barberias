@@ -42,6 +42,7 @@ export default function PricesSection({ data }) {
               letterSpacing: "-0.04em",
               maxWidth: 760,
               marginInline: "auto",
+              color: "var(--text)",
             }}
           >
             {data.title}

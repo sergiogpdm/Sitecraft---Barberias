@@ -20,7 +20,8 @@ export const siteConfig = {
   },
   "layout": {
     "showNavbarCta": true,
-    "showFloatingWhatsApp": true
+    "showFloatingWhatsApp": true,
+    "showFloatingBooking": true
   },
   "theme": {
     "preset": "classicCream",
@@ -53,19 +54,19 @@ export const siteConfig = {
           "label": "Inicio"
         },
         {
-          "id": "services",
+          "id": "prices",
           "enabled": true,
           "label": "Servicios"
+        },
+        {
+          "id": "testimonials",
+          "enabled": true,
+          "label": "Opiniones"
         },
         {
           "id": "photoStrip",
           "enabled": true,
           "label": "Galería"
-        },
-        {
-          "id": "prices",
-          "enabled": true,
-          "label": "Precios"
         },
         {
           "id": "booking",
@@ -145,12 +146,43 @@ export const siteConfig = {
       "title": "Reserva tu próxima cita fácilmente.",
       "desc": "Contacta por WhatsApp y te confirmamos horario.",
       "ctaText": "Abrir WhatsApp",
-      "ctaHref": "https://wa.me/913267611?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20La%20Barber%C3%ADa%20de%20Madrid%20%F0%9F%92%88"
+      "ctaHref": "https://wa.me/913267611?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20La%20Barber%C3%ADa%20de%20Madrid%20%F0%9F%92%88",
+      "sideImages": [
+        "",
+        ""
+      ]
     },
     "footer": {
       "title": "La Barbería de Madrid",
       "subtitle": "Cortes · Barba · Atención cercana",
       "small": "© 2026"
+    },
+    "testimonials": {
+      "kicker": "Opiniones",
+      "title": "Clientes que vuelven por algo.",
+      "desc": "Confianza, detalle y resultados que se notan desde la primera visita.",
+      "items": [
+        {
+          "name": "Carlos M.",
+          "service": "Corte + barba",
+          "text": "Muy buen trato y un resultado impecable."
+        },
+        {
+          "name": "Adrián R.",
+          "service": "Fade",
+          "text": "Reserva rápida por WhatsApp y corte muy limpio."
+        },
+        {
+          "name": "Javi P.",
+          "service": "Arreglo de barba",
+          "text": "Buen ambiente y servicio muy cuidado."
+        }
+      ]
     }
+  },
+  "bookingPlatform": {
+    "type": "none",
+    "label": "Reservar",
+    "url": ""
   }
 };
