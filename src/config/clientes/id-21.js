@@ -7,8 +7,8 @@ export const siteConfig = {
   },
   "links": {
     "whatsapp": "",
-    "instagram": "",
-    "maps": ""
+    "instagram": "https://www.instagram.com/dlruestudio/",
+    "maps": "https://maps.app.goo.gl/ipE2MT9LkJEuwzmu6"
   },
   "contact": {
     "phoneDisplay": "",
@@ -20,7 +20,8 @@ export const siteConfig = {
   },
   "layout": {
     "showNavbarCta": true,
-    "showFloatingWhatsApp": true
+    "showFloatingWhatsApp": true,
+    "showFloatingBooking": true
   },
   "theme": {
     "preset": "goldNight",
@@ -30,11 +31,18 @@ export const siteConfig = {
       "--bg": "#0B0B0D",
       "--card": "#fa3a34",
       "--text": "#ffffff",
-      "--muted": "#A1A1AA",
+      "--muted": "#ffffff",
       "--border": "#26262B",
       "--accentA": "#ffffff",
-      "--accentB": "#9C7A2B",
+      "--accentB": "#ffffff",
       "--accentSoft": "#1A1710",
+      "--accentText": "#111111",
+      "--accentCard": "#ffffff",
+      "--accentCardText": "#111111",
+      "--buttonText": "#111111",
+      "--buttonBg": "#ffffff",
+      "--buttonSecondaryBg": "#141418",
+      "--buttonSecondaryText": "#ffffff",
       "--radius": "16px",
       "--btnRadius": "12px",
       "--shadowY": "18px",
@@ -53,7 +61,7 @@ export const siteConfig = {
           "label": "Inicio"
         },
         {
-          "id": "services",
+          "id": "prices",
           "enabled": true,
           "label": "Servicios"
         },
@@ -66,11 +74,6 @@ export const siteConfig = {
           "id": "photoStrip",
           "enabled": true,
           "label": "Galería"
-        },
-        {
-          "id": "prices",
-          "enabled": true,
-          "label": "Precios"
         },
         {
           "id": "booking",
@@ -131,26 +134,33 @@ export const siteConfig = {
         {
           "price": "18€",
           "title": "Corte",
-          "desc": "Corte con acabado y peinado."
+          "desc": "Corte con acabado y peinado.",
+          "image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80"
         },
         {
           "price": "25€",
           "title": "Corte + barba",
-          "desc": "Servicio completo."
+          "desc": "Servicio completo.",
+          "image": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80"
         },
         {
           "price": "10€",
           "title": "Arreglo de barba",
-          "desc": "Perfilado profesional."
+          "desc": "Perfilado profesional.",
+          "image": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
         }
       ]
     },
     "booking": {
       "kicker": "Reserva",
       "title": "Pide tu cita y déjanos el resto.",
-      "desc": "Te atendemos por WhatsApp de forma rápida y sencilla.",
-      "ctaText": "Abrir WhatsApp",
-      "ctaHref": ""
+      "desc": "",
+      "ctaText": "Abrir Booksy",
+      "ctaHref": "https://booksy.com/es-es/136278_de-la-rue_otro_35362_manzanares#ba_s=seo",
+      "sideImages": [
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80"
+      ]
     },
     "footer": {
       "title": "De la Rue Studio",
@@ -179,5 +189,10 @@ export const siteConfig = {
         }
       ]
     }
+  },
+  "bookingPlatform": {
+    "type": "booksy",
+    "label": "Reservar",
+    "url": "https://booksy.com/es-es/136278_de-la-rue_otro_35362_manzanares#ba_s=seo"
   }
 };

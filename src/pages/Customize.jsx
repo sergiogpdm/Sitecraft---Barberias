@@ -101,7 +101,7 @@ function ensureConfigShape(config) {
         "--bg": "#0B0B0D",
         "--card": "#141418",
         "--text": "#F5F5F5",
-        "--muted": "#A1A1AA",
+        "--muted": "#ffffff",
         "--border": "#26262B",
         "--accentA": "#D4AF37",
         "--accentB": "#9C7A2B",
@@ -756,6 +756,12 @@ export default function Customize() {
               />
 
               <ColorInput
+                label="Color texto secundario"
+                value={safeConfig.theme.overrides["--muted"] || "#ffffff"}
+                onChange={(v) => updateThemeOverride("--muted", v)}
+              />
+
+              <ColorInput
                 label="Color acento"
                 value={safeConfig.theme.overrides["--accentA"] || "#D4AF37"}
                 onChange={(v) => updateThemeOverride("--accentA", v)}
@@ -1312,7 +1318,7 @@ function QuickGenerator({ setConfig }) {
         "--bg": "#0B0B0D",
         "--card": "#141418",
         "--text": "#F5F5F5",
-        "--muted": "#A1A1AA",
+        "--muted": "#ffffff",
         "--border": "#26262B",
         "--accentA": "#D4AF37",
         "--accentB": "#9C7A2B",
@@ -1340,7 +1346,7 @@ function QuickGenerator({ setConfig }) {
         "--bg": "#0F1115",
         "--card": "#171A21",
         "--text": "#F3F4F6",
-        "--muted": "#9CA3AF",
+        "--muted": "#ffffff",
         "--border": "#2B313D",
         "--accentA": "#60A5FA",
         "--accentB": "#2563EB",
@@ -1368,7 +1374,7 @@ function QuickGenerator({ setConfig }) {
         "--bg": "#F7F3EB",
         "--card": "#FFFDF8",
         "--text": "#1F2937",
-        "--muted": "#6B7280",
+        "--muted": "#ffffff",
         "--border": "#E5E7EB",
         "--accentA": "#8B5E3C",
         "--accentB": "#6F4A2F",

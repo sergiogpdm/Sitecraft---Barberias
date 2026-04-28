@@ -1,22 +1,22 @@
 export const siteConfig = {
   "brand": {
-    "name": "La Barbería de Madrid",
-    "tagline": "Barbería en Madrid · Reserva rápida",
+    "name": "De la Rue Studio",
+    "tagline": "Barbería en Manzanares · Reserva rápida",
     "emojiLogo": "💈",
     "logoImage": ""
   },
   "links": {
-    "whatsapp": "https://wa.me/913267611?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20La%20Barber%C3%ADa%20de%20Madrid%20%F0%9F%92%88",
-    "instagram": "https://www.instagram.com/labarberiademadrid/",
-    "maps": "https://maps.app.goo.gl/8wxLHDNWmUVjhGDDA"
+    "whatsapp": "",
+    "instagram": "https://www.instagram.com/dlruestudio/",
+    "maps": "https://maps.app.goo.gl/ipE2MT9LkJEuwzmu6"
   },
   "contact": {
-    "phoneDisplay": "(+91) 3267611",
-    "phoneTel": "+913267611",
+    "phoneDisplay": "",
+    "phoneTel": "",
     "email": "info@blackcrownbarber.com",
-    "address": "Madrid",
+    "address": "Manzanares",
     "hours": "Lun-Sáb · 10:00–21:00",
-    "phone": "913267611"
+    "phone": ""
   },
   "layout": {
     "showNavbarCta": true,
@@ -24,23 +24,30 @@ export const siteConfig = {
     "showFloatingBooking": true
   },
   "theme": {
-    "preset": "classicCream",
+    "preset": "goldNight",
     "mode": "flat",
     "scheme": "dark",
     "overrides": {
-      "--bg": "#F7F3EB",
-      "--card": "#FFFDF8",
-      "--text": "#1F2937",
-      "--muted": "#6B7280",
-      "--border": "#E5E7EB",
-      "--accentA": "#8B5E3C",
-      "--accentB": "#6F4A2F",
-      "--accentSoft": "#F3E8D8",
+      "--bg": "#0B0B0D",
+      "--card": "#fa3a34",
+      "--text": "#ffffff",
+      "--muted": "#ffffff",
+      "--border": "#26262B",
+      "--accentA": "#ffffff",
+      "--accentB": "#ffffff",
+      "--accentSoft": "#1A1710",
+      "--accentText": "#111111",
+      "--accentCard": "#ffffff",
+      "--accentCardText": "#111111",
+      "--buttonText": "#111111",
+      "--buttonBg": "#ffffff",
+      "--buttonSecondaryBg": "#141418",
+      "--buttonSecondaryText": "#ffffff",
       "--radius": "16px",
       "--btnRadius": "12px",
-      "--shadowY": "16px",
-      "--shadowBlur": "40px",
-      "--shadowOpacity": "0.12",
+      "--shadowY": "18px",
+      "--shadowBlur": "44px",
+      "--shadowOpacity": "0.24",
       "--fontDisplay": "Playfair Display, serif",
       "--fontBody": "Inter, sans-serif"
     }
@@ -81,42 +88,42 @@ export const siteConfig = {
   },
   "copy": {
     "hero": {
-      "badge": "💈 Barbería de confianza en Madrid",
-      "titleA": "LA",
-      "titleHighlight": "BARBERÍA DE MADRID",
-      "titleB": "Tradición, detalle y buen servicio.",
-      "subtitle": "Cortes clásicos, arreglos de barba y trato cercano para que salgas siempre como esperas.",
+      "badge": "💈 Experiencia premium en Manzanares",
+      "titleA": "DE",
+      "titleHighlight": "LA RUE STUDIO",
+      "titleB": "Imagen cuidada. Reserva rápida.",
+      "subtitle": "Un espacio pensado para quienes valoran el detalle, la precisión y un servicio a la altura.",
       "ctaText": "Reservar por WhatsApp",
-      "ctaHref": "https://wa.me/913267611?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20La%20Barber%C3%ADa%20de%20Madrid%20%F0%9F%92%88",
-      "imageSrc": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80"
+      "ctaHref": "",
+      "imageSrc": "/fondos/fondo_id21.webp"
     },
     "services": {
       "kicker": "Servicios",
-      "title": "Los servicios de siempre, bien hechos.",
-      "desc": "Profesionalidad, cercanía y resultados limpios en cada visita.",
+      "title": "Más que un corte, una experiencia.",
+      "desc": "Atención cuidada, técnica precisa y una imagen que habla por ti.",
       "items": [
         {
-          "title": "Corte clásico",
-          "desc": "Técnica tradicional con acabado limpio y profesional."
+          "title": "Corte personalizado",
+          "desc": "Adaptado a tu estilo, facciones y rutina diaria."
         },
         {
           "title": "Barba y perfilado",
           "desc": "Definición, recorte y limpieza para un look completo."
         },
         {
-          "title": "Arreglo completo",
-          "desc": "Una opción completa para salir perfecto."
+          "title": "Corte + barba",
+          "desc": "Servicio completo para una imagen impecable."
         }
       ]
     },
     "photoStrip": {
-      "kicker": "Trabajos",
-      "title": "Detalles de una barbería de verdad.",
-      "note": "Imagen, detalle y acabado profesional.",
+      "kicker": "Galería",
+      "title": "Así se ve un buen corte.",
+      "note": "Estilo, detalle y presencia.",
       "photos": [
-        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
         "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80",
-        "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80"
+        "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
       ]
     },
     "prices": {
@@ -125,36 +132,39 @@ export const siteConfig = {
       "desc": "Elige tu servicio y reserva en un momento.",
       "items": [
         {
-          "price": "15€",
+          "price": "18€",
           "title": "Corte",
-          "desc": "Corte con acabado y peinado."
+          "desc": "Corte con acabado y peinado.",
+          "image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80"
         },
         {
-          "price": "20€",
+          "price": "25€",
           "title": "Corte + barba",
-          "desc": "Servicio completo."
+          "desc": "Servicio completo.",
+          "image": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80"
         },
         {
-          "price": "12€",
+          "price": "10€",
           "title": "Arreglo de barba",
-          "desc": "Perfilado profesional."
+          "desc": "Perfilado profesional.",
+          "image": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
         }
       ]
     },
     "booking": {
       "kicker": "Reserva",
-      "title": "Reserva tu próxima cita fácilmente.",
-      "desc": "Contacta por WhatsApp y te confirmamos horario.",
-      "ctaText": "Abrir WhatsApp",
-      "ctaHref": "https://wa.me/913267611?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20La%20Barber%C3%ADa%20de%20Madrid%20%F0%9F%92%88",
+      "title": "Pide tu cita y déjanos el resto.",
+      "desc": "",
+      "ctaText": "Abrir Booksy",
+      "ctaHref": "https://booksy.com/es-es/136278_de-la-rue_otro_35362_manzanares#ba_s=seo",
       "sideImages": [
-        "",
-        ""
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80"
       ]
     },
     "footer": {
-      "title": "La Barbería de Madrid",
-      "subtitle": "Cortes · Barba · Atención cercana",
+      "title": "De la Rue Studio",
+      "subtitle": "Estilo · Precisión · Reserva",
       "small": "© 2026"
     },
     "testimonials": {
@@ -181,8 +191,8 @@ export const siteConfig = {
     }
   },
   "bookingPlatform": {
-    "type": "none",
+    "type": "booksy",
     "label": "Reservar",
-    "url": ""
+    "url": "https://booksy.com/es-es/136278_de-la-rue_otro_35362_manzanares#ba_s=seo"
   }
 };
