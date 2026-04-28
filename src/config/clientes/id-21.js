@@ -6,7 +6,7 @@ export const siteConfig = {
     "logoImage": ""
   },
   "links": {
-    "whatsapp": "",
+    "whatsapp": "https://wa.link/ic2cun",
     "instagram": "https://www.instagram.com/dlruestudio/",
     "maps": "https://maps.app.goo.gl/ipE2MT9LkJEuwzmu6"
   },
