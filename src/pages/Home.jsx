@@ -74,9 +74,13 @@ export default function Home() {
             <a href="#hero" className="navbar-pro-brand">
               <div className="navbar-pro-brand-mark">
                 {brand.logoImage ? (
-                  <img src={brand.logoImage} alt={brand.name} />
+                  <img
+                    src={brand.logoImage}
+                    alt={brand.name}
+                    className="navbar-pro-logo-clean"
+                  />
                 ) : (
-                  <span>{brand.emojiLogo}</span>
+                  <span className="navbar-pro-logo-emoji">{brand.emojiLogo}</span>
                 )}
               </div>
 
