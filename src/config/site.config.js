@@ -29,7 +29,7 @@ export const siteConfig = {
     "scheme": "dark",
     "overrides": {
       "--bg": "#0B0B0D",
-      "--card": "#fa3a34",
+      "--card": "#b41813",
       "--text": "#ffffff",
       "--muted": "#ffffff",
       "--border": "#26262B",
