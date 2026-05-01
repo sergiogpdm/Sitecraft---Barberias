@@ -13,7 +13,6 @@ export default function Home() {
   const { brand, copy, contact, pages, links, layout, theme } = config;
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   const enabledSections = [
     { id: "hero", label: "Inicio" },
@@ -32,19 +31,12 @@ export default function Home() {
   const navbarBookingLink = externalBookingLink.href
     ? externalBookingLink
     : {
-        href: links?.whatsapp || "",
-        label: "Reservar",
-        platform: "custom",
-      };
+      href: links?.whatsapp || "",
+      label: "Reservar",
+      platform: "custom",
+    };
 
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 24);
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const bgColor = theme?.overrides?.["--bg"] || "#0b0b0d";
   const cardColor = theme?.overrides?.["--card"] || "#141418";
@@ -52,19 +44,13 @@ export default function Home() {
 
   const navbarStyle = useMemo(() => {
     return {
-      background: isScrolled
-        ? makeAlphaColor(cardColor, 0.88)
-        : makeAlphaColor(bgColor, 0.38),
-      borderBottom: isScrolled
-        ? `1px solid ${makeAlphaColor(borderColor, 0.9)}`
-        : `1px solid ${makeAlphaColor(borderColor, 0.18)}`,
-      boxShadow: isScrolled
-        ? "0 12px 34px rgba(0,0,0,0.10)"
-        : "none",
-      backdropFilter: isScrolled ? "blur(16px)" : "blur(10px)",
+      background: makeAlphaColor(bgColor, 0.38),
+      borderBottom: `1px solid ${makeAlphaColor(borderColor, 0.18)}`,
+      boxShadow: "none",
+      backdropFilter: "blur(10px)",
       transition: "all 0.25s ease",
     };
-  }, [isScrolled, bgColor, cardColor, borderColor]);
+  }, [bgColor, borderColor]);
 
   return (
     <main style={{ minHeight: "100vh" }}>
