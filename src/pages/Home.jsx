@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSiteConfig } from "../context/SiteConfigContext.jsx";
 import HeroSection from "../components/sections/HeroSection.jsx";
 import PricesSection from "../components/sections/PricesSection.jsx";
@@ -31,15 +31,13 @@ export default function Home() {
   const navbarBookingLink = externalBookingLink.href
     ? externalBookingLink
     : {
-      href: links?.whatsapp || "",
-      label: "Reservar",
-      platform: "custom",
-    };
-
-
+        href: links?.whatsapp || "",
+        label: "Reservar",
+        platform: "custom",
+        external: true,
+      };
 
   const bgColor = theme?.overrides?.["--bg"] || "#0b0b0d";
-  const cardColor = theme?.overrides?.["--card"] || "#141418";
   const borderColor = theme?.overrides?.["--border"] || "#26262b";
 
   const navbarStyle = useMemo(() => {
@@ -80,7 +78,9 @@ export default function Home() {
                     className="navbar-pro-logo-clean"
                   />
                 ) : (
-                  <span className="navbar-pro-logo-emoji">{brand.emojiLogo}</span>
+                  <span className="navbar-pro-logo-emoji">
+                    {brand.emojiLogo}
+                  </span>
                 )}
               </div>
 
@@ -102,8 +102,8 @@ export default function Home() {
               {layout.showNavbarCta && navbarBookingLink.href && (
                 <a
                   href={navbarBookingLink.href}
-                  target="_blank"
-                  rel="noreferrer"
+                  target={navbarBookingLink.external ? "_blank" : undefined}
+                  rel={navbarBookingLink.external ? "noreferrer" : undefined}
                   className={`booking-platform-btn booking-platform-btn-${navbarBookingLink.platform}`}
                 >
                   {navbarBookingLink.label}
@@ -112,7 +112,9 @@ export default function Home() {
             </nav>
 
             <button
-              className={`navbar-pro-toggle mobile-only ${menuOpen ? "is-open" : ""}`}
+              className={`navbar-pro-toggle mobile-only ${
+                menuOpen ? "is-open" : ""
+              }`}
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             >
@@ -123,7 +125,9 @@ export default function Home() {
           </div>
 
           <div
-            className={`mobile-drawer-overlay mobile-only ${menuOpen ? "is-open" : ""}`}
+            className={`mobile-drawer-overlay mobile-only ${
+              menuOpen ? "is-open" : ""
+            }`}
             onClick={() => setMenuOpen(false)}
           >
             <aside
@@ -169,8 +173,8 @@ export default function Home() {
                   {layout.showNavbarCta && navbarBookingLink.href && (
                     <a
                       href={navbarBookingLink.href}
-                      target="_blank"
-                      rel="noreferrer"
+                      target={navbarBookingLink.external ? "_blank" : undefined}
+                      rel={navbarBookingLink.external ? "noreferrer" : undefined}
                       className={`mobile-drawer-cta booking-platform-btn booking-platform-btn-${navbarBookingLink.platform}`}
                       onClick={() => setMenuOpen(false)}
                     >
@@ -215,8 +219,8 @@ export default function Home() {
       {layout.showFloatingBooking && externalBookingLink.href && (
         <a
           href={externalBookingLink.href}
-          target="_blank"
-          rel="noreferrer"
+          target={externalBookingLink.external ? "_blank" : undefined}
+          rel={externalBookingLink.external ? "noreferrer" : undefined}
           className={`floating-booking-btn floating-booking-btn-${externalBookingLink.platform}`}
         >
           <span className="floating-btn-text">
@@ -225,13 +229,16 @@ export default function Home() {
 
           <span className="floating-btn-icon">
             {externalBookingLink.platform === "booksy" && (
-              <img src="/logos/booksy.png" />
+              <img src="/logos/booksy.png" alt="Booksy" />
             )}
             {externalBookingLink.platform === "yeasy" && (
-              <img src="/logos/yeasy.png" />
+              <img src="/logos/yeasy.png" alt="Yeasy" />
             )}
             {externalBookingLink.platform === "custom" && (
-              <img src="/logos/custom.png" />
+              <img src="/logos/custom.png" alt="Reservar" />
+            )}
+            {externalBookingLink.platform === "internal" && (
+              <img src="/logos/custom.png" alt="Reservar" />
             )}
           </span>
         </a>
@@ -248,7 +255,7 @@ export default function Home() {
           <span className="floating-btn-text">WhatsApp</span>
 
           <span className="floating-btn-icon">
-            <img src="/logos/whatsapp.png" />
+            <img src="/logos/whatsapp.png" alt="WhatsApp" />
           </span>
         </a>
       )}
@@ -275,15 +282,46 @@ function resolveBookingLink(config) {
   const type = config?.bookingPlatform?.type || "none";
   const url = config?.bookingPlatform?.url || "";
 
-  if (type === "yeasy") return { href: url, label: "Yeasy", platform: "yeasy" };
-  if (type === "booksy") return { href: url, label: "Booksy", platform: "booksy" };
+  if (type === "internal") {
+    return {
+      href: "#booking",
+      label: config?.bookingPlatform?.label || "Reservar",
+      platform: "internal",
+      external: false,
+    };
+  }
 
-  if (type === "custom")
+  if (type === "yeasy") {
+    return {
+      href: url,
+      label: "Yeasy",
+      platform: "yeasy",
+      external: true,
+    };
+  }
+
+  if (type === "booksy") {
+    return {
+      href: url,
+      label: "Booksy",
+      platform: "booksy",
+      external: true,
+    };
+  }
+
+  if (type === "custom") {
     return {
       href: url,
       label: config?.bookingPlatform?.label || "Reservar",
       platform: "custom",
+      external: true,
     };
+  }
 
-  return { href: "", label: "", platform: "none" };
+  return {
+    href: "",
+    label: "",
+    platform: "none",
+    external: false,
+  };
 }

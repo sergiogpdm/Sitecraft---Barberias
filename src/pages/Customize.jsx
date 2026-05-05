@@ -85,9 +85,10 @@ function ensureConfigShape(config) {
     },
 
     bookingPlatform: {
-      type: "none", // yeasy | booksy | custom | none
+      type: "none", // yeasy | booksy | custom | internal | none
       label: "Reservar",
       url: "",
+      barberiaId: "",
       ...(config?.bookingPlatform || {}),
     },
 
@@ -669,6 +670,7 @@ export default function Customize() {
                   <option value="yeasy">Yeasy</option>
                   <option value="booksy">Booksy</option>
                   <option value="custom">Custom</option>
+                  <option value="internal">Reserva interna</option>
                 </select>
               </label>
 
@@ -698,6 +700,22 @@ export default function Customize() {
                       bookingPlatform: {
                         ...(prev?.bookingPlatform || {}),
                         url: v,
+                      },
+                    })
+                  )
+                }
+              />
+
+              <Input
+                label="ID Barbería / Cliente"
+                value={safeConfig.bookingPlatform?.barberiaId || ""}
+                onChange={(v) =>
+                  setConfig((prev) =>
+                    ensureConfigShape({
+                      ...prev,
+                      bookingPlatform: {
+                        ...(prev?.bookingPlatform || {}),
+                        barberiaId: v,
                       },
                     })
                   )
