@@ -3937,3 +3937,263 @@ body::after {
     min-height: 54px;
   }
 }
+
+/* =========================
+   Booking central card upgrade
+========================= */
+
+.booking-convert-card {
+  max-width: 820px;
+  padding: 58px 42px 38px;
+  border-radius: 38px;
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--accentA) 18%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--card) 96%, var(--surface)), var(--card));
+}
+
+.booking-convert-kicker {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accentA) 45%, var(--border));
+  background: color-mix(in srgb, var(--accentA) 12%, transparent);
+  color: var(--accentA);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+}
+
+.booking-convert-title {
+  max-width: 760px;
+  font-size: clamp(44px, 5.4vw, 82px);
+}
+
+.booking-convert-desc {
+  max-width: 600px;
+  color: var(--muted);
+  opacity: 0.92;
+}
+
+.booking-convert-points-v2 {
+  margin-top: 38px;
+  gap: 14px;
+}
+
+.booking-convert-point-v2 {
+  min-height: 170px;
+  padding: 24px 18px 22px;
+  border-radius: 26px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accentCard) 92%, white 8%),
+      color-mix(in srgb, var(--accentCard) 70%, var(--accentB))
+    );
+  transform: translateY(0);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.booking-convert-point-v2:hover {
+  transform: translateY(-5px);
+}
+
+.booking-point-icon {
+  width: 54px;
+  height: 54px;
+  font-size: 25px;
+  margin-bottom: 16px;
+  background: color-mix(in srgb, var(--accentCardText) 14%, transparent);
+}
+
+.booking-convert-point-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.booking-convert-point-value {
+  font-size: 19px;
+}
+
+.booking-convert-point-sub {
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.booking-actions-divider {
+  margin: 32px 0 24px;
+}
+
+.booking-convert-actions-v2 {
+  gap: 14px;
+}
+
+.booking-platform-btn-wide {
+  height: 68px;
+  border-radius: 22px;
+  font-size: 16px;
+}
+
+.booking-location-chip {
+  margin-top: 4px;
+  min-height: 46px;
+  padding: 0 20px;
+  background: color-mix(in srgb, var(--accentA) 18%, var(--card));
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accentA) 32%, var(--border));
+}
+
+/* móvil */
+@media (max-width: 760px) {
+  .booking-convert-card {
+    padding: 38px 20px 26px;
+    border-radius: 28px;
+  }
+
+  .booking-convert-title {
+    font-size: clamp(36px, 11vw, 52px);
+  }
+
+  .booking-convert-desc {
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+
+  .booking-convert-points-v2 {
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+
+  .booking-convert-point-v2 {
+    min-height: auto;
+    padding: 20px 18px;
+  }
+
+  .booking-platform-btn-wide {
+    height: 60px;
+  }
+}
+
+/* =========================
+   BookingSection móvil compacto
+========================= */
+
+@media (max-width: 760px) {
+  #booking {
+    padding: 22px 0 42px !important;
+  }
+
+  .booking-stage {
+    min-height: auto !important;
+  }
+
+  .booking-convert-card {
+    padding: 26px 16px 20px !important;
+    border-radius: 24px !important;
+  }
+
+  .booking-convert-kicker-wrap {
+    margin-bottom: 12px !important;
+  }
+
+  .booking-convert-kicker {
+    padding: 7px 12px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .booking-convert-title {
+    font-size: clamp(30px, 9vw, 42px) !important;
+    line-height: 0.96 !important;
+  }
+
+  .booking-convert-desc {
+    margin-top: 12px !important;
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+  }
+
+  .booking-convert-points-v2 {
+    margin-top: 18px !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .booking-convert-point-v2 {
+    min-height: auto !important;
+    padding: 12px 8px !important;
+    border-radius: 16px !important;
+  }
+
+  .booking-point-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 17px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .booking-convert-point-label {
+    font-size: 8px !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 4px !important;
+  }
+
+  .booking-convert-point-value {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+  }
+
+  .booking-convert-point-sub {
+    display: none !important;
+  }
+
+  .booking-actions-divider {
+    margin: 18px 0 14px !important;
+  }
+
+  .booking-convert-actions-v2 {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .booking-platform-btn-wide {
+    height: 54px !important;
+    border-radius: 16px !important;
+    font-size: 15px !important;
+  }
+
+  .booking-convert-note-v2 {
+    margin-top: 12px !important;
+  }
+
+  .booking-location-chip {
+    min-height: 38px !important;
+    padding: 0 14px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.04em !important;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 390px) {
+  .booking-convert-title {
+    font-size: 28px !important;
+  }
+
+  .booking-convert-points-v2 {
+    gap: 6px !important;
+  }
+
+  .booking-convert-point-v2 {
+    padding: 10px 6px !important;
+  }
+
+  .booking-point-icon {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 15px !important;
+  }
+
+  .booking-convert-point-value {
+    font-size: 11px !important;
+  }
+}
