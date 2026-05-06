@@ -7,12 +7,14 @@ import BookingSection from "../components/sections/BookingSection.jsx";
 import Footer from "../components/Footer.jsx";
 import Container from "../components/Container.jsx";
 import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
+import InternalBookingForm from "../components/sections/InternalBookingForm.jsx";
 
 export default function Home() {
   const { config } = useSiteConfig();
   const { brand, copy, contact, pages, links, layout, theme } = config;
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [internalBookingOpen, setInternalBookingOpen] = useState(false);
 
   const enabledSections = [
     { id: "hero", label: "Inicio" },
@@ -31,11 +33,11 @@ export default function Home() {
   const navbarBookingLink = externalBookingLink.href
     ? externalBookingLink
     : {
-        href: links?.whatsapp || "",
-        label: "Reservar",
-        platform: "custom",
-        external: true,
-      };
+      href: links?.whatsapp || "",
+      label: "Reservar",
+      platform: "custom",
+      external: true,
+    };
 
   const bgColor = theme?.overrides?.["--bg"] || "#0b0b0d";
   const borderColor = theme?.overrides?.["--border"] || "#26262b";
@@ -112,9 +114,8 @@ export default function Home() {
             </nav>
 
             <button
-              className={`navbar-pro-toggle mobile-only ${
-                menuOpen ? "is-open" : ""
-              }`}
+              className={`navbar-pro-toggle mobile-only ${menuOpen ? "is-open" : ""
+                }`}
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             >
@@ -125,9 +126,8 @@ export default function Home() {
           </div>
 
           <div
-            className={`mobile-drawer-overlay mobile-only ${
-              menuOpen ? "is-open" : ""
-            }`}
+            className={`mobile-drawer-overlay mobile-only ${menuOpen ? "is-open" : ""
+              }`}
             onClick={() => setMenuOpen(false)}
           >
             <aside
@@ -217,31 +217,46 @@ export default function Home() {
 
       {/* FLOATING BOOKING */}
       {layout.showFloatingBooking && externalBookingLink.href && (
-        <a
-          href={externalBookingLink.href}
-          target={externalBookingLink.external ? "_blank" : undefined}
-          rel={externalBookingLink.external ? "noreferrer" : undefined}
-          className={`floating-booking-btn floating-booking-btn-${externalBookingLink.platform}`}
-        >
-          <span className="floating-btn-text">
-            {externalBookingLink.label}
-          </span>
+        <>
+          <a
+            href={externalBookingLink.platform === "internal" ? "#" : externalBookingLink.href}
+            target={externalBookingLink.external ? "_blank" : undefined}
+            rel={externalBookingLink.external ? "noreferrer" : undefined}
+            className={`floating-booking-btn floating-booking-btn-${externalBookingLink.platform}`}
+            onClick={(e) => {
+              if (externalBookingLink.platform === "internal") {
+                e.preventDefault();
+                setInternalBookingOpen(true);
+              }
+            }}
+          >
+            <span className="floating-btn-text">
+              {externalBookingLink.label}
+            </span>
 
-          <span className="floating-btn-icon">
-            {externalBookingLink.platform === "booksy" && (
-              <img src="/logos/booksy.png" alt="Booksy" />
-            )}
-            {externalBookingLink.platform === "yeasy" && (
-              <img src="/logos/yeasy.png" alt="Yeasy" />
-            )}
-            {externalBookingLink.platform === "custom" && (
-              <img src="/logos/custom.png" alt="Reservar" />
-            )}
-            {externalBookingLink.platform === "internal" && (
-              <img src="/logos/custom.png" alt="Reservar" />
-            )}
-          </span>
-        </a>
+            <span className="floating-btn-icon">
+              {externalBookingLink.platform === "booksy" && (
+                <img src="/logos/booksy.png" alt="Booksy" />
+              )}
+              {externalBookingLink.platform === "yeasy" && (
+                <img src="/logos/yeasy.png" alt="Yeasy" />
+              )}
+              {externalBookingLink.platform === "custom" && (
+                <img src="/logos/custom.png" alt="Reservar" />
+              )}
+              {externalBookingLink.platform === "internal" && (
+                <img src="/logos/custom.png" alt="Reservar" />
+              )}
+            </span>
+          </a>
+
+          {internalBookingOpen && (
+            <InternalBookingForm
+              services={copy?.prices?.items || []}
+              onClose={() => setInternalBookingOpen(false)}
+            />
+          )}
+        </>
       )}
 
       {/* FLOATING WHATSAPP */}
