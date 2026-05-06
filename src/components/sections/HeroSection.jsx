@@ -19,7 +19,6 @@ export default function HeroSection({ brand: brandProp, data }) {
     >
       <div className="hero-full-overlay" />
 
-      {/* 🔥 LOGO */}
       <img
         src={brand?.logoImage || "/logos_id/logo_id21.png"}
         alt={brand?.name || "Logo"}
@@ -28,9 +27,7 @@ export default function HeroSection({ brand: brandProp, data }) {
 
       <Container wide>
         <div className="hero-full-content">
-          {data.badge && (
-            <div className="hero-full-badge">{data.badge}</div>
-          )}
+          {data.badge && <div className="hero-full-badge">{data.badge}</div>}
 
           <h1 className="hero-full-title">
             <span>{data.titleA}</span>
@@ -39,17 +36,17 @@ export default function HeroSection({ brand: brandProp, data }) {
             </span>
           </h1>
 
-          <div className="hero-full-subtitle-strong">
-            {data.titleB}
-          </div>
+          <div className="hero-full-subtitle-strong">{data.titleB}</div>
 
-          <p className="hero-full-subtitle">
-            {data.subtitle}
-          </p>
+          <p className="hero-full-subtitle">{data.subtitle}</p>
 
           <div className="hero-full-actions">
             {booking.href && (
-              <Button href={booking.href} target="_blank">
+              <Button
+                href={booking.href}
+                target={booking.external ? "_blank" : undefined}
+                rel={booking.external ? "noreferrer" : undefined}
+              >
                 {booking.label}
               </Button>
             )}
@@ -64,25 +61,23 @@ export default function HeroSection({ brand: brandProp, data }) {
   );
 }
 
-/* =========================
-   🔥 LÓGICA DE RESERVA
-========================= */
-
 function resolveBookingLink(config, data, links) {
   const type = config?.bookingPlatform?.type || "none";
   const url = config?.bookingPlatform?.url || "";
-
-  if (type === "none") {
-    return {
-      href: links?.whatsapp || data?.ctaHref || "",
-      label: "WhatsApp",
-    };
-  }
 
   if (type === "internal") {
     return {
       href: "#booking",
       label: config?.bookingPlatform?.label || "Reservar",
+      external: false,
+    };
+  }
+
+  if (type === "none") {
+    return {
+      href: links?.whatsapp || data?.ctaHref || "",
+      label: "WhatsApp",
+      external: true,
     };
   }
 
@@ -90,6 +85,7 @@ function resolveBookingLink(config, data, links) {
     return {
       href: url,
       label: "Reservar en Yeasy",
+      external: true,
     };
   }
 
@@ -97,6 +93,7 @@ function resolveBookingLink(config, data, links) {
     return {
       href: url,
       label: "Reservar en Booksy",
+      external: true,
     };
   }
 
@@ -104,11 +101,13 @@ function resolveBookingLink(config, data, links) {
     return {
       href: url || data?.ctaHref || "",
       label: config?.bookingPlatform?.label || "Reservar",
+      external: true,
     };
   }
 
   return {
     href: "",
     label: "",
+    external: false,
   };
 }
