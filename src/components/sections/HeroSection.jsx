@@ -79,6 +79,13 @@ function resolveBookingLink(config, data, links) {
     };
   }
 
+  if (type === "internal") {
+    return {
+      href: "#booking",
+      label: config?.bookingPlatform?.label || "Reservar",
+    };
+  }
+
   if (type === "yeasy") {
     return {
       href: url,
