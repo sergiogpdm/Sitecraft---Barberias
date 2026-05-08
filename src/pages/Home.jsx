@@ -321,7 +321,7 @@ function resolveBookingLink(config) {
   if (type === "yeasy") {
     return {
       href: url,
-      label: "Yeasy",
+      label: "YEASY",
       platform: "yeasy",
       external: true,
     };

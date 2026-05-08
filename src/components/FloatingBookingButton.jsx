@@ -34,7 +34,7 @@ function resolveBookingLink(config) {
   if (type === "yeasy") {
     return {
       href: customUrl,
-      label: config?.bookingPlatform?.label || "Yeasy",
+      label: config?.bookingPlatform?.label || "YEASY",
       type,
     };
   }

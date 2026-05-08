@@ -84,7 +84,7 @@ function resolveBookingLink(config, data, links) {
   if (type === "yeasy") {
     return {
       href: url,
-      label: "Reservar en Yeasy",
+      label: "Reservar en YEASY",
       external: true,
     };
   }

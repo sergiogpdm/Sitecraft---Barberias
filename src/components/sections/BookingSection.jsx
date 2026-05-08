@@ -167,7 +167,7 @@ function resolveBookingLink(config, data) {
   if (type === "yeasy") {
     return {
       href: platformUrl,
-      label: "Yeasy",
+      label: "YEASY",
       platform: "yeasy",
       external: true,
     };
@@ -203,7 +203,7 @@ function getBookingPlatformLabel(config) {
   const type = config?.bookingPlatform?.type || "none";
 
   if (type === "internal") return "En la web";
-  if (type === "yeasy") return "En Yeasy";
+  if (type === "yeasy") return "En YEASY";
   if (type === "booksy") return "En Booksy";
   if (type === "custom") return "Online";
 

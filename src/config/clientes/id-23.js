@@ -1,291 +1,216 @@
 export const siteConfig = {
-  brand: {
-    name: "Inmortal Barber Concept",
-    tagline: "Barbería premium · Estilo limpio · Reserva rápida",
-    emojiLogo: "✂️",
-    logoImage: "/logos/inmortal-logo.png",
+  "brand": {
+    "name": "Inmortal Barber Concept",
+    "tagline": "Barbería en Manzanares · Reserva rápida",
+    "emojiLogo": "💈",
+    "logoImage": "/logos_id/logo_id23.png"
   },
-
-  links: {
-    whatsapp: "https://wa.me/34600000000",
-    instagram: "https://www.instagram.com/inmortalbarberconcept/",
-    maps: "https://maps.google.com",
+  "links": {
+    "whatsapp": "https://wa.me/604203243?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20Inmortal%20Barber%20Concept%20%F0%9F%92%88",
+    "instagram": "https://www.instagram.com/inmortal_barberconcept/",
+    "maps": "https://maps.app.goo.gl/9GWvwZ9SfF8jxEFK9"
   },
-
-  contact: {
-    phoneDisplay: "+34 600 000 000",
-    phoneTel: "+34600000000",
-    email: "info@inmortalbarberconcept.com",
-    address: "Madrid",
-    hours: "Lun-Sáb · 10:00–21:00",
-    phone: "+34600000000",
+  "contact": {
+    "phoneDisplay": "(+60) 4203243",
+    "phoneTel": "+604203243",
+    "email": "info@blackcrownbarber.com",
+    "address": "Manzanares",
+    "hours": "Lun-Sáb · 10:00–21:00",
+    "phone": "604203243"
   },
-
-  layout: {
-    showNavbarCta: true,
-    showFloatingWhatsApp: true,
-    showFloatingBooking: true,
+  "layout": {
+    "showNavbarCta": true,
+    "showFloatingWhatsApp": true,
+    "showFloatingBooking": true
   },
-
-  theme: {
-    preset: "cleanLuxury",
-    mode: "flat",
-    scheme: "light",
-
-    overrides: {
-      "--bg": "#F4F2EE",
-      "--card": "#FFFFFF",
-      "--surface": "#E7E3DC",
-
-      "--text": "#111111",
-      "--muted": "#4B4B4B",
-
-      "--border": "#D6D0C7",
-
-      "--accentA": "#B11217",
-      "--accentB": "#8F8F8F",
-      "--accentSoft": "#EFE8E2",
-
-      "--accentText": "#FFFFFF",
-
-      "--accentCard": "#C9C3B8",
-      "--accentCardText": "#111111",
-
-      "--buttonText": "#FFFFFF",
-      "--buttonBg": "#B11217",
-
-      "--buttonSecondaryBg": "#111111",
-      "--buttonSecondaryText": "#FFFFFF",
-
-      "--radius": "18px",
-      "--btnRadius": "14px",
-
-      "--shadowY": "16px",
-      "--shadowBlur": "38px",
-      "--shadowOpacity": "0.12",
-
-      "--fontDisplay": "Playfair Display, serif",
+  "theme": {
+    "preset": "urbanSteel",
+    "mode": "flat",
+    "scheme": "dark",
+    "overrides": {
+      "--bg": "#0F1115",
+      "--card": "#4570d3",
+      "--text": "#F3F4F6",
+      "--muted": "#ffffff",
+      "--border": "#2B313D",
+      "--accentA": "#60A5FA",
+      "--accentB": "#2563EB",
+      "--accentSoft": "#111827",
+      "--accentText": "#ffffff",
+      "--accentCard": "#2563EB",
+      "--accentCardText": "#ffffff",
+      "--buttonText": "#ffffff",
+      "--buttonBg": "#60A5FA",
+      "--buttonSecondaryBg": "#171A21",
+      "--buttonSecondaryText": "#F3F4F6",
+      "--radius": "16px",
+      "--btnRadius": "12px",
+      "--shadowY": "18px",
+      "--shadowBlur": "44px",
+      "--shadowOpacity": "0.22",
+      "--fontDisplay": "Oswald, sans-serif",
       "--fontBody": "Inter, sans-serif",
-    },
+      "--surface": "#56568f"
+    }
   },
-
-  pages: {
-    home: {
-      sections: [
+  "pages": {
+    "home": {
+      "sections": [
         {
-          id: "hero",
-          enabled: true,
-          label: "Inicio",
+          "id": "hero",
+          "enabled": true,
+          "label": "Inicio"
         },
         {
-          id: "about",
-          enabled: true,
-          label: "Nosotros",
+          "id": "about",
+          "enabled": true,
+          "label": "Quiénes somos"
         },
         {
-          id: "prices",
-          enabled: true,
-          label: "Servicios",
+          "id": "prices",
+          "enabled": true,
+          "label": "Servicios"
         },
         {
-          id: "testimonials",
-          enabled: true,
-          label: "Opiniones",
+          "id": "testimonials",
+          "enabled": true,
+          "label": "Opiniones"
         },
         {
-          id: "photoStrip",
-          enabled: true,
-          label: "Galería",
+          "id": "photoStrip",
+          "enabled": true,
+          "label": "Galería"
         },
         {
-          id: "booking",
-          enabled: true,
-          label: "Reservar",
-        },
-      ],
+          "id": "booking",
+          "enabled": true,
+          "label": "Reservar"
+        }
+      ]
     },
-
-    customize: {
-      enabled: true,
-    },
+    "customize": {
+      "enabled": true
+    }
   },
-
-  copy: {
-    hero: {
-      badge: "⚡ Imagen premium · Precisión · Detalle",
-
-      titleA: "INMORTAL",
-      titleHighlight: "BARBER",
-      titleB: "CONCEPT",
-
-      subtitle:
-        "Diseño limpio, técnica precisa y una experiencia creada para quienes cuidan cada detalle de su imagen.",
-
-      ctaText: "Reservar cita",
-      ctaHref: "",
-
-      imageSrc: "/fondos/inmortal-hero.webp",
+  "copy": {
+    "hero": {
+      "badge": "💈 Experiencia premium en Manzanares",
+      "titleA": "INMORTAL",
+      "titleHighlight": "BARBER",
+      "titleB": "Imagen cuidada. Reserva rápida.",
+      "subtitle": "Un espacio pensado para quienes valoran el detalle, la precisión y un servicio a la altura.",
+      "ctaText": "Reservar por WhatsApp",
+      "ctaHref": "https://wa.me/604203243?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20Inmortal%20Barber%20Concept%20%F0%9F%92%88",
+      "imageSrc": "/fondos/fondo_id23.webp"
     },
-
-    services: {
-      kicker: "Servicios",
-
-      title: "Una imagen que deja huella.",
-
-      desc:
-        "Cortes modernos, acabados precisos y atención personalizada en un entorno elegante y minimalista.",
-
-      items: [
+    "services": {
+      "kicker": "Servicios",
+      "title": "Más que un corte, una experiencia.",
+      "desc": "Atención cuidada, técnica precisa y una imagen que habla por ti.",
+      "items": [
         {
-          title: "Corte premium",
-          desc:
-            "Fade, textura y acabado profesional adaptado a tu estilo.",
+          "title": "Corte personalizado",
+          "desc": "Adaptado a tu estilo, facciones y rutina diaria."
         },
-
         {
-          title: "Barba & perfilado",
-          desc:
-            "Definición precisa y cuidado completo para una barba impecable.",
+          "title": "Barba y perfilado",
+          "desc": "Definición, recorte y limpieza para un look completo."
         },
-
         {
-          title: "Experiencia completa",
-          desc:
-            "Corte + barba + acabado para una imagen totalmente cuidada.",
-        },
-      ],
+          "title": "Corte + barba",
+          "desc": "Servicio completo para una imagen impecable."
+        }
+      ]
     },
-
-    photoStrip: {
-      kicker: "Galería",
-
-      title: "Limpio. Preciso. Inmortal.",
-
-      note: "Cada detalle cuenta.",
-
-      photos: [
-        "/imagenes/inmortal1.jpg",
-        "/imagenes/inmortal2.jpg",
-        "/imagenes/inmortal3.jpg",
-      ],
+    "photoStrip": {
+      "kicker": "Trabajos",
+      "title": "Así se ve un buen corte.",
+      "note": "Imagen, detalle y acabado profesional.",
+      "photos": [
+        "/imagenesprueba/imagenes-inmortal/inmortal8.jpeg",
+        "/imagenesprueba/imagenes-inmortal/inmortal9.jpeg",
+        "/imagenesprueba/imagenes-inmortal/inmortal7.png"
+      ]
     },
-
-    prices: {
-      kicker: "Tarifas",
-
-      title: "Servicios premium, precios claros.",
-
-      desc:
-        "Reserva rápida y resultados que hablan por sí solos.",
-
-      items: [
+    "prices": {
+      "kicker": "Servicios y precios",
+      "title": "Todo lo que necesitas para salir impecable.",
+      "desc": "Servicios claros, tarifas claras y reserva rápida.",
+      "items": [
         {
-          price: "20€",
-          title: "Corte premium",
-          desc:
-            "Corte personalizado con styling final.",
-          image: "/imagenes/inmortal1.jpg",
+          "price": "15€",
+          "title": "Corte",
+          "desc": "Corte con acabado y peinado.",
+          "image": "/imagenesprueba/imagenes-inmortal/inmortal5.jpg"
         },
-
         {
-          price: "28€",
-          title: "Corte + barba",
-          desc:
-            "Servicio completo con perfilado y acabado.",
-          image: "/imagenes/inmortal2.jpg",
+          "price": "20€",
+          "title": "Corte + barba",
+          "desc": "Servicio completo.",
+          "image": "/imagenesprueba/imagenes-inmortal/inmortal2.jpg"
         },
-
         {
-          price: "12€",
-          title: "Barba",
-          desc:
-            "Perfilado y definición profesional.",
-          image: "/imagenes/inmortal3.jpg",
-        },
-      ],
+          "price": "10€",
+          "title": "Arreglo de barba",
+          "desc": "Perfilado profesional.",
+          "image": "/imagenesprueba/imagenes-inmortal/inmortal4.jpg"
+        }
+      ]
     },
-
-    booking: {
-      kicker: "Reserva",
-
-      title: "Tu próxima cita empieza aquí.",
-
-      desc:
-        "Elige día, hora y deja el resto en nuestras manos.",
-
-      ctaText: "Reservar ahora",
-
-      ctaHref: "https://booksy.com",
-
-      sideImages: [
-        "/imagenes/inmortal-side1.jpg",
-        "/imagenes/inmortal-side2.jpg",
-      ],
+    "booking": {
+      "kicker": "Reserva",
+      "title": "Pide tu cita y déjanos el resto.",
+      "desc": "Te atendemos por WhatsApp de forma rápida y sencilla.",
+      "ctaText": "Abrir WhatsApp",
+      "ctaHref": "https://wa.me/604203243?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20Inmortal%20Barber%20Concept%20%F0%9F%92%88",
+      "sideImages": [
+        "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
+      ]
     },
-
-    testimonials: {
-      kicker: "Opiniones",
-
-      title: "Clientes que vuelven por la experiencia.",
-
-      desc:
-        "Precisión, ambiente y atención cuidada en cada visita.",
-
-      items: [
+    "footer": {
+      "title": "Inmortal Barber Concept",
+      "subtitle": "Estilo · Precisión · Reserva",
+      "small": "© 2026"
+    },
+    "testimonials": {
+      "kicker": "Opiniones",
+      "title": "Clientes que vuelven por algo.",
+      "desc": "Confianza, detalle y resultados que se notan desde la primera visita.",
+      "items": [
         {
-          name: "David R.",
-          service: "Corte premium",
-          text:
-            "La barbería más limpia y profesional en la que he estado.",
+          "name": "Pablo ",
+          "service": "Corte + cejas",
+          "text": "Corta muy bien y es muy buen barbero."
         },
-
         {
-          name: "Sergio M.",
-          service: "Fade",
-          text:
-            "Atención increíble y acabados perfectos.",
+          "name": "Ricardo",
+          "service": "Fade",
+          "text": "Reserva rápida por YEASY y corte muy limpio. Muy recomendable."
         },
-
         {
-          name: "Alex P.",
-          service: "Corte + barba",
-          text:
-            "El local transmite elegancia desde que entras.",
-        },
-      ],
+          "name": "Francisco",
+          "service": "Corte de pelo",
+          "text": "Miguel Ángel es una máquina. Un artista podando cabezas"
+        }
+      ]
     },
-
-    about: {
-      kicker: "Nosotros",
-
-      title: "No seguimos tendencias. Creamos identidad.",
-
-      desc:
-        "En Inmortal Barber Concept trabajamos cada corte con precisión, estética y personalidad. Un espacio donde el detalle, la limpieza visual y la experiencia premium forman parte de cada servicio.",
-
-      image: "/imagenes/inmortal-about.jpg",
-
-      points: [
-        "Precisión premium",
-        "Diseño minimalista",
-        "Atención personalizada",
-      ],
-    },
-
-    footer: {
-      title: "Inmortal Barber Concept",
-      subtitle: "Precisión · Estilo · Identidad",
-      small: "© 2026",
-    },
+    "about": {
+      "kicker": "Quiénes somos",
+      "title": "No hacemos solo cortes. Creamos presencia.",
+      "desc": "Cada cliente entra con una idea y sale con una imagen más definida. Cuidamos el detalle, el ritmo y el acabado para que el resultado se note desde el primer vistazo.",
+      "image": "/imagenesprueba/imagenes-inmortal/inmortal6.jpg",
+      "points": [
+        "Técnica precisa",
+        "Trato cercano",
+        "Acabados limpios"
+      ]
+    }
   },
-
-  bookingPlatform: {
-    type: "internal",
-
-    label: "Reservar",
-
-    url: "https://booksy.com",
-
-    barberiaId: "inmortal-barber-concept",
-  },
+  "bookingPlatform": {
+    "type": "yeasy",
+    "label": "Reservar",
+    "url": "https://yeasy.io/commerce/64091f86-f4f8-4de1-a70a-1ab2532d6a25",
+    "barberiaId": "id-23-inmortalbarber"
+  }
 };

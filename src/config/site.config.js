@@ -1,22 +1,22 @@
 export const siteConfig = {
   "brand": {
-    "name": "De la Rue Studio",
+    "name": "Inmortal Barber Concept",
     "tagline": "Barbería en Manzanares · Reserva rápida",
     "emojiLogo": "💈",
-    "logoImage": "/logos_id/logo_id21.png"
+    "logoImage": "/logos_id/logo_id23.png"
   },
   "links": {
-    "whatsapp": "https://wa.link/ic2cun",
-    "instagram": "https://www.instagram.com/dlruestudio/",
-    "maps": "https://maps.app.goo.gl/ipE2MT9LkJEuwzmu6"
+    "whatsapp": "https://wa.me/604203243?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20Inmortal%20Barber%20Concept%20%F0%9F%92%88",
+    "instagram": "https://www.instagram.com/inmortal_barberconcept/",
+    "maps": "https://maps.app.goo.gl/9GWvwZ9SfF8jxEFK9"
   },
   "contact": {
-    "phoneDisplay": "",
-    "phoneTel": "",
+    "phoneDisplay": "(+60) 4203243",
+    "phoneTel": "+604203243",
     "email": "info@blackcrownbarber.com",
     "address": "Manzanares",
     "hours": "Lun-Sáb · 10:00–21:00",
-    "phone": ""
+    "phone": "604203243"
   },
   "layout": {
     "showNavbarCta": true,
@@ -24,32 +24,33 @@ export const siteConfig = {
     "showFloatingBooking": true
   },
   "theme": {
-    "preset": "goldNight",
+    "preset": "urbanSteel",
     "mode": "flat",
     "scheme": "dark",
     "overrides": {
-      "--bg": "#0B0B0D",
-      "--card": "#b41813",
-      "--text": "#ffffff",
+      "--bg": "#0F1115",
+      "--card": "#4570d3",
+      "--text": "#F3F4F6",
       "--muted": "#ffffff",
-      "--border": "#26262B",
-      "--accentA": "#ffffff",
-      "--accentB": "#ffffff",
-      "--accentSoft": "#1A1710",
-      "--accentText": "#111111",
-      "--accentCard": "#ffffff",
-      "--accentCardText": "#111111",
-      "--buttonText": "#111111",
-      "--buttonBg": "#ffffff",
-      "--buttonSecondaryBg": "#141418",
-      "--buttonSecondaryText": "#ffffff",
+      "--border": "#2B313D",
+      "--accentA": "#60A5FA",
+      "--accentB": "#2563EB",
+      "--accentSoft": "#111827",
+      "--accentText": "#ffffff",
+      "--accentCard": "#2563EB",
+      "--accentCardText": "#ffffff",
+      "--buttonText": "#ffffff",
+      "--buttonBg": "#60A5FA",
+      "--buttonSecondaryBg": "#171A21",
+      "--buttonSecondaryText": "#F3F4F6",
       "--radius": "16px",
       "--btnRadius": "12px",
       "--shadowY": "18px",
       "--shadowBlur": "44px",
-      "--shadowOpacity": "0.24",
-      "--fontDisplay": "Playfair Display, serif",
-      "--fontBody": "Inter, sans-serif"
+      "--shadowOpacity": "0.22",
+      "--fontDisplay": "Oswald, sans-serif",
+      "--fontBody": "Inter, sans-serif",
+      "--surface": "#56568f"
     }
   },
   "pages": {
@@ -94,13 +95,13 @@ export const siteConfig = {
   "copy": {
     "hero": {
       "badge": "💈 Experiencia premium en Manzanares",
-      "titleA": "DE",
-      "titleHighlight": "LA RUE STUDIO",
+      "titleA": "INMORTAL",
+      "titleHighlight": "BARBER",
       "titleB": "Imagen cuidada. Reserva rápida.",
       "subtitle": "Un espacio pensado para quienes valoran el detalle, la precisión y un servicio a la altura.",
       "ctaText": "Reservar por WhatsApp",
-      "ctaHref": "",
-      "imageSrc": "/fondos/fondo_id21.webp"
+      "ctaHref": "https://wa.me/604203243?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20Inmortal%20Barber%20Concept%20%F0%9F%92%88",
+      "imageSrc": "/fondos/fondo_id23.webp"
     },
     "services": {
       "kicker": "Servicios",
@@ -122,53 +123,53 @@ export const siteConfig = {
       ]
     },
     "photoStrip": {
-      "kicker": "Galería",
+      "kicker": "Trabajos",
       "title": "Así se ve un buen corte.",
-      "note": "Estilo, detalle y presencia.",
+      "note": "Imagen, detalle y acabado profesional.",
       "photos": [
-        "/imagenesprueba/barberia3.jpg",
-        "/imagenesprueba/barberia1.png",
-        "/imagenesprueba/barberia4.jpg"
+        "/imagenesprueba/imagenes-inmortal/inmortal8.jpeg",
+        "/imagenesprueba/imagenes-inmortal/inmortal9.jpeg",
+        "/imagenesprueba/imagenes-inmortal/inmortal7.png"
       ]
     },
     "prices": {
-      "kicker": "Precios",
-      "title": "Tarifas claras, sin complicaciones.",
-      "desc": "Elige tu servicio y reserva en un momento.",
+      "kicker": "Servicios y precios",
+      "title": "Todo lo que necesitas para salir impecable.",
+      "desc": "Servicios claros, tarifas claras y reserva rápida.",
       "items": [
         {
-          "price": "18€",
+          "price": "15€",
           "title": "Corte",
           "desc": "Corte con acabado y peinado.",
-          "image": "/imagenesprueba/barberia1.png"
+          "image": "/imagenesprueba/imagenes-inmortal/inmortal5.jpg"
         },
         {
-          "price": "25€",
+          "price": "20€",
           "title": "Corte + barba",
           "desc": "Servicio completo.",
-          "image": "/imagenesprueba/barberia4.jpg"
+          "image": "/imagenesprueba/imagenes-inmortal/inmortal2.jpg"
         },
         {
           "price": "10€",
           "title": "Arreglo de barba",
           "desc": "Perfilado profesional.",
-          "image": "/imagenesprueba/barberia2.jpg"
+          "image": "/imagenesprueba/imagenes-inmortal/inmortal4.jpg"
         }
       ]
     },
     "booking": {
       "kicker": "Reserva",
       "title": "Pide tu cita y déjanos el resto.",
-      "desc": "",
-      "ctaText": "Abrir Booksy",
-      "ctaHref": "https://booksy.com/es-es/136278_de-la-rue_otro_35362_manzanares#ba_s=seo",
+      "desc": "Te atendemos por WhatsApp de forma rápida y sencilla.",
+      "ctaText": "Abrir WhatsApp",
+      "ctaHref": "https://wa.me/604203243?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20Inmortal%20Barber%20Concept%20%F0%9F%92%88",
       "sideImages": [
-        "/imagenesprueba/image.png",
-        "/imagenesprueba/barberia3.jpg"
+        "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
       ]
     },
     "footer": {
-      "title": "De la Rue Studio",
+      "title": "Inmortal Barber Concept",
       "subtitle": "Estilo · Precisión · Reserva",
       "small": "© 2026"
     },
@@ -178,19 +179,19 @@ export const siteConfig = {
       "desc": "Confianza, detalle y resultados que se notan desde la primera visita.",
       "items": [
         {
-          "name": "Carlos M.",
-          "service": "Corte + barba",
-          "text": "Muy buen trato y un resultado impecable."
+          "name": "Pablo ",
+          "service": "Corte + cejas",
+          "text": "Corta muy bien y es muy buen barbero."
         },
         {
-          "name": "Adrián R.",
+          "name": "Ricardo",
           "service": "Fade",
-          "text": "Reserva rápida por WhatsApp y corte muy limpio."
+          "text": "Reserva rápida por YEASY y corte muy limpio. Muy recomendable."
         },
         {
-          "name": "Javi P.",
-          "service": "Arreglo de barba",
-          "text": "Buen ambiente y servicio muy cuidado."
+          "name": "Francisco",
+          "service": "Corte de pelo",
+          "text": "Miguel Ángel es una máquina. Un artista podando cabezas"
         }
       ]
     },
@@ -198,7 +199,7 @@ export const siteConfig = {
       "kicker": "Quiénes somos",
       "title": "No hacemos solo cortes. Creamos presencia.",
       "desc": "Cada cliente entra con una idea y sale con una imagen más definida. Cuidamos el detalle, el ritmo y el acabado para que el resultado se note desde el primer vistazo.",
-      "image": "/imagenesprueba/barberia4.jpg",
+      "image": "/imagenesprueba/imagenes-inmortal/inmortal6.jpg",
       "points": [
         "Técnica precisa",
         "Trato cercano",
@@ -207,9 +208,9 @@ export const siteConfig = {
     }
   },
   "bookingPlatform": {
-    "type": "internal",
+    "type": "yeasy",
     "label": "Reservar",
-    "url": "https://booksy.com/es-es/136278_de-la-rue_otro_35362_manzanares#ba_s=seo",
-    "barberiaId": "id-21-delarue"
+    "url": "https://yeasy.io/commerce/64091f86-f4f8-4de1-a70a-1ab2532d6a25",
+    "barberiaId": "id-23-inmortalbarber"
   }
 };
