@@ -61,6 +61,11 @@ export const siteConfig = {
           "label": "Inicio"
         },
         {
+          "id": "about",
+          "enabled": true,
+          "label": "Quiénes somos"
+        },
+        {
           "id": "prices",
           "enabled": true,
           "label": "Servicios"
@@ -187,6 +192,17 @@ export const siteConfig = {
           "service": "Arreglo de barba",
           "text": "Buen ambiente y servicio muy cuidado."
         }
+      ]
+    },
+    "about": {
+      "kicker": "Quiénes somos",
+      "title": "No hacemos solo cortes. Creamos presencia.",
+      "desc": "Cada cliente entra con una idea y sale con una imagen más definida. Cuidamos el detalle, el ritmo y el acabado para que el resultado se note desde el primer vistazo.",
+      "image": "/imagenesprueba/barberia4.jpg",
+      "points": [
+        "Técnica precisa",
+        "Trato cercano",
+        "Acabados limpios"
       ]
     }
   },
