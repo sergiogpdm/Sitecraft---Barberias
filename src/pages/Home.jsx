@@ -9,6 +9,8 @@ import Container from "../components/Container.jsx";
 import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
 import InternalBookingForm from "../components/sections/InternalBookingForm.jsx";
 
+import AboutSection from "../components/sections/AboutSection.jsx";
+
 export default function Home() {
   const { config } = useSiteConfig();
   const { brand, copy, contact, pages, links, layout, theme } = config;
@@ -18,6 +20,7 @@ export default function Home() {
 
   const enabledSections = [
     { id: "hero", label: "Inicio" },
+    { id: "about", label: "Quiénes somos" },
     { id: "prices", label: "Servicios" },
     { id: "testimonials", label: "Opiniones" },
     { id: "photoStrip", label: "Galería" },
@@ -196,6 +199,15 @@ export default function Home() {
       {/* SERVICIOS */}
       <div id="prices">
         <PricesSection data={copy.prices} />
+      </div>
+
+      <div id="about">
+        <AboutSection
+          data={{
+            ...copy.about,
+            brandName: brand.name,
+          }}
+        />
       </div>
 
       {/* TESTIMONIOS + GALERIA */}

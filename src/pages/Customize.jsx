@@ -8,6 +8,8 @@ import PricesSection from "../components/sections/PricesSection.jsx";
 import PhotoStripSection from "../components/sections/PhotoStripSection.jsx";
 import BookingSection from "../components/sections/BookingSection.jsx";
 import Footer from "../components/Footer.jsx";
+import AboutSection from "../components/sections/AboutSection.jsx";
+
 
 import { clientConfigs } from "../config/clientes/index.js";
 
@@ -28,6 +30,7 @@ function parseConfigText(text) {
 function ensureHomeSections(existingSections = []) {
   const defaults = [
     { id: "hero", enabled: true, label: "Inicio" },
+    { id: "about", enabled: true, label: "Quiénes somos" },
     { id: "prices", enabled: true, label: "Servicios" },
     { id: "testimonials", enabled: true, label: "Opiniones" },
     { id: "photoStrip", enabled: true, label: "Galería" },
@@ -198,6 +201,15 @@ function ensureConfigShape(config) {
         ...(config?.copy?.prices || {}),
       },
 
+      about: {
+        kicker: "Quiénes somos",
+        title: "No hacemos solo cortes. Creamos presencia.",
+        desc: "Cada cliente entra con una idea y sale con una imagen más definida. Cuidamos el detalle, el ritmo y el acabado para que el resultado se note desde el primer vistazo.",
+        image: "",
+        points: ["Técnica precisa", "Trato cercano", "Acabados limpios"],
+        ...(config?.copy?.about || {}),
+      },
+
       photoStrip: {
         kicker: "",
         title: "",
@@ -229,6 +241,7 @@ function ensureConfigShape(config) {
 const TABS = [
   { key: "general", label: "General" },
   { key: "hero", label: "Hero" },
+  { key: "about", label: "About" },
   { key: "testimonials", label: "Testimonials" },
   { key: "prices", label: "Prices" },
   { key: "photoStrip", label: "PhotoStrip" },
@@ -883,7 +896,35 @@ export default function Customize() {
             </>
           )}
 
-          
+          {active === "about" && (
+            <>
+              <SectionTitle>Quiénes somos</SectionTitle>
+
+              <Input
+                label="Kicker"
+                value={safeConfig.copy.about.kicker}
+                onChange={(v) => updateCopy("about", "kicker", v)}
+              />
+
+              <Input
+                label="Título"
+                value={safeConfig.copy.about.title}
+                onChange={(v) => updateCopy("about", "title", v)}
+              />
+
+              <Textarea
+                label="Descripción"
+                value={safeConfig.copy.about.desc}
+                onChange={(v) => updateCopy("about", "desc", v)}
+              />
+
+              <Input
+                label="Imagen"
+                value={safeConfig.copy.about.image}
+                onChange={(v) => updateCopy("about", "image", v)}
+              />
+            </>
+          )}
 
           {active === "testimonials" && (
             <>
@@ -1132,7 +1173,11 @@ export default function Customize() {
               }}
             >
               {active === "hero" && <HeroSection brand={safeConfig.brand} data={safeConfig.copy.hero} />}
-              
+
+              {active === "about" && (
+                <AboutSection data={safeConfig.copy.about} brand={safeConfig.brand} />
+              )}
+
               {active === "testimonials" && (
                 <TestimonialsSection data={safeConfig.copy.testimonials} />
               )}
@@ -1143,6 +1188,7 @@ export default function Customize() {
               {active === "general" && (
                 <>
                   <HeroSection brand={safeConfig.brand} data={safeConfig.copy.hero} />
+                  <AboutSection data={safeConfig.copy.about} brand={safeConfig.brand} />
                   <TestimonialsSection data={safeConfig.copy.testimonials} />
                   <PricesSection data={safeConfig.copy.prices} />
                   <PhotoStripSection data={safeConfig.copy.photoStrip} />
@@ -1619,7 +1665,7 @@ function QuickGenerator({ setConfig }) {
             imageSrc: heroImageByStyle[form.styleVariant],
           },
 
-          
+
 
           testimonials: {
             ...(prev?.copy?.testimonials || {}),
