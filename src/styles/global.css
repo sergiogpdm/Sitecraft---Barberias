@@ -1762,7 +1762,7 @@ a.footer-compact-info-item:hover .footer-compact-value {
 .hero-full-bg {
   position: relative;
   min-height: 100vh;
-  min-height: 100svh; /* 🔥 evita corte en móviles */
+  min-height: 100svh;
   display: flex;
   align-items: center;
   background-size: cover;
@@ -1777,9 +1777,11 @@ a.footer-compact-info-item:hover .footer-compact-value {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(to bottom,
+    linear-gradient(
+      to bottom,
       rgba(0, 0, 0, 0.55),
-      rgba(0, 0, 0, 0.65));
+      rgba(0, 0, 0, 0.65)
+    );
   pointer-events: none;
 }
 
@@ -1875,14 +1877,15 @@ a.footer-compact-info-item:hover .footer-compact-value {
   }
 
   .hero-corner-logo-img {
-    top: 32px;
-    right: 34px;
-    width: clamp(230px, 34vw, 330px);
+    top: 24px;
+    right: 24px;
+
+    width: clamp(160px, 24vw, 240px);
   }
 
   .hero-full-content {
     max-width: 680px;
-    padding-top: 108px;
+    padding-top: 72px;
   }
 
   .hero-full-badge {
@@ -1919,51 +1922,56 @@ a.footer-compact-info-item:hover .footer-compact-value {
   .hero-full-bg {
     min-height: 100svh;
     align-items: flex-start;
-    padding: 28px 0 34px;
+    padding: 18px 0 28px;
     background-position: center;
   }
 
   .hero-corner-logo-img {
-    top: 18px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    width: min(230px, 68vw);
+    top: 10px;
+    right: 12px;
+
+    left: auto;
+    transform: none;
+
+    width: min(110px, 28vw);
+    max-width: 110px;
   }
 
   .hero-full-content {
     width: 100%;
     max-width: 100%;
-    padding-top: 122px;
+
+    padding-top: 52px;
+
     text-align: left;
   }
 
   .hero-full-badge {
-    margin-bottom: 14px;
-    padding: 7px 12px;
-    font-size: 12px;
+    margin-bottom: 12px;
+    padding: 6px 11px;
+    font-size: 11px;
   }
 
   .hero-full-title {
-    font-size: clamp(44px, 13.8vw, 62px);
+    font-size: clamp(42px, 13vw, 58px);
     line-height: 0.9;
     letter-spacing: -0.055em;
   }
 
   .hero-full-subtitle-strong {
-    margin-top: 16px;
-    font-size: clamp(21px, 6.2vw, 27px);
+    margin-top: 14px;
+    font-size: clamp(20px, 6vw, 25px);
     line-height: 1.12;
   }
 
   .hero-full-subtitle {
-    margin-top: 18px;
-    font-size: 15.5px;
-    line-height: 1.65;
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.55;
   }
 
   .hero-full-actions {
-    margin-top: 22px;
+    margin-top: 18px;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
@@ -1971,7 +1979,7 @@ a.footer-compact-info-item:hover .footer-compact-value {
 
   .hero-full-actions a,
   .hero-full-actions button {
-    min-width: 200px;
+    min-width: 190px;
   }
 }
 
@@ -1981,34 +1989,39 @@ a.footer-compact-info-item:hover .footer-compact-value {
 
 @media (max-width: 380px) {
   .hero-full-bg {
-    padding-top: 20px;
-    padding-bottom: 28px;
+    padding-top: 14px;
+    padding-bottom: 24px;
   }
 
   .hero-corner-logo-img {
-    top: 12px;
-    width: min(200px, 64vw);
+    top: 8px;
+    right: 10px;
+
+    left: auto;
+    transform: none;
+
+    width: min(92px, 26vw);
   }
 
   .hero-full-content {
-    padding-top: 104px;
+    padding-top: 44px;
   }
 
   .hero-full-title {
-    font-size: clamp(39px, 13vw, 54px);
+    font-size: clamp(36px, 12vw, 50px);
   }
 
   .hero-full-subtitle-strong {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .hero-full-subtitle {
-    font-size: 14.5px;
-    line-height: 1.55;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .hero-full-actions {
-    margin-top: 18px;
+    margin-top: 16px;
   }
 }
 
